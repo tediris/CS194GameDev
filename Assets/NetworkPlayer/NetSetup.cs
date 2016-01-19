@@ -16,6 +16,7 @@ public class NetSetup : NetworkBehaviour {
 
 		if (isLocalPlayer) {
 			GetComponent<PlayerControl> ().enabled = true;
+			GetComponent<ItemManager> ().enabled = true;
 			GameObject.Find ("Main Camera").GetComponent<UnityStandardAssets._2D.Camera2DFollow> ().SetTarget(transform);
 		}
 		StartCoroutine (SetName ());
