@@ -5,6 +5,7 @@ using UnityEngine.Networking;
 public class LocalTool : NetworkBehaviour {
 	[SyncVar]
 	public int playerNum = -1;
+	public GameObject pickup;
 
 	// Use this for initialization
 //	void Start () {

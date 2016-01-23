@@ -6,11 +6,13 @@ public class ItemManager : NetworkBehaviour {
 
 	public Vector3 hipOffset;
 	public GameObject[] tools;
+	public GameObject pickupPrefab;
 //	PlayerAnimation animationScript;
-	[SyncVar]
-	public int itemAvailable = -1;
+	[SyncVar] public int itemAvailable = -1;
 	NetSetup netInfo;
 	string pickupName = "";
+	bool carryingItem = false;
+	int carriedItemID = -1;
 
 	// Use this for initialization
 	void Start () {
@@ -22,7 +24,13 @@ public class ItemManager : NetworkBehaviour {
 	void Update () {
 		if (itemAvailable != -1) {
 			if (Input.GetKeyDown (KeyCode.E)) {
-				EquipItem (itemAvailable);
+				if (!carryingItem) {
+					carryingItem = true;
+					EquipItem (itemAvailable);
+				} else {
+					carryingItem = false;
+					DequipItem ();
+				}
 			}
 		}
 	}
@@ -43,7 +51,30 @@ public class ItemManager : NetworkBehaviour {
 //	}
 
 	[ClientCallback]
+	void DequipItem() {
+		CmdSpawnPickup (carriedItemID, netInfo.playerNum);
+	}
+
+	[Command]
+	void CmdSpawnPickup (int itemID, int playerNum) {
+		GameObject toSpawn = Instantiate (pickupPrefab) as GameObject;
+		toSpawn.transform.position = transform.position;
+		toSpawn.GetComponent<Pickup>().SetPickup (itemID);
+		NetworkServer.Spawn (toSpawn);
+		RpcUnsetItemParent (itemID, playerNum);
+	}
+
+	[ClientRpc]
+	void RpcUnsetItemParent(int itemID, int playerNum) {
+		GameObject player = GameObject.Find("Player" + playerNum);
+		foreach (Transform child in player.transform) {
+			GameObject.Destroy(child.gameObject);
+		}
+	}
+
+	[ClientCallback]
 	void EquipItem(int itemID) {
+		carriedItemID = itemID;
 		CmdEquipItem (itemID, netInfo.playerNum);
 	}
 
