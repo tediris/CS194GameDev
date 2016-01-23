@@ -10,6 +10,8 @@ public class PlayerControl : NetworkBehaviour
 	public List<string> groundTags;
 	[HideInInspector] public bool facingRight = true;
 	[HideInInspector] public bool grounded = true;
+	private bool wallJumped = false; // Indicate whether or not we have already walljumped since last being grounded
+	private Collider2D currentPlatformCollider; // Platform that we are currently colliding with
 
 	public float distToBottom;
 
@@ -28,6 +30,10 @@ public class PlayerControl : NetworkBehaviour
 		return !carryControl.carried;
 	}
 
+	bool canJump() {
+		return !carrying && grounded || (!grounded && !wallJumped && currentPlatformCollider);
+	}
+
 	// Use this for initialization
 	void Start () {
 		playerBody = GetComponent<Rigidbody2D> ();
@@ -43,6 +49,10 @@ public class PlayerControl : NetworkBehaviour
 
 	// Update is called once per frame
 	void Update () {
+		if (currentPlatformCollider && !playerBody.IsTouching (currentPlatformCollider)) {
+			currentPlatformCollider = null;
+		}
+
 		if (Input.GetKeyDown(KeyCode.P)) {
 			if (!carrying) {
 				CarryPlayer ();
@@ -53,9 +63,13 @@ public class PlayerControl : NetworkBehaviour
 
 		float h = Input.GetAxis ("Horizontal");
 
-		if (grounded && Input.GetKeyDown (KeyCode.W) && !carrying) {
+		if (canJump() && Input.GetKeyDown (KeyCode.W)) {
 			playerBody.velocity =  new Vector2 (playerBody.velocity.x, jumpSpeed);
-			grounded = false;
+			if (!grounded) {
+				wallJumped = true;
+			} else {
+				grounded = false;
+			}
 		}
 
 		if (canMoveHorizontally() && Mathf.Abs(h) > 0) {
@@ -109,8 +123,18 @@ public class PlayerControl : NetworkBehaviour
 		Collider2D collider = collision.collider;
 		foreach (string validTag in groundTags) {
 			if (collider.tag == validTag) {
-				if (transform.position.y > collider.transform.position.y) {
-					grounded = true;
+				currentPlatformCollider = collider;
+
+				// Check if all contacts are between -45 and 45 degs to normal of top of collider
+				// If it is, then we consider ourselves grounded
+				Vector2 rightVector = new Vector2 (1, 1);
+				Vector2 leftVector = new Vector2 (-1, 1);
+				foreach (ContactPoint2D contact in collision.contacts) {
+					if (Vector2.Dot (rightVector, contact.normal) > 0 && Vector2.Dot (leftVector, contact.normal) > 0) {
+						grounded = true;
+						wallJumped = false;
+						break;
+					}
 				}
 			}
 		}
