@@ -6,13 +6,13 @@ using UnityEngine.Networking;
 public class PlayerControl : NetworkBehaviour
 {
 	public float maxSpeed = 5.0f;
-	public float jumpSpeed = 5.0f;
+	public float jumpSpeed = 20.0f;
 	public List<string> groundTags;
 	[HideInInspector] public bool facingRight = true;
+	[HideInInspector] public bool grounded = true;
 
 	public float distToBottom;
 
-	public bool grounded = true;
 	private bool carrying = false;
 	int carryingPlayer = -1;
 
@@ -23,6 +23,10 @@ public class PlayerControl : NetworkBehaviour
 	CarryManager carryManager;
 
 	CarryControl carryControl;
+
+	bool canMoveHorizontally() {
+		return !carryControl.carried;
+	}
 
 	// Use this for initialization
 	void Start () {
@@ -48,22 +52,21 @@ public class PlayerControl : NetworkBehaviour
 		}
 
 		float h = Input.GetAxis ("Horizontal");
-		float yVelocity = playerBody.velocity.y;
 
 		if (grounded && Input.GetKeyDown (KeyCode.W) && !carrying) {
-			yVelocity = jumpSpeed;
-			playerBody.velocity = new Vector2 (playerBody.velocity.x, yVelocity);
+			playerBody.velocity =  new Vector2 (playerBody.velocity.x, jumpSpeed);
 			grounded = false;
 		}
 
-		if (grounded && !carryControl.carried) {
-			playerBody.velocity = new Vector2 (h * maxSpeed, yVelocity);
+		if (canMoveHorizontally() && Mathf.Abs(h) > 0) {
+			playerBody.velocity = new Vector2 (h * maxSpeed, playerBody.velocity.y);
 		}
 
-		if (h > 0 && !facingRight)
+		if (h > 0 && !facingRight) {
 			Flip ();
-		else if (h < 0 && facingRight)
+		} else if (h < 0 && facingRight) {
 			Flip ();
+		}
 	}
 
 	void ThrowPlayer() {
@@ -97,8 +100,6 @@ public class PlayerControl : NetworkBehaviour
 	[Command]
 	void CmdInitiatePickup(int carryPlayer, int playerNum) {
 		Debug.Log ("Player " + carryPlayer + " is picking up player " + playerNum);
-		//Debug.Log (carryManager);
-		//GameObject carried = carryManager.GetPlayer (playerNum);
 		GameObject carried = GameObject.Find("Player" + playerNum);
 		carried.GetComponent<ColorControl> ().CmdSetColor (Color.green);
 		carried.GetComponent<CarryControl> ().CmdSetCarry(carryPlayer);
@@ -108,8 +109,9 @@ public class PlayerControl : NetworkBehaviour
 		Collider2D collider = collision.collider;
 		foreach (string validTag in groundTags) {
 			if (collider.tag == validTag) {
-				if (transform.position.y > collider.transform.position.y)
+				if (transform.position.y > collider.transform.position.y) {
 					grounded = true;
+				}
 			}
 		}
 	}
