@@ -4,7 +4,7 @@ using UnityEngine.Networking;
 
 public class Pickup : NetworkBehaviour {
 
-//	public GameObject[] tools;
+	public GameObject[] tools;
 	public int toolToEquipID = 0;
 	PickupManager manager;
 
@@ -13,6 +13,18 @@ public class Pickup : NetworkBehaviour {
 //		if (isServer) {
 //			gameObject.name = "Pickup" + GameObject.Find("PickupManager").GetComponent<PickupManager> ().getID();
 //		}
+		SetupPickup();
+	}
+
+	public void SetPickup(int ID) {
+		toolToEquipID = ID;
+	}
+
+	void SetupPickup() {
+		GameObject item = tools[toolToEquipID];
+		GameObject toEquip = Instantiate (item) as GameObject;
+		toEquip.transform.parent = this.transform;
+		toEquip.transform.position = this.transform.position;
 	}
 
 	void OnTriggerEnter2D (Collider2D other) {
