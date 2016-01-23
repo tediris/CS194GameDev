@@ -6,7 +6,7 @@ public class CarryControl : NetworkBehaviour {
 
 	public bool carried = false;
 	Rigidbody2D carrier = null;
-	public float throwSpeed = 5f;
+	public float throwSpeed = 7.5f;
 
 	Rigidbody2D body;
 	float standardGrav;
@@ -21,7 +21,7 @@ public class CarryControl : NetworkBehaviour {
 		if (!isLocalPlayer)
 			return;
 		if (carried && carrier != null)
-			body.MovePosition (carrier.position + Vector2.up * 1.5f);
+			body.MovePosition (carrier.position + Vector2.up * 0.75f);
 	}
 
 	[ClientRpc]
