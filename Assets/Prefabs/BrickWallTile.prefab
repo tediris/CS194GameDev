@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 432312}
   - 212: {fileID: 21294422}
   m_Layer: 0
-  m_Name: StoneWallTile
+  m_Name: BrickWallTile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
