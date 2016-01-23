@@ -57,7 +57,7 @@ CircleCollider2D:
   m_GameObject: {fileID: 116490}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 5eaf406dd04bc403bbbf5ee0935672d1, type: 2}
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
@@ -143,6 +143,10 @@ Prefab:
       propertyPath: tools.Array.data[0]
       value: 
       objectReference: {fileID: 106724, guid: 1faa04b85b7ba4eceab4e069afeb0941, type: 2}
+    - target: {fileID: 0}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 5eaf406dd04bc403bbbf5ee0935672d1, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 116490}
