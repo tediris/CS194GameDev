@@ -84,17 +84,17 @@ public class PlayerControl : NetworkBehaviour
 	}
 
 	void ThrowPlayer() {
-		CmdThrowPlayer (carryingPlayer);
+		CmdThrowPlayer (carryingPlayer, transform.localScale.x);
 		carrying = false;
 		carryingPlayer = -1;
 	}
 
 	[Command]
-	void CmdThrowPlayer(int playerNum) {
+	void CmdThrowPlayer(int playerNum, float direction) {
 		Debug.Log ("Throwing player " + playerNum);
 		GameObject carried = GameObject.Find("Player" + playerNum);
 		carried.GetComponent<ColorControl> ().CmdSetColor (Color.white);
-		carried.GetComponent<CarryControl> ().CmdUnsetCarry (transform.localScale.x);
+		carried.GetComponent<CarryControl> ().CmdUnsetCarry (direction);
 	}
 
 	void CarryPlayer() {
