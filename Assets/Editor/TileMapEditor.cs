@@ -275,8 +275,11 @@ public class TileMapEditor : EditorWindow {
 									newgo.transform.position = mouseWorldPos;
 									newgo.GetComponent<SpriteRenderer>().sprite = activeSprite;
 									newgo.tag = tagName;
-									if (addBoxCollider)
-										newgo.AddComponent<BoxCollider2D>();
+									if (addBoxCollider) {
+										newgo.AddComponent<BoxCollider2D> ();
+										if (physicsMaterial != null)
+											newgo.GetComponent<BoxCollider2D> ().sharedMaterial = physicsMaterial;
+									}
 								}
 							}
 							else if (selected == DRAWOPTION.erase)
