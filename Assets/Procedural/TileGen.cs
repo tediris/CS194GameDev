@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class TileGen : MonoBehaviour {
 
@@ -16,10 +17,20 @@ public class TileGen : MonoBehaviour {
 
 	public int tileSize = 32;
 
+	public int numRoomsWidth = 4;
+	public int numRoomsHeight = 2;
+	public int minRoomSize = 4;
+	public int maxRoomSize = 8;
+	Room[,] rooms;
+
 	TileType[,] map;
+
+	System.Random rand;
+	public string seed = "mario";
 
 	// Use this for initialization
 	void Start () {
+		rand = new System.Random (seed.GetHashCode());
 		InitMap ();
 		SpawnMap ();
 	}
@@ -43,14 +54,24 @@ public class TileGen : MonoBehaviour {
 		}
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	
+	void CreateRoomLayout() {
+		rooms = new Room[numRoomsWidth, numRoomsHeight];
+		//int roomWidthSpacing = wid
+		for (int x = 0; x < numRoomsWidth; x++) {
+			for (int y = 0; y < numRoomsHeight; y++) {
+				int size = rand.Next (maxRoomSize - minRoomSize + 1) + minRoomSize;
+				rooms [x, y] = new Room (x, y, size);
+			}
+		}
+		int startX = rand.Next (numRoomsWidth);
+		int startY = rand.Next (numRoomsHeight);
+
 	}
 
 	public class Room {
 		int x, y;
 		int radius;
+		public List<Room> connectedRooms;
 
 		public enum Shape {
 			Rect = 0,

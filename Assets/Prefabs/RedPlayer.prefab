@@ -18,6 +18,7 @@ GameObject:
   - 114: {fileID: 11488224}
   - 114: {fileID: 11446158}
   - 114: {fileID: 11447320}
+  - 58: {fileID: 5878898}
   m_Layer: 8
   m_Name: RedPlayer
   m_TagString: Player
@@ -32,7 +33,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 187436}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.033125088, y: 0.8423261, z: 0}
+  m_LocalPosition: {x: -1.7054907, y: 0.4156238, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -54,6 +55,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!58 &5878898
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 187436}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: 5eaf406dd04bc403bbbf5ee0935672d1, type: 2}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: -0.35}
+  serializedVersion: 2
+  m_Radius: 0.3
 --- !u!61 &6161676
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -65,9 +80,9 @@ BoxCollider2D:
   m_Material: {fileID: 6200000, guid: 5eaf406dd04bc403bbbf5ee0935672d1, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.3}
   serializedVersion: 2
-  m_Size: {x: 0.64, y: 1.28}
+  m_Size: {x: 0.64, y: 0.7}
 --- !u!114 &11406890
 MonoBehaviour:
   m_ObjectHideFlags: 1
