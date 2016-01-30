@@ -31,7 +31,7 @@ public class PlayerControl : NetworkBehaviour
 	}
 
 	bool canJump() {
-		return !carrying && grounded || (!grounded && !wallJumped && currentPlatformCollider);
+		return !carrying && grounded || (!grounded /*&& !wallJumped*/ && currentPlatformCollider);
 	}
 
 	// Use this for initialization
