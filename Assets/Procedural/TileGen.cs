@@ -70,7 +70,7 @@ public class TileGen : MonoBehaviour {
 		for (int x = 0; x < numRoomsWidth; x++) {
 			for (int y = 0; y < numRoomsHeight; y++) {
 				int size = rand.Next (maxRoomSize - minRoomSize + 1) + minRoomSize;
-				rooms [x, y] = new Room (xOffset + x * roomWidthSpacing , yOffset + y * roomHeightSpacing, x, y, size);
+				rooms [x, y] = new Room (xOffset + x * roomWidthSpacing , yOffset + y * roomHeightSpacing, x, y, 20, 10);
 			}
 		}
 		int startX = rand.Next (numRoomsWidth);
@@ -111,7 +111,7 @@ public class TileGen : MonoBehaviour {
 	public class Room {
 		public int x, y;
 		public int gridX, gridY;
-		int radius;
+		int width, height;
 		public List<Room> connectedRooms;
 
 		public enum Shape {
@@ -121,12 +121,13 @@ public class TileGen : MonoBehaviour {
 
 		public Shape shape;
 
-		public Room(int x, int y, int gridX, int gridY, int radius) {
+		public Room(int x, int y, int gridX, int gridY, int width, int height) {
 			this.x = x;
 			this.y = y;
 			this.gridX = gridX;
 			this.gridY = gridY;
-			this.radius = radius;
+			this.width = width;
+			this.height = height;
 			shape = Shape.Rect;
 			connectedRooms = new List<Room>();
 		}
@@ -159,8 +160,8 @@ public class TileGen : MonoBehaviour {
 		}
 
 		void fillRect(TileType[,] tilemap) {
-			for (int i = Mathf.Max (x - radius, 1); i < Mathf.Min (tilemap.GetLength (0) - 1, x + radius); i++) {
-				for (int j = Mathf.Max(y - radius, 1); j < Mathf.Min(tilemap.GetLength(1) - 1, y + radius); j++) {
+			for (int i = Mathf.Max (x - width/2, 1); i < Mathf.Min (tilemap.GetLength (0) - 1, x + width/2); i++) {
+				for (int j = Mathf.Max(y - height/2, 1); j < Mathf.Min(tilemap.GetLength(1) - 1, y + height/2); j++) {
 					tilemap[i, j] = TileType.Empty;
 				}
 			}
