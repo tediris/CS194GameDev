@@ -10,8 +10,10 @@ public class TileMapEditor : EditorWindow {
 
 	private static bool isEnabled;
 	private Vector2 _scrollPos;
-	private static Vector2 gridSize = new Vector2(0.16f, 0.16f);
+	private static Vector2 gridSize = new Vector2(0.32f, 0.32f);
+	private static float tileSize = 1.0f;
 	private static bool isGrid;
+	private static bool isScaled;
 	private static bool isDraw;
 	private static bool addBoxCollider;
 	private static bool isObjmode;
@@ -19,6 +21,7 @@ public class TileMapEditor : EditorWindow {
 	private static GameObject parentObj;
 	private static PhysicsMaterial2D physicsMaterial;
 	private static int layerOrd;
+	private static string layerName;
 	private static string tagName;
 	private int index;
 	private string[] options;
@@ -79,6 +82,11 @@ public class TileMapEditor : EditorWindow {
 		gridSize = EditorGUILayout.Vector2Field("Grid Size (0.05 minimum)", gridSize,  GUILayout.Width(236));
 		GUILayout.EndHorizontal();
 
+		GUILayout.BeginHorizontal ();
+		isScaled = EditorGUILayout.Toggle (isScaled, GUILayout.Width (16));
+		tileSize = EditorGUILayout.FloatField ("Scale Tiles", tileSize, GUILayout.Width (236));
+		GUILayout.EndHorizontal ();
+
 		EditorGUILayout.LabelField("Parent Object", GUILayout.Width(256));
 		parentObj = (GameObject)EditorGUILayout.ObjectField(parentObj, typeof(GameObject),true,GUILayout.Width(256));
 
@@ -96,6 +104,11 @@ public class TileMapEditor : EditorWindow {
 		layerOrd = EditorGUILayout.IntField(layerOrd,  GUILayout.Width(126));
 		isObjmode = EditorGUILayout.Toggle(isObjmode, GUILayout.Width(16));
 		EditorGUILayout.LabelField("Layer based on Y", GUILayout.Width(110));
+		GUILayout.EndHorizontal();
+
+		EditorGUILayout.LabelField ("Sprite Layer Name", GUILayout.Width (256));
+		GUILayout.BeginHorizontal ();
+		layerName = EditorGUILayout.TextField (layerName, GUILayout.Width(256));
 		GUILayout.EndHorizontal();
 
 		EditorGUILayout.LabelField("Tag", GUILayout.Width(32));
@@ -161,8 +174,8 @@ public class TileMapEditor : EditorWindow {
 			if (isEnabled && isGrid)
 			{
 				Gizmos.color = Color.white;
-				Vector3 minGrid = SceneView.currentDrawingSceneView.camera.ScreenPointToRay(new Vector2(0f, 0f)).origin;
-				Vector3 maxGrid = SceneView.currentDrawingSceneView.camera.ScreenPointToRay(new Vector2(SceneView.currentDrawingSceneView.camera.pixelWidth, SceneView.currentDrawingSceneView.camera.pixelHeight)).origin;
+				Vector3 minGrid = new Vector3 (-100, -100, 0); // SceneView.currentDrawingSceneView.camera.ScreenPointToRay(new Vector2(0f, 0f)).origin;
+				Vector3 maxGrid = new Vector3 (100, 100, 0); // SceneView.currentDrawingSceneView.camera.ScreenPointToRay(new Vector2(SceneView.currentDrawingSceneView.camera.pixelWidth, SceneView.currentDrawingSceneView.camera.pixelHeight)).origin;
 				for (float i = Mathf.Round(minGrid.x / gridSize.x) * gridSize.x; i < Mathf.Round(maxGrid.x / gridSize.x) * gridSize.x && gridSize.x > 0.05f; i+=gridSize.x)
 					Gizmos.DrawLine(new Vector3(i,minGrid.y,0.0f), new Vector3(i,maxGrid.y,0.0f));
 				for (float j = Mathf.Round(minGrid.y / gridSize.y) * gridSize.y; j < Mathf.Round(maxGrid.y / gridSize.y) * gridSize.y && gridSize.y > 0.05f; j+=gridSize.y)
@@ -248,14 +261,22 @@ public class TileMapEditor : EditorWindow {
 								{
 									GameObject newgo = new GameObject(activeSprite.name, typeof(SpriteRenderer));
 									newgo.transform.position = mouseWorldPos;
-									newgo.GetComponent<SpriteRenderer>().sprite = activeSprite;
+									if (isScaled) {
+										newgo.transform.localScale = new Vector2 (tileSize, tileSize);
+									}
+									SpriteRenderer sRenderer = newgo.GetComponent<SpriteRenderer> ();
+									sRenderer.sprite = activeSprite;
+									if (layerName != "")
+										sRenderer.sortingLayerName = layerName;
+									if (tagName == "")
+										tagName = "Untagged";
 									newgo.tag = tagName;
 									if (addBoxCollider) {
 										newgo.AddComponent<BoxCollider2D> ();
 										if (physicsMaterial != null)
 											newgo.GetComponent<BoxCollider2D> ().sharedMaterial = physicsMaterial;
 									}
-									if (parentObj != null)
+									if (parentObj != null) 
 										newgo.transform.parent = parentObj.transform;
 								}
 							}
