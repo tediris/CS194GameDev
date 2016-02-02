@@ -124,10 +124,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3de86d58f4d94587b3e94109bc74d1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 20
-  height: 20
+  width: 100
+  height: 100
   wall: {fileID: 190278, guid: 4e1fadda058364aa3b64eb32c7d1580d, type: 2}
   tileSize: 128
+  numRoomsWidth: 5
+  numRoomsHeight: 5
+  minRoomSize: 4
+  maxRoomSize: 8
+  seed: mario
 --- !u!1 &676121135
 GameObject:
   m_ObjectHideFlags: 0
