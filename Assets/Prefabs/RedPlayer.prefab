@@ -19,6 +19,7 @@ GameObject:
   - 114: {fileID: 11446158}
   - 114: {fileID: 11447320}
   - 58: {fileID: 5878898}
+  - 114: {fileID: 11417272}
   m_Layer: 8
   m_Name: RedPlayer
   m_TagString: Player
@@ -102,6 +103,19 @@ MonoBehaviour:
   facingRight: 1
   grounded: 1
   distToBottom: 0.5
+--- !u!114 &11417272
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 187436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfb86bdbc7f5c43a7996eb62948830bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 5
+  health: 5
 --- !u!114 &11419108
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -333,7 +347,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: maxSpeed
@@ -399,6 +413,10 @@ Prefab:
       propertyPath: pickupPrefab
       value: 
       objectReference: {fileID: 119926, guid: 0529b65e1ed8b4020b294b608e129b3c, type: 2}
+    - target: {fileID: 0}
+      propertyPath: m_UsedByEffector
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 187436}

@@ -26,9 +26,6 @@ public class EnemyManager : MonoBehaviour {
 			float thisTop = (thisBounds.center + thisBounds.extents) [1];
 
 			if (otherBottom - thisTop < 0.0f) {
-				// Player on bottom
-				Destroy(other.gameObject);
-			} else {
 				// Player on top
 				Destroy(this.gameObject);
 			}
