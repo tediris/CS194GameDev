@@ -18,9 +18,9 @@ public class WallEnemyManager : MonoBehaviour {
 	}
 
 	void OnCollisionEnter2D(Collision2D other) {
-		if (other.gameObject.tag == "Player") {
-			Destroy (other.gameObject);
-		}
+//		if (other.gameObject.tag == "Player") {
+//			Destroy (other.gameObject);
+//		}
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {
