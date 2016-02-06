@@ -12,8 +12,8 @@ public class TileMapEditor : EditorWindow {
 
 	private static bool isEnabled;
 	private Vector2 _scrollPos;
-	[SerializeField] private static Vector2 gridSize = new Vector2(0.32f, 0.32f);
-	[SerializeField] private static float tileSize = 1.0f;
+	private static Vector2 gridSize = new Vector2(0.32f, 0.32f);
+	private static float tileSize = 1.0f;
 	private static bool isGrid;
 	private static bool isScaled;
 	private static bool isDraw = true;
@@ -184,6 +184,12 @@ public class TileMapEditor : EditorWindow {
 					Gizmos.DrawLine(new Vector3(i,minGrid.y * gridSize.y,0.0f), new Vector3(i,maxGrid.y * gridSize.y,0.0f));
 				for (float j = minGrid.y * gridSize.y; j < maxGrid.y * gridSize.y && gridSize.y > 0.05f; j+=gridSize.y)
 					Gizmos.DrawLine(new Vector3(minGrid.x * gridSize.x,j,0.0f), new Vector3(maxGrid.x * gridSize.x,j,0.0f));
+//				Vector3 minGrid = new Vector3 (-100, -100, 0); // SceneView.currentDrawingSceneView.camera.ScreenPointToRay(new Vector2(0f, 0f)).origin;
+//				Vector3 maxGrid = new Vector3 (100, 100, 0); // SceneView.currentDrawingSceneView.camera.ScreenPointToRay(new Vector2(SceneView.currentDrawingSceneView.camera.pixelWidth, SceneView.currentDrawingSceneView.camera.pixelHeight)).origin;
+//				for (float i = Mathf.Round(minGrid.x / gridSize.x) * gridSize.x; i < Mathf.Round(maxGrid.x / gridSize.x) * gridSize.x && gridSize.x > 0.05f; i+=gridSize.x)
+//					Gizmos.DrawLine(new Vector3(i,minGrid.y,0.0f), new Vector3(i,maxGrid.y,0.0f));
+//				for (float j = Mathf.Round(minGrid.y / gridSize.y) * gridSize.y; j < Mathf.Round(maxGrid.y / gridSize.y) * gridSize.y && gridSize.y > 0.05f; j+=gridSize.y)
+//					Gizmos.DrawLine(new Vector3(minGrid.x,j,0.0f), new Vector3(maxGrid.x,j,0.0f));
 				SceneView.RepaintAll();
 			}
 		}
