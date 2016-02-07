@@ -1,0 +1,452 @@
+fileFormatVersion: 2
+guid: f71ca61d5881c414aa540ddbd41336cd
+timeCreated: 1454794453
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: twilight_platform_large_0
+    21300002: twilight_platform_large_1
+    21300004: twilight_platform_large_2
+    21300006: twilight_platform_large_3
+    21300008: twilight_platform_large_4
+    21300010: twilight_platform_large_5
+    21300012: twilight_platform_large_6
+    21300014: twilight_platform_large_7
+    21300016: twilight_platform_large_8
+    21300018: twilight_platform_large_9
+    21300020: twilight_platform_large_10
+    21300022: twilight_platform_large_11
+    21300024: twilight_platform_large_12
+    21300026: twilight_platform_large_13
+    21300028: twilight_platform_large_14
+    21300030: twilight_platform_large_15
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: twilight_platform_large_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 96
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -28}
+        - {x: 5, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: twilight_platform_large_1
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 96
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: twilight_platform_large_2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 96
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: twilight_platform_large_3
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 96
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 29, y: -32}
+        - {x: 32, y: -30}
+        - {x: 32, y: 0}
+    - name: twilight_platform_large_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -13}
+        - {x: 4, y: -25}
+        - {x: 8, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+      - - {x: 2, y: -20}
+        - {x: 0, y: -22}
+        - {x: 0, y: -24}
+        - {x: 2, y: -26}
+        - {x: 4, y: -26}
+        - {x: 6, y: -24}
+        - {x: 6, y: -22}
+        - {x: 4, y: -20}
+      - - {x: 1, y: -12}
+        - {x: 0, y: -13}
+        - {x: 0, y: -18}
+        - {x: 4, y: -18}
+        - {x: 6, y: -17}
+        - {x: 6, y: -14}
+        - {x: 4, y: -12}
+    - name: twilight_platform_large_5
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 64
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: twilight_platform_large_6
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: twilight_platform_large_7
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 64
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 25, y: -32}
+        - {x: 32, y: -29}
+        - {x: 32, y: 0}
+      - - {x: 28, y: -10}
+        - {x: 28, y: -12}
+        - {x: 30, y: -14}
+        - {x: 32, y: -14}
+        - {x: 32, y: -8}
+        - {x: 30, y: -8}
+    - name: twilight_platform_large_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 32
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 10, y: 0}
+        - {x: 10, y: -10}
+        - {x: 11, y: -27}
+        - {x: 17, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+      - - {x: 0, y: -22}
+        - {x: 0, y: -31}
+        - {x: 2, y: -32}
+        - {x: 8, y: -32}
+        - {x: 10, y: -30}
+        - {x: 10, y: -22}
+      - - {x: 4, y: 0}
+        - {x: 2, y: -2}
+        - {x: 2, y: -6}
+        - {x: 4, y: -8}
+        - {x: 8, y: -8}
+        - {x: 10, y: -6}
+        - {x: 10, y: -2}
+        - {x: 8, y: 0}
+    - name: twilight_platform_large_9
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 32
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: twilight_platform_large_10
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 32
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: twilight_platform_large_11
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 32
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 24, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 18, y: -32}
+        - {x: 21, y: -29}
+        - {x: 24, y: -15}
+      - - {x: 26, y: -20}
+        - {x: 24, y: -22}
+        - {x: 24, y: -26}
+        - {x: 26, y: -28}
+        - {x: 30, y: -28}
+        - {x: 32, y: -26}
+        - {x: 32, y: -22}
+        - {x: 30, y: -20}
+      - - {x: 26, y: -8}
+        - {x: 24, y: -10}
+        - {x: 24, y: -14}
+        - {x: 26, y: -16}
+        - {x: 30, y: -16}
+        - {x: 32, y: -14}
+        - {x: 32, y: -10}
+        - {x: 30, y: -8}
+      - - {x: 26, y: 0}
+        - {x: 26, y: -2}
+        - {x: 28, y: -4}
+        - {x: 30, y: -4}
+        - {x: 32, y: -2}
+        - {x: 32, y: 0}
+    - name: twilight_platform_large_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 18, y: -26}
+        - {x: 18, y: -32}
+        - {x: 23, y: -32}
+        - {x: 24, y: -30}
+        - {x: 24, y: -26}
+      - - {x: 9, y: -14}
+        - {x: 8, y: -16}
+        - {x: 8, y: -24}
+        - {x: 18, y: -24}
+        - {x: 18, y: -14}
+      - - {x: 20, y: 0}
+        - {x: 20, y: -24}
+        - {x: 28, y: -24}
+        - {x: 32, y: -23}
+        - {x: 32, y: -2}
+        - {x: 30, y: 0}
+      - - {x: 7, y: -4}
+        - {x: 6, y: -5}
+        - {x: 6, y: -10}
+        - {x: 11, y: -10}
+        - {x: 12, y: -8}
+        - {x: 12, y: -6}
+        - {x: 10, y: -4}
+      - - {x: 14, y: -2}
+        - {x: 12, y: -4}
+        - {x: 12, y: -8}
+        - {x: 14, y: -10}
+        - {x: 18, y: -10}
+        - {x: 20, y: -8}
+        - {x: 20, y: -4}
+        - {x: 18, y: -2}
+    - name: twilight_platform_large_13
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 22, y: -24}
+        - {x: 22, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: -22}
+        - {x: 24, y: -22}
+      - - {x: 0, y: -24}
+        - {x: 0, y: -32}
+        - {x: 4, y: -32}
+        - {x: 6, y: -30}
+        - {x: 6, y: -26}
+        - {x: 4, y: -24}
+      - - {x: 0, y: 0}
+        - {x: 0, y: -22}
+        - {x: 6, y: -28}
+        - {x: 27, y: -28}
+        - {x: 32, y: -26}
+        - {x: 32, y: 0}
+    - name: twilight_platform_large_14
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -22}
+        - {x: 8, y: -31}
+        - {x: 11, y: -32}
+        - {x: 22, y: -32}
+        - {x: 32, y: -24}
+        - {x: 32, y: 0}
+      - - {x: 6, y: -24}
+        - {x: 4, y: -26}
+        - {x: 4, y: -28}
+        - {x: 6, y: -30}
+        - {x: 8, y: -30}
+        - {x: 10, y: -29}
+        - {x: 10, y: -26}
+        - {x: 9, y: -24}
+    - name: twilight_platform_large_15
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: -20}
+        - {x: 0, y: -26}
+        - {x: 2, y: -26}
+        - {x: 4, y: -24}
+        - {x: 4, y: -22}
+        - {x: 2, y: -20}
+      - - {x: 15, y: -12}
+        - {x: 16, y: -12}
+        - {x: 18, y: -10}
+        - {x: 18, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: -14}
+        - {x: 3, y: -18}
+        - {x: 12, y: -24}
+        - {x: 25, y: -24}
+        - {x: 26, y: -23}
+        - {x: 26, y: -15}
+        - {x: 21, y: -11}
+      - - {x: 22, y: -2}
+        - {x: 20, y: -4}
+        - {x: 20, y: -6}
+        - {x: 22, y: -8}
+        - {x: 24, y: -8}
+        - {x: 26, y: -6}
+        - {x: 26, y: -4}
+        - {x: 24, y: -2}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

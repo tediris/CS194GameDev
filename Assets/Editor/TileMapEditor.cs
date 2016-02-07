@@ -4,31 +4,31 @@ using UnityEditor;
 using System.IO;
 using System.Linq;
 
-enum DRAWOPTION {select, paint, paintover, erase};
+public enum DRAWOPTION {select, paint, paintover, erase};
 
 public class TileMapEditor : EditorWindow {
 
-	private static bool isEnabled;
-	private Vector2 _scrollPos;
-	private static Vector2 gridSize = new Vector2(0.32f, 0.32f);
-	private static float tileSize = 1.0f;
-	private static bool isGrid;
-	private static bool isScaled;
-	private static bool isDraw;
-	private static bool addBoxCollider;
-	private static bool isObjmode;
-	private static DRAWOPTION selected;
-	private static GameObject parentObj;
-	private static PhysicsMaterial2D physicsMaterial;
-	private static int layerOrd;
-	private static string layerName;
-	private static string tagName;
-	private int index;
-	private string[] options;
-	private Sprite[] allSprites;
-	private string[] files;
-	private static Sprite activeSprite;
-	private static GameObject activeGo;
+	public static bool isEnabled;
+	public Vector2 _scrollPos;
+	public static Vector2 gridSize = new Vector2(0.32f, 0.32f);
+	public static float tileSize = 1.0f;
+	public static bool isGrid;
+	public static bool isScaled;
+	public static bool isDraw;
+	public static bool addBoxCollider;
+	public static bool isObjmode;
+	public static DRAWOPTION selected;
+	public static GameObject parentObj;
+	public static PhysicsMaterial2D physicsMaterial;
+	public static int layerOrd;
+	public static string layerName;
+	public static string tagName;
+	public int index;
+	public string[] options;
+	public Sprite[] allSprites;
+	public string[] files;
+	public static Sprite activeSprite;
+	public static GameObject activeGo;
 	public GUIStyle textureStyle;
 	public GUIStyle textureStyleAct;
 
@@ -36,22 +36,22 @@ public class TileMapEditor : EditorWindow {
 	public static void ShowWindow() {
 		EditorWindow.GetWindow (typeof(TileMapEditor));
 	}
-
-	public void OnInspectorUpdate()
-	{
-		// This will only get called 10 times per second.
-		Repaint();
-	}
-
+//
+//	public void OnInspectorUpdate()
+//	{
+//		// This will only get called 10 times per second.
+//		Repaint();
+//	}
+//
 	void OnEnable() {
 
 		isEnabled = true;
 		Editor.CreateInstance(typeof(SceneViewEventHandler));
 	}
 
-	void OnDestroy() {
-		isEnabled = false;
-	}
+//	void OnDestroy() {
+//		isEnabled = false;
+//	}
 
 	void OnGUI()
 	{
@@ -165,7 +165,7 @@ public class TileMapEditor : EditorWindow {
 		SceneView.RepaintAll();
 	}
 
-	[CustomEditor(typeof(TileMapEditor))]
+	[CustomEditor(typeof(MonoBehaviour))]
 	public class SceneGUITest : Editor
 	{
 		[DrawGizmo(GizmoType.NotInSelectionHierarchy)]
