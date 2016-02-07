@@ -43,6 +43,7 @@ public class CSVLoader : EditorWindow {
 		GUILayout.BeginHorizontal();
 		EditorGUILayout.LabelField("Parent Transform", GUILayout.Width(128));
 		parentTransform = (Transform) EditorGUILayout.ObjectField(parentTransform, typeof(Transform),true,GUILayout.Width(128));
+		parentTransform.position = new Vector3 (0, 0, 0);
 		GUILayout.EndHorizontal ();
 
 		GUILayout.BeginHorizontal();
@@ -137,8 +138,12 @@ public class CSVLoader : EditorWindow {
 
 	public static int[,] ParseCSV(TextAsset file) {
 		string[] lines = file.text.Split('\n');
-		int[,] result = new int[lines.Length, lines [0].Split (',').Length];
-		for ( var i = 0; i < lines.Length; i ++ ) {
+		int limit = lines.Length;
+		if (lines [lines.Length - 1] == "") {
+			limit--;
+		} 
+		int[,] result = new int[limit, lines [0].Split (',').Length];
+		for (var i = 0; i < limit; i ++ ) {
 			string[] parts = lines[i].Split(","[0]);
 			for ( var x = 0; x < parts.Length; x ++ ) {
 				result [i, x] = int.Parse (parts [x]);
