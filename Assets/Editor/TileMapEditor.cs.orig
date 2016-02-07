@@ -1,15 +1,38 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using UnityEditor;
 using System.IO;
 using System.Linq;
 
-enum DRAWOPTION {select, paint, paintover, erase};
+public enum DRAWOPTION {select, paint, paintover, erase};
 
 [System.Serializable]
 
 public class TileMapEditor : EditorWindow {
 
+<<<<<<< HEAD
+	public static bool isEnabled;
+	public Vector2 _scrollPos;
+	public static Vector2 gridSize = new Vector2(0.32f, 0.32f);
+	public static float tileSize = 1.0f;
+	public static bool isGrid;
+	public static bool isScaled;
+	public static bool isDraw;
+	public static bool addBoxCollider;
+	public static bool isObjmode;
+	public static DRAWOPTION selected;
+	public static GameObject parentObj;
+	public static PhysicsMaterial2D physicsMaterial;
+	public static int layerOrd;
+	public static string layerName;
+	public static string tagName;
+	public int index;
+	public string[] options;
+	public Sprite[] allSprites;
+	public string[] files;
+	public static Sprite activeSprite;
+	public static GameObject activeGo;
+=======
 	private static bool isEnabled;
 	private Vector2 _scrollPos;
 	private static Vector2 gridSize = new Vector2(0.32f, 0.32f);
@@ -31,6 +54,7 @@ public class TileMapEditor : EditorWindow {
 	private string[] files;
 	private static Sprite activeSprite;
 	private static GameObject activeGo;
+>>>>>>> 4483712a23433c99c14e09cf485f4327c2a8ac2b
 	public GUIStyle textureStyle;
 	public GUIStyle textureStyleAct;
 
