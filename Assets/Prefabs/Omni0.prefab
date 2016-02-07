@@ -1417,7 +1417,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 441024}
   m_Layer: 0
-  m_Name: TilemapParent
+  m_Name: Omni0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
