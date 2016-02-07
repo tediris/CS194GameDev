@@ -43,7 +43,8 @@ public class CSVLoader : EditorWindow {
 		GUILayout.BeginHorizontal();
 		EditorGUILayout.LabelField("Parent Transform", GUILayout.Width(128));
 		parentTransform = (Transform) EditorGUILayout.ObjectField(parentTransform, typeof(Transform),true,GUILayout.Width(128));
-		parentTransform.position = new Vector3 (0, 0, 0);
+		if (parentTransform != null) 
+			parentTransform.position = new Vector3 (0, 0, 0);
 		GUILayout.EndHorizontal ();
 
 		GUILayout.BeginHorizontal();
