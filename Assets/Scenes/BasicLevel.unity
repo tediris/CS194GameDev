@@ -3,7 +3,7 @@
 --- !u!29 &1
 SceneSettings:
   m_ObjectHideFlags: 0
-  m_PVSData:
+  m_PVSData: 
   m_PVSObjectsArray: []
   m_PVSPortalsArray: []
   m_OcclusionBakeSettings:
@@ -94,13 +94,14 @@ GameObject:
   m_Component:
   - 4: {fileID: 115989038}
   - 114: {fileID: 115989039}
+  - 114: {fileID: 115989040}
   m_Layer: 0
   m_Name: TileGenParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &115989038
 Transform:
   m_ObjectHideFlags: 0
@@ -119,7 +120,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 115989037}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c3de86d58f4d94587b3e94109bc74d1d, type: 3}
   m_Name: 
@@ -132,6 +133,53 @@ MonoBehaviour:
   numRoomsHeight: 3
   minRoomSize: 4
   maxRoomSize: 8
+  seed: mario
+--- !u!114 &115989040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 115989037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3f0377663db548bea73fcc4430b7158, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  omniPrefabs:
+  - {fileID: 176088, guid: d0cc747a765c5428eb088789062e3ddc, type: 2}
+  northPrefabs:
+  - {fileID: 110856, guid: 4789d459e2bd54b988efdee0b3dfe2b9, type: 2}
+  eastPrefabs:
+  - {fileID: 0}
+  southPrefabs:
+  - {fileID: 121290, guid: dc8a0166fd30b4a44bc3c9057ec165ce, type: 2}
+  westPrefabs:
+  - {fileID: 126148, guid: 533d9bc0851c64ea49e1ac5b37362fa5, type: 2}
+  northEastPrefabs:
+  - {fileID: 101920, guid: b8e2323fcf9df43f5be248b5d596e8ba, type: 2}
+  northSouthPrefabs:
+  - {fileID: 177878, guid: 4382ad91fabde466fbf4b7d65e577ec8, type: 2}
+  northWestPrefabs:
+  - {fileID: 147216, guid: ab2f19313c212425097089068094a688, type: 2}
+  southEastPrefabs:
+  - {fileID: 109438, guid: 8becf4760571f488bbbcffc106420a31, type: 2}
+  southWestPrefabs:
+  - {fileID: 119006, guid: 9915523fa5f7f48c69f151536f3202e8, type: 2}
+  eastWestPrefabs:
+  - {fileID: 162548, guid: 1db513754cfad48a79f462508cd2f415, type: 2}
+  northEastSouthPrefabs:
+  - {fileID: 195374, guid: b37a8961b23024853af9aaf18db691fa, type: 2}
+  northEastWestPrefabs:
+  - {fileID: 165390, guid: 87753b085caee4df39186d85b258e1e8, type: 2}
+  northSouthWestPrefabs:
+  - {fileID: 135222, guid: 318c6b3f43dda4e429bf17111c3e64a0, type: 2}
+  southEastWestPrefabs:
+  - {fileID: 138686, guid: e4bd2cb49398e41768e4fd25a5838fe5, type: 2}
+  tileSize: 32
+  roomWidth: 6.4
+  roomHeight: 3.2
+  numRoomsWidth: 4
+  numRoomsHeight: 2
   seed: mario
 --- !u!1 &676121135
 GameObject:
@@ -263,7 +311,7 @@ SpriteRenderer:
   m_ReceiveShadows: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
-  m_SubsetIndices:
+  m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
   m_ReflectionProbeUsage: 0

@@ -47,12 +47,12 @@ public class TileGen : MonoBehaviour {
 	void InitMap() {
 		map = new TileType[width, height];
 		CreateRoomLayout ();
-		for (int x = 0; x < numRoomsWidth; x++) {
-			for (int y = 0; y < numRoomsHeight; y++) {
-				rooms [x, y].fillMap (map);
-				rooms [x, y].fillConnections (map);
-			}
-		}
+//		for (int x = 0; x < numRoomsWidth; x++) {
+//			for (int y = 0; y < numRoomsHeight; y++) {
+//				rooms [x, y].fillMap (map);
+//				rooms [x, y].fillConnections (map);
+//			}
+//		}
 		//Room r = new Room (10, 10, 5);
 		//r.fillMap (map);
 	}
