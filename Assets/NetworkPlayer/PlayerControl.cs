@@ -36,6 +36,7 @@ public class PlayerControl : NetworkBehaviour
 	public float maxAirSpeed = 3.0f;
 	public float airControl = 0.05f;
 	public float climbSpeed = 1.0f;
+	public float wallJumpPush = 2.0f;
 	private float gravityInitial = 0.0f;
 
 	private WallCheck wallCheck;
@@ -45,7 +46,7 @@ public class PlayerControl : NetworkBehaviour
 	}
 
 	bool canJump() {
-		return !carrying && grounded || (!grounded /*&& !wallJumped*/ && currentPlatformCollider);
+		return (!carrying && grounded) || (!carrying && !grounded && grabbingWall);
 	}
 
 	public void SetGravity(bool enable) {
@@ -140,12 +141,17 @@ public class PlayerControl : NetworkBehaviour
 		float h = Input.GetAxis ("Horizontal");
 
 		if (canJump() && (Input.GetKeyDown (KeyCode.Space) || Input.GetKeyDown(KeyCode.U))) {
-			playerBody.velocity =  new Vector2 (playerBody.velocity.x, jumpSpeed);
-			airSpeed = playerBody.velocity.x;
 			if (!grounded) {
+				Debug.Log ("Trying to wall jump");
 				wallJumped = true;
+				grabbingWall = false;
+				airSpeed = transform.localScale.x * wallJumpPush * -1;
+				playerBody.velocity =  new Vector2 (airSpeed, jumpSpeed);
+				SetGravity (true);
 			} else {
 				grounded = false;
+				airSpeed = playerBody.velocity.x;
+				playerBody.velocity =  new Vector2 (playerBody.velocity.x, jumpSpeed);
 			}
 		}
 
