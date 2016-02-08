@@ -4,11 +4,12 @@ using System.Collections;
 public class TileManager : MonoBehaviour {
 
 	public SpriteRenderer tile;
+	public int n_tiles = 20;
 
 	// Use this for initialization
 	void Start () {
 		// Really get (2 * n_tiles)^2
-		int n_tiles = 20;
+
 		Vector2 tileSize = new Vector2 (
 			                   tile.bounds.size.x / transform.localScale.x, 
 			                   tile.bounds.size.y / transform.localScale.y
