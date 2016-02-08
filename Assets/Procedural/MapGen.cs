@@ -21,6 +21,8 @@ public class MapGen : MonoBehaviour {
 		OMNI
 	}
 
+	public GameObject endPortal;
+
 	public List<GameObject> omniPrefabs;
 	public List<GameObject> northPrefabs;
 	public List<GameObject> eastPrefabs;
@@ -49,8 +51,11 @@ public class MapGen : MonoBehaviour {
 	public System.Random rand;
 	public string seed = "mario";
 
+	private Teleport portalScript;
+
 	// Use this for initialization
 	void Start () {
+		portalScript = GameObject.Find ("StartPortal").GetComponent<Teleport> ();
 		rand = new System.Random (seed.GetHashCode());
 		InitMap ();
 		SpawnMap ();
@@ -61,6 +66,21 @@ public class MapGen : MonoBehaviour {
 	}
 
 	void SpawnMap() {
+		int maxDist = -1;
+		int maxDistX = -1;
+		int maxDistY = -1;
+		for (int x = 0; x < numRoomsWidth; x++) {
+			for (int y = 0; y < numRoomsHeight; y++) {
+				if (rooms [x, y].dist > maxDist) {
+					maxDist = rooms [x, y].dist;
+					maxDistX = x;
+					maxDistY = y;
+				}
+			}
+		}
+
+		CreateEnd (maxDistX, maxDistY);
+
 		for (int x = 0; x < numRoomsWidth; x++) {
 			for (int y = 0; y < numRoomsHeight; y++) {
 				rooms [x, y].Create ();
@@ -68,17 +88,30 @@ public class MapGen : MonoBehaviour {
 		}
 	}
 
+	void CreateEnd(int x, int y) {
+		Vector3 pos = Vector3.up * (-y - 0.5f) * roomHeight + Vector3.right * (-x + 0.5f) * roomWidth;
+
+		GameObject portal = Instantiate (endPortal, pos, Quaternion.identity) as GameObject;
+		Teleport endPortalScript = portal.GetComponent<Teleport> ();
+		endPortalScript.toX = 3.2f;
+		endPortalScript.toY = 98.4f;
+		endPortalScript.isEnd = true;
+	}
+
 	void CreateRoomLayout() {
 		rooms = new Room[numRoomsWidth, numRoomsHeight];
 		for (int x = 0; x < numRoomsWidth; x++) {
 			for (int y = 0; y < numRoomsHeight; y++) {
-				rooms [x, y] = new Room (x, y, this);
+				rooms [x, y] = new Room (x, y, this, -1);
 			}
 		}
 		int startX = rand.Next (numRoomsWidth);
 		int startY = rand.Next (numRoomsHeight);
 
-		RecursiveBuildMaze (startX, startY);
+		portalScript.toX = -startX * roomWidth + 0.5f * roomWidth;
+		portalScript.toY = -startY * roomHeight - 0.5f * roomHeight;
+
+		RecursiveBuildMaze (startX, startY, 0);
 	}
 
 	List<Room> GetConnectedUnvisitedRooms(int x, int y) {
@@ -98,7 +131,8 @@ public class MapGen : MonoBehaviour {
 		return connected;
 	}
 
-	void RecursiveBuildMaze(int x, int y) {
+	void RecursiveBuildMaze(int x, int y, int dist) {
+		rooms[x,y].dist = dist;
 		while (true) {
 			List<Room> connected = GetConnectedUnvisitedRooms (x, y);
 			if (connected.Count == 0)
@@ -106,18 +140,19 @@ public class MapGen : MonoBehaviour {
 			Room nextRoom = connected [rand.Next (connected.Count)];
 			rooms [x, y].connectedRooms[(int)rooms[x, y].GetRelation(nextRoom.x, nextRoom.y)] = true;
 			nextRoom.connectedRooms [(int)nextRoom.GetRelation (x, y)] = true;;
-			RecursiveBuildMaze (nextRoom.x, nextRoom.y);
+			RecursiveBuildMaze (nextRoom.x, nextRoom.y, dist + 1);
 		}
 	}
 
 	public class Room {
-		public int x, y;
+		public int x, y, dist;
 		public bool[] connectedRooms;
 		public MapGen generator;
 
-		public Room(int x, int y, MapGen gen) {
+		public Room(int x, int y, MapGen gen, int dist) {
 			this.x = x;
 			this.y = y;
+			this.dist = dist;
 			connectedRooms = new bool[4];
 			generator = gen;
 		}
