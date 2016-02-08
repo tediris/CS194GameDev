@@ -160,7 +160,8 @@ MonoBehaviour:
   roomHeight: 3.2
   numRoomsWidth: 3
   numRoomsHeight: 3
-  seed: mario
+  numRandomConnections: 3
+  seed: morgan
 --- !u!1 &676121135
 GameObject:
   m_ObjectHideFlags: 0

@@ -18,6 +18,9 @@ public class WallCheck : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {
+		if (other.tag != "Ground") {
+			return;
+		}
 		touchingWall = true;
 		walls.Add (other);
 		if (!masterController.grounded) {
@@ -28,6 +31,9 @@ public class WallCheck : MonoBehaviour {
 	}
 
 	void OnTriggerExit2D(Collider2D other) {
+		if (other.tag != "Ground") {
+			return;
+		}
 		walls.Remove (other);
 		if (walls.Count > 0)
 			return;
