@@ -158,8 +158,8 @@ MonoBehaviour:
   tileSize: 32
   roomWidth: 6.4
   roomHeight: 3.2
-  numRoomsWidth: 10
-  numRoomsHeight: 10
+  numRoomsWidth: 3
+  numRoomsHeight: 3
   seed: mario
 --- !u!1 &676121135
 GameObject:
@@ -268,6 +268,7 @@ MonoBehaviour:
   lookAheadFactor: 3
   lookAheadReturnSpeed: 0.5
   lookAheadMoveThreshold: 0.1
+  jumpThreshold: 30
 --- !u!1 &774163782 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 176842, guid: 7a08ad3b2cdb5421ba70184ecbc6630c, type: 2}
@@ -520,6 +521,7 @@ GameObject:
   - 4: {fileID: 1824526449}
   - 114: {fileID: 1824526448}
   - 114: {fileID: 1824526447}
+  - 114: {fileID: 1824526450}
   m_Layer: 0
   m_Name: PlayerManager
   m_TagString: Untagged
@@ -582,6 +584,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
+--- !u!114 &1824526450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1824526446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ab09068e4a554d2d966caaabd538ab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  netManager: {fileID: 0}
 --- !u!1 &2023279154
 GameObject:
   m_ObjectHideFlags: 0
