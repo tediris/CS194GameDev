@@ -93,7 +93,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 115989038}
-  - 114: {fileID: 115989039}
   - 114: {fileID: 115989040}
   m_Layer: 0
   m_Name: TileGenParent
@@ -114,26 +113,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
---- !u!114 &115989039
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 115989037}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3de86d58f4d94587b3e94109bc74d1d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  width: 100
-  height: 100
-  wall: {fileID: 190278, guid: 4e1fadda058364aa3b64eb32c7d1580d, type: 2}
-  tileSize: 128
-  numRoomsWidth: 3
-  numRoomsHeight: 3
-  minRoomSize: 4
-  maxRoomSize: 8
-  seed: mario
 --- !u!114 &115989040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,8 +157,8 @@ MonoBehaviour:
   tileSize: 32
   roomWidth: 6.4
   roomHeight: 3.2
-  numRoomsWidth: 4
-  numRoomsHeight: 2
+  numRoomsWidth: 10
+  numRoomsHeight: 10
   seed: mario
 --- !u!1 &676121135
 GameObject:
