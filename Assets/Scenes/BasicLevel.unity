@@ -164,7 +164,7 @@ MonoBehaviour:
 --- !u!1 &676121135
 GameObject:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_PrefabParentObject: {fileID: 112928, guid: 43ebd927f72654b6d952b67321a66318, type: 2}
   m_PrefabInternal: {fileID: 0}
   serializedVersion: 4
   m_Component:
@@ -191,21 +191,24 @@ AudioListener:
 --- !u!124 &676121137
 Behaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_PrefabParentObject: {fileID: 12465598, guid: 43ebd927f72654b6d952b67321a66318,
+    type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 676121135}
   m_Enabled: 1
 --- !u!92 &676121138
 Behaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_PrefabParentObject: {fileID: 9269010, guid: 43ebd927f72654b6d952b67321a66318,
+    type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 676121135}
   m_Enabled: 1
 --- !u!20 &676121139
 Camera:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_PrefabParentObject: {fileID: 2079668, guid: 43ebd927f72654b6d952b67321a66318,
+    type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 676121135}
   m_Enabled: 1
@@ -239,7 +242,7 @@ Camera:
 --- !u!4 &676121140
 Transform:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_PrefabParentObject: {fileID: 419704, guid: 43ebd927f72654b6d952b67321a66318, type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 676121135}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -251,7 +254,8 @@ Transform:
 --- !u!114 &676121141
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_PrefabParentObject: {fileID: 11491674, guid: 43ebd927f72654b6d952b67321a66318,
+    type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 676121135}
   m_Enabled: 1
@@ -264,6 +268,66 @@ MonoBehaviour:
   lookAheadFactor: 3
   lookAheadReturnSpeed: 0.5
   lookAheadMoveThreshold: 0.1
+--- !u!1 &774163782 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 176842, guid: 7a08ad3b2cdb5421ba70184ecbc6630c, type: 2}
+  m_PrefabInternal: {fileID: 1070831426}
+--- !u!61 &774163783
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 774163782}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Size: {x: 0.39, y: 0.62}
+--- !u!1001 &800354072
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 419704, guid: 43ebd927f72654b6d952b67321a66318, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 419704, guid: 43ebd927f72654b6d952b67321a66318, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 419704, guid: 43ebd927f72654b6d952b67321a66318, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -20
+      objectReference: {fileID: 0}
+    - target: {fileID: 419704, guid: 43ebd927f72654b6d952b67321a66318, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 419704, guid: 43ebd927f72654b6d952b67321a66318, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 419704, guid: 43ebd927f72654b6d952b67321a66318, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 419704, guid: 43ebd927f72654b6d952b67321a66318, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 419704, guid: 43ebd927f72654b6d952b67321a66318, type: 2}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 43ebd927f72654b6d952b67321a66318, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1001 &1070831426
 Prefab:
   m_ObjectHideFlags: 0
@@ -337,7 +401,7 @@ MonoBehaviour:
   manager: {fileID: 0}
   showGUI: 1
   offsetX: 0
-  offsetY: 0
+  offsetY: 2
 --- !u!114 &1397742573
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -392,7 +456,7 @@ MonoBehaviour:
     m_ReactorMaximumReceivedMessages: 1024
     m_ReactorMaximumSentMessages: 1024
     m_MaxPacketSize: 2000
-  m_Channels: 
+  m_Channels: 0500000000000000
   m_UseWebSockets: 0
   m_UseSimulator: 0
   m_SimulatedLatency: 1
