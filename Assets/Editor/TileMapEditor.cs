@@ -1,10 +1,12 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using UnityEditor;
 using System.IO;
 using System.Linq;
 
 enum DRAWOPTION {select, paint, paintover, erase};
+
+[System.Serializable]
 
 public class TileMapEditor : EditorWindow {
 
@@ -14,11 +16,11 @@ public class TileMapEditor : EditorWindow {
 	private static float tileSize = 1.0f;
 	private static bool isGrid;
 	private static bool isScaled;
-	private static bool isDraw;
+	private static bool isDraw = true;
 	private static bool addBoxCollider;
 	private static bool isObjmode;
 	private static DRAWOPTION selected;
-	private static GameObject parentObj;
+	[SerializeField] private static GameObject parentObj;
 	private static PhysicsMaterial2D physicsMaterial;
 	private static int layerOrd;
 	private static string layerName;
@@ -36,22 +38,22 @@ public class TileMapEditor : EditorWindow {
 	public static void ShowWindow() {
 		EditorWindow.GetWindow (typeof(TileMapEditor));
 	}
-
-	public void OnInspectorUpdate()
-	{
-		// This will only get called 10 times per second.
-		Repaint();
-	}
-
+//
+//	public void OnInspectorUpdate()
+//	{
+//		// This will only get called 10 times per second.
+//		Repaint();
+//	}
+//
 	void OnEnable() {
 
 		isEnabled = true;
 		Editor.CreateInstance(typeof(SceneViewEventHandler));
 	}
 
-	void OnDestroy() {
-		isEnabled = false;
-	}
+//	void OnDestroy() {
+//		isEnabled = false;
+//	}
 
 	void OnGUI()
 	{
@@ -165,7 +167,7 @@ public class TileMapEditor : EditorWindow {
 		SceneView.RepaintAll();
 	}
 
-	[CustomEditor(typeof(TileMapEditor))]
+	[CustomEditor(typeof(MonoBehaviour))]
 	public class SceneGUITest : Editor
 	{
 		[DrawGizmo(GizmoType.NotInSelectionHierarchy)]
@@ -174,12 +176,20 @@ public class TileMapEditor : EditorWindow {
 			if (isEnabled && isGrid)
 			{
 				Gizmos.color = Color.white;
-				Vector3 minGrid = new Vector3 (-100, -100, 0); // SceneView.currentDrawingSceneView.camera.ScreenPointToRay(new Vector2(0f, 0f)).origin;
-				Vector3 maxGrid = new Vector3 (100, 100, 0); // SceneView.currentDrawingSceneView.camera.ScreenPointToRay(new Vector2(SceneView.currentDrawingSceneView.camera.pixelWidth, SceneView.currentDrawingSceneView.camera.pixelHeight)).origin;
-				for (float i = Mathf.Round(minGrid.x / gridSize.x) * gridSize.x; i < Mathf.Round(maxGrid.x / gridSize.x) * gridSize.x && gridSize.x > 0.05f; i+=gridSize.x)
-					Gizmos.DrawLine(new Vector3(i,minGrid.y,0.0f), new Vector3(i,maxGrid.y,0.0f));
-				for (float j = Mathf.Round(minGrid.y / gridSize.y) * gridSize.y; j < Mathf.Round(maxGrid.y / gridSize.y) * gridSize.y && gridSize.y > 0.05f; j+=gridSize.y)
-					Gizmos.DrawLine(new Vector3(minGrid.x,j,0.0f), new Vector3(maxGrid.x,j,0.0f));
+				Vector3 minGrid = SceneView.currentDrawingSceneView.camera.ScreenPointToRay(new Vector2(0f, 0f)).origin;
+				minGrid = new Vector3 (Mathf.Round(minGrid.x/gridSize.x) - 2.0f, Mathf.Round(minGrid.y/gridSize.y) + 2.0f, minGrid.z);
+				Vector3 maxGrid = SceneView.currentDrawingSceneView.camera.ScreenPointToRay(new Vector2(SceneView.currentDrawingSceneView.camera.pixelWidth, SceneView.currentDrawingSceneView.camera.pixelHeight)).origin;
+				maxGrid = new Vector3 (Mathf.Round(maxGrid.x/gridSize.x) - 2.0f, Mathf.Round(maxGrid.y/gridSize.y) + 2.0f, maxGrid.z);
+				for (float i = minGrid.x * gridSize.x; i < maxGrid.x * gridSize.x && gridSize.x > 0.05f; i+=gridSize.x)
+					Gizmos.DrawLine(new Vector3(i,minGrid.y * gridSize.y,0.0f), new Vector3(i,maxGrid.y * gridSize.y,0.0f));
+				for (float j = minGrid.y * gridSize.y; j < maxGrid.y * gridSize.y && gridSize.y > 0.05f; j+=gridSize.y)
+					Gizmos.DrawLine(new Vector3(minGrid.x * gridSize.x,j,0.0f), new Vector3(maxGrid.x * gridSize.x,j,0.0f));
+//				Vector3 minGrid = new Vector3 (-100, -100, 0); // SceneView.currentDrawingSceneView.camera.ScreenPointToRay(new Vector2(0f, 0f)).origin;
+//				Vector3 maxGrid = new Vector3 (100, 100, 0); // SceneView.currentDrawingSceneView.camera.ScreenPointToRay(new Vector2(SceneView.currentDrawingSceneView.camera.pixelWidth, SceneView.currentDrawingSceneView.camera.pixelHeight)).origin;
+//				for (float i = Mathf.Round(minGrid.x / gridSize.x) * gridSize.x; i < Mathf.Round(maxGrid.x / gridSize.x) * gridSize.x && gridSize.x > 0.05f; i+=gridSize.x)
+//					Gizmos.DrawLine(new Vector3(i,minGrid.y,0.0f), new Vector3(i,maxGrid.y,0.0f));
+//				for (float j = Mathf.Round(minGrid.y / gridSize.y) * gridSize.y; j < Mathf.Round(maxGrid.y / gridSize.y) * gridSize.y && gridSize.y > 0.05f; j+=gridSize.y)
+//					Gizmos.DrawLine(new Vector3(minGrid.x,j,0.0f), new Vector3(maxGrid.x,j,0.0f));
 				SceneView.RepaintAll();
 			}
 		}
@@ -191,6 +201,36 @@ public class TileMapEditor : EditorWindow {
 		static SceneViewEventHandler()
 		{
 			SceneView.onSceneGUIDelegate += OnSceneGUI;
+		}
+
+		static void Paint(Vector3 mouseWorldPos) {
+			GameObject newgo = new GameObject(activeSprite.name, typeof(SpriteRenderer));
+			newgo.transform.position = mouseWorldPos;
+			if (isScaled) {
+				newgo.transform.localScale = new Vector2 (tileSize, tileSize);
+			}
+			SpriteRenderer sRenderer = newgo.GetComponent<SpriteRenderer> ();
+			sRenderer.sprite = activeSprite;
+			if (layerName != "")
+				sRenderer.sortingLayerName = layerName;
+			if (tagName == null)
+				tagName = "Untagged";
+			newgo.tag = tagName;
+			if (addBoxCollider) {
+				newgo.AddComponent<BoxCollider2D> ();
+				if (physicsMaterial != null)
+					newgo.GetComponent<BoxCollider2D> ().sharedMaterial = physicsMaterial;
+			}
+			if (parentObj != null) 
+				newgo.transform.parent = parentObj.transform;
+		}
+
+		static void Erase(GameObject[] allgo, Vector3 mouseWorldPos) {
+			for (int i = 0; i < allgo.Length;i++)
+			{
+				if (Mathf.Approximately(allgo[i].transform.position.x, mouseWorldPos.x) && Mathf.Approximately(allgo[i].transform.position.y, mouseWorldPos.y) && Mathf.Approximately(allgo[i].transform.position.z, mouseWorldPos.z))
+					GameObject.DestroyImmediate(allgo[i]);
+			}
 		}
 
 		static void OnSceneGUI(SceneView aView)
@@ -259,57 +299,17 @@ public class TileMapEditor : EditorWindow {
 								}
 								if (brk == 0)
 								{
-									GameObject newgo = new GameObject(activeSprite.name, typeof(SpriteRenderer));
-									newgo.transform.position = mouseWorldPos;
-									if (isScaled) {
-										newgo.transform.localScale = new Vector2 (tileSize, tileSize);
-									}
-									SpriteRenderer sRenderer = newgo.GetComponent<SpriteRenderer> ();
-									sRenderer.sprite = activeSprite;
-									if (layerName != "")
-										sRenderer.sortingLayerName = layerName;
-									if (tagName == "")
-										tagName = "Untagged";
-									newgo.tag = tagName;
-									if (addBoxCollider) {
-										newgo.AddComponent<BoxCollider2D> ();
-										if (physicsMaterial != null)
-											newgo.GetComponent<BoxCollider2D> ().sharedMaterial = physicsMaterial;
-									}
-									if (parentObj != null) 
-										newgo.transform.parent = parentObj.transform;
+									Paint (mouseWorldPos);
 								}
 							}
 							else if (selected == DRAWOPTION.paintover)
 							{
-								for (int i = 0; i < allgo.Length;i++)
-								{
-									if (allgo[i].GetComponent<SpriteRenderer>() != null & Mathf.Approximately(allgo[i].transform.position.x, mouseWorldPos.x) && Mathf.Approximately(allgo[i].transform.position.y, mouseWorldPos.y) && Mathf.Approximately(allgo[i].transform.position.z, mouseWorldPos.z))
-									{
-										allgo[i].GetComponent<SpriteRenderer>().sprite = activeSprite;
-										brk++;
-									}
-								}
-								if (brk == 0)
-								{
-									GameObject newgo = new GameObject(activeSprite.name, typeof(SpriteRenderer));
-									newgo.transform.position = mouseWorldPos;
-									newgo.GetComponent<SpriteRenderer>().sprite = activeSprite;
-									newgo.tag = tagName;
-									if (addBoxCollider) {
-										newgo.AddComponent<BoxCollider2D> ();
-										if (physicsMaterial != null)
-											newgo.GetComponent<BoxCollider2D> ().sharedMaterial = physicsMaterial;
-									}
-								}
+								Erase (allgo, mouseWorldPos);
+								Paint (mouseWorldPos);
 							}
 							else if (selected == DRAWOPTION.erase)
 							{
-								for (int i = 0; i < allgo.Length;i++)
-								{
-									if (Mathf.Approximately(allgo[i].transform.position.x, mouseWorldPos.x) && Mathf.Approximately(allgo[i].transform.position.y, mouseWorldPos.y) && Mathf.Approximately(allgo[i].transform.position.z, mouseWorldPos.z))
-										GameObject.DestroyImmediate(allgo[i]);
-								}
+								Erase (allgo, mouseWorldPos);
 							}
 						}
 					}
