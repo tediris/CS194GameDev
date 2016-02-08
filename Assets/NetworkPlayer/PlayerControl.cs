@@ -25,7 +25,7 @@ public class PlayerControl : NetworkBehaviour
 	CarryManager carryManager;
 
 	CarryControl carryControl;
-	Animator anim;
+	[HideInInspector]public Animator anim;
 
 	private float dirInput = 0.0f;
 	private float buttonValue = 0.0f;
@@ -94,11 +94,14 @@ public class PlayerControl : NetworkBehaviour
 			if (wallCheck.touchingWall) {
 				if (grabbingWall) {
 					playerBody.velocity = Vector2.zero;
-					if (Input.GetKey(KeyCode.W)) {
+					if (Input.GetKey (KeyCode.W)) {
 						playerBody.velocity += Vector2.up * climbSpeed;
-					}
-					if (Input.GetKey(KeyCode.S)) {
+						anim.SetBool ("climbing", true);
+					} else if (Input.GetKey (KeyCode.S)) {
 						playerBody.velocity -= Vector2.up * climbSpeed;
+						anim.SetBool ("climbing", true);
+					} else {
+						anim.SetBool ("climbing", false);
 					}
 
 				}
@@ -134,6 +137,8 @@ public class PlayerControl : NetworkBehaviour
 
 		if (grabbingWall && Input.GetKeyDown(KeyCode.X)) {
 			grabbingWall = false;
+			anim.SetBool ("climbing", false);
+			anim.SetBool ("onWall", false);
 			SetGravity (true);
 		}
 

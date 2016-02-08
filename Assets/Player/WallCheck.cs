@@ -17,11 +17,8 @@ public class WallCheck : MonoBehaviour {
 		return touchingWall;
 	}
 
-	Collider2D wall = null;
-
 	void OnTriggerEnter2D(Collider2D other) {
 		touchingWall = true;
-		wall = other;
 		walls.Add (other);
 		if (!masterController.grounded) {
 			masterController.grabbingWall = true;
@@ -36,6 +33,8 @@ public class WallCheck : MonoBehaviour {
 		touchingWall = false;
 		if (masterController.grabbingWall) {
 			masterController.grabbingWall = false;
+			masterController.anim.SetBool ("climbing", false);
+			masterController.anim.SetBool ("onWall", false);
 			masterController.SetGravity (true);
 		}
 	}
