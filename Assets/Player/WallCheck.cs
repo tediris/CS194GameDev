@@ -23,6 +23,7 @@ public class WallCheck : MonoBehaviour {
 		if (!masterController.grounded) {
 			masterController.grabbingWall = true;
 			masterController.SetGravity (false);
+			masterController.anim.SetBool ("onWall", true);
 		}
 	}
 

@@ -120,8 +120,15 @@ public class PlayerControl : NetworkBehaviour
 			
 	}
 
+	void AnimateLeavingWall() {
+		anim.SetBool ("climbing", false);
+		anim.SetBool ("onWall", false);
+	}
+
 	// Update is called once per frame
 	void Update () {
+		anim.SetBool ("grounded", grounded);
+
 		UpdateLRMovement ();
 
 		if (currentPlatformCollider && (!playerBody.IsTouching (currentPlatformCollider) || grounded)) {
@@ -138,8 +145,7 @@ public class PlayerControl : NetworkBehaviour
 
 		if (grabbingWall && Input.GetKeyDown(KeyCode.X)) {
 			grabbingWall = false;
-			anim.SetBool ("climbing", false);
-			anim.SetBool ("onWall", false);
+			AnimateLeavingWall ();
 			SetGravity (true);
 		}
 
@@ -150,6 +156,7 @@ public class PlayerControl : NetworkBehaviour
 				Debug.Log ("Trying to wall jump");
 				wallJumped = true;
 				grabbingWall = false;
+				AnimateLeavingWall ();
 				airSpeed = transform.localScale.x * wallJumpPush * -1;
 				playerBody.velocity =  new Vector2 (airSpeed, jumpSpeed);
 				SetGravity (true);
@@ -172,14 +179,11 @@ public class PlayerControl : NetworkBehaviour
 		} 
 
 		if (Mathf.Abs(playerBody.velocity.y) > 0.1f) {
-			anim.SetBool ("grounded", false);
 			if (playerBody.velocity.y > 0) {
 				anim.SetBool ("rising", true);
 			} else {
 				anim.SetBool ("rising", false);
 			}
-		} else {
-			anim.SetBool ("grounded", true);
 		}
 
 		if (h > 0 && !facingRight) {
