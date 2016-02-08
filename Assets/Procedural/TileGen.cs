@@ -10,6 +10,15 @@ public class TileGen : MonoBehaviour {
 		Empty
 	};
 
+	public enum RoomType
+	{
+		N, E, S, W,
+		NE, NS, NW,
+		SE, SW, EW,
+		NES, NEW, NSW, SEW,
+		OMNI
+	}
+
 	public int width = 50;
 	public int height = 50;
 
