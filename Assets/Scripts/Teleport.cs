@@ -20,7 +20,7 @@ public class Teleport : MonoBehaviour {
 	void OnTriggerEnter2D (Collider2D other) {
 		if (other.tag == "Player") {
 			other.transform.position = new Vector3 (toX, toY, other.transform.position.z);
-			Camera.main.transform.position = new Vector3 (toX, toY, Camera.main.transform.position.z);
+//			Camera.main.transform.position = new Vector3 (toX, toY, Camera.main.transform.position.z);
 		}
 	}
 }
