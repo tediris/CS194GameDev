@@ -133,7 +133,7 @@ MonoBehaviour:
   numRoomsHeight: 3
   minRoomSize: 4
   maxRoomSize: 8
-  seed: mario
+  seed: luigi
 --- !u!114 &115989040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,9 +178,9 @@ MonoBehaviour:
   tileSize: 32
   roomWidth: 6.4
   roomHeight: 3.2
-  numRoomsWidth: 4
-  numRoomsHeight: 2
-  seed: mario
+  numRoomsWidth: 5
+  numRoomsHeight: 5
+  seed: luigi
 --- !u!1 &676121135
 GameObject:
   m_ObjectHideFlags: 0
@@ -397,7 +397,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1397742572
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -412,7 +412,7 @@ MonoBehaviour:
   manager: {fileID: 0}
   showGUI: 1
   offsetX: 0
-  offsetY: 0
+  offsetY: 2
 --- !u!114 &1397742573
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -467,7 +467,7 @@ MonoBehaviour:
     m_ReactorMaximumReceivedMessages: 1024
     m_ReactorMaximumSentMessages: 1024
     m_MaxPacketSize: 2000
-  m_Channels: 
+  m_Channels: 0500000000000000
   m_UseWebSockets: 0
   m_UseSimulator: 0
   m_SimulatedLatency: 1
