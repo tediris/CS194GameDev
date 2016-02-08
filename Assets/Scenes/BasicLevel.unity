@@ -158,8 +158,8 @@ MonoBehaviour:
   tileSize: 32
   roomWidth: 6.4
   roomHeight: 3.2
-  numRoomsWidth: 10
-  numRoomsHeight: 10
+  numRoomsWidth: 3
+  numRoomsHeight: 3
   seed: mario
 --- !u!1 &676121135
 GameObject:
@@ -264,24 +264,6 @@ MonoBehaviour:
   lookAheadFactor: 3
   lookAheadReturnSpeed: 0.5
   lookAheadMoveThreshold: 0.1
---- !u!1 &774163782 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 176842, guid: 7a08ad3b2cdb5421ba70184ecbc6630c, type: 2}
-  m_PrefabInternal: {fileID: 1070831426}
---- !u!61 &774163783
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 774163782}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Size: {x: 0.39, y: 0.62}
 --- !u!1001 &1070831426
 Prefab:
   m_ObjectHideFlags: 0
