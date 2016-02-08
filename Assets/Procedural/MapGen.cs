@@ -145,7 +145,7 @@ public class MapGen : MonoBehaviour {
 		}
 
 		public void Create() {
-			Vector3 pos = Vector3.up * y * generator.roomHeight + Vector3.right * x * generator.roomWidth;
+			Vector3 pos = Vector3.up * -y * generator.roomHeight + Vector3.right * -x * generator.roomWidth;
 
 			GameObject prefab;
 

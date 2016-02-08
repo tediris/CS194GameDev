@@ -150,7 +150,7 @@ MonoBehaviour:
   northPrefabs:
   - {fileID: 110856, guid: 4789d459e2bd54b988efdee0b3dfe2b9, type: 2}
   eastPrefabs:
-  - {fileID: 0}
+  - {fileID: 143944, guid: fb419e7876c044c00afef1d02d12f9eb, type: 2}
   southPrefabs:
   - {fileID: 121290, guid: dc8a0166fd30b4a44bc3c9057ec165ce, type: 2}
   westPrefabs:
