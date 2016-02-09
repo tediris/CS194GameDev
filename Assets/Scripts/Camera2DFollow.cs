@@ -10,6 +10,7 @@ namespace UnityStandardAssets._2D
         public float lookAheadFactor = 3;
         public float lookAheadReturnSpeed = 0.5f;
         public float lookAheadMoveThreshold = 0.1f;
+		public float jumpThreshold = 30f;
 
         private float m_OffsetZ;
         private Vector3 m_LastTargetPosition;
@@ -36,6 +37,12 @@ namespace UnityStandardAssets._2D
         {
 			if (target == null)
 				return;
+
+			if (Vector3.Magnitude(target.position - transform.position) > jumpThreshold) {
+				transform.position = target.position;
+				m_LastTargetPosition = target.position;
+				return;
+			}
             // only update lookahead pos if accelerating or changed direction
             float xMoveDelta = (target.position - m_LastTargetPosition).x;
 

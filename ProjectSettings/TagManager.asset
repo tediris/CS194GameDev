@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+  - Ground
+  - MinimapCamera
   layers:
   - Default
   - TransparentFX
@@ -39,11 +41,11 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Default
-    uniqueID: 0
-    locked: 0
   - name: Background
     uniqueID: 2462929153
+    locked: 0
+  - name: Default
+    uniqueID: 0
     locked: 0
   - name: Tiles
     uniqueID: 1301003973

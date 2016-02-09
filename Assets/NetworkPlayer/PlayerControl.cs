@@ -25,13 +25,51 @@ public class PlayerControl : NetworkBehaviour
 	CarryManager carryManager;
 
 	CarryControl carryControl;
+	[HideInInspector]public Animator anim;
+
+	private float dirInput = 0.0f;
+	private float buttonValue = 0.0f;
+	[Range(0f, 1f)]
+	public float responsiveness = 0.5f;
+
+	private float airSpeed = 0.0f;
+	public float maxAirSpeed = 3.0f;
+	public float airControl = 0.05f;
+	public float climbSpeed = 1.0f;
+	public float wallJumpPush = 2.0f;
+	private float gravityInitial = 0.0f;
+
+	private WallCheck wallCheck;
 
 	bool canMoveHorizontally() {
 		return !carryControl.carried;
 	}
 
 	bool canJump() {
-		return !carrying && grounded || (!grounded /*&& !wallJumped*/ && currentPlatformCollider);
+		return (!carrying && grounded) || (!carrying && !grounded && grabbingWall);
+	}
+
+	public void SetGravity(bool enable) {
+		if (enable) {
+			playerBody.gravityScale = gravityInitial;
+		} else {
+			playerBody.gravityScale = 0f;
+		}
+	}
+
+	void UpdateLRMovement() {
+		buttonValue = 0.0f;
+		if (Input.GetKey (KeyCode.A)) {
+			buttonValue -= 1.0f;
+		}
+		if (Input.GetKey(KeyCode.D)) {
+			buttonValue += 1.0f;	
+		}
+		dirInput = Mathf.Lerp (dirInput, buttonValue, responsiveness);
+	}
+
+	bool moveButtonDown() {
+		return Mathf.Abs (dirInput) > 0f;
 	}
 
 	// Use this for initialization
@@ -39,6 +77,9 @@ public class PlayerControl : NetworkBehaviour
 		playerBody = GetComponent<Rigidbody2D> ();
 		networkInfo = GetComponent<NetSetup> ();
 		carryControl = GetComponent<CarryControl> ();
+		anim = GetComponent<Animator> ();
+		gravityInitial = playerBody.gravityScale;
+		wallCheck = GetComponentInChildren<WallCheck> ();
 	}
 
 	void FindPlayerManager() {
@@ -47,9 +88,50 @@ public class PlayerControl : NetworkBehaviour
 		}
 	}
 
+	public bool grabbingWall = false;
+
+	void FixedUpdate() {
+		if (!grounded) {
+			if (wallCheck.touchingWall) {
+				if (grabbingWall) {
+					playerBody.velocity = Vector2.zero;
+					if (Input.GetKey (KeyCode.W)) {
+						playerBody.velocity += Vector2.up * climbSpeed;
+						anim.SetBool ("climbing", true);
+					} else if (Input.GetKey (KeyCode.S)) {
+						playerBody.velocity -= Vector2.up * climbSpeed;
+						anim.SetBool ("climbing", true);
+					} else {
+						anim.SetBool ("climbing", false);
+					}
+
+				}
+			} else {
+				if (Mathf.Abs (buttonValue) < float.Epsilon) {
+					airSpeed = Mathf.Lerp (airSpeed, 0f, 0.1f);
+				} else {
+					airSpeed = playerBody.velocity.x;
+					airSpeed += dirInput * airControl;
+				}
+				airSpeed = Mathf.Clamp (airSpeed, -maxAirSpeed, maxAirSpeed);
+				playerBody.velocity = new Vector2 (airSpeed, playerBody.velocity.y);
+			}
+		}
+			
+	}
+
+	void AnimateLeavingWall() {
+		anim.SetBool ("climbing", false);
+		anim.SetBool ("onWall", false);
+	}
+
 	// Update is called once per frame
 	void Update () {
-		if (currentPlatformCollider && !playerBody.IsTouching (currentPlatformCollider)) {
+		anim.SetBool ("grounded", grounded);
+
+		UpdateLRMovement ();
+
+		if (currentPlatformCollider && (!playerBody.IsTouching (currentPlatformCollider) || grounded)) {
 			currentPlatformCollider = null;
 		}
 
@@ -61,19 +143,47 @@ public class PlayerControl : NetworkBehaviour
 			}
 		}
 
+		if (grabbingWall && Input.GetKeyDown(KeyCode.X)) {
+			grabbingWall = false;
+			AnimateLeavingWall ();
+			SetGravity (true);
+		}
+
 		float h = Input.GetAxis ("Horizontal");
 
-		if (canJump() && Input.GetKeyDown (KeyCode.W)) {
-			playerBody.velocity =  new Vector2 (playerBody.velocity.x, jumpSpeed);
+		if (canJump() && (Input.GetKeyDown (KeyCode.Space) || Input.GetKeyDown(KeyCode.U))) {
 			if (!grounded) {
+				Debug.Log ("Trying to wall jump");
 				wallJumped = true;
+				grabbingWall = false;
+				AnimateLeavingWall ();
+				airSpeed = transform.localScale.x * wallJumpPush * -1;
+				playerBody.velocity =  new Vector2 (airSpeed, jumpSpeed);
+				SetGravity (true);
 			} else {
 				grounded = false;
+				airSpeed = playerBody.velocity.x;
+				playerBody.velocity =  new Vector2 (playerBody.velocity.x, jumpSpeed);
 			}
 		}
 
-		if (canMoveHorizontally() && Mathf.Abs(h) > 0) {
-			playerBody.velocity = new Vector2 (h * maxSpeed, playerBody.velocity.y);
+		if (canMoveHorizontally ()) {
+			if (grounded) {
+				playerBody.velocity = new Vector2 (dirInput * maxSpeed, playerBody.velocity.y);
+				if (Mathf.Abs (dirInput) > 0.5f) {
+					anim.SetBool ("standing", false);
+				} else {
+					anim.SetBool ("standing", true);
+				}
+			}
+		} 
+
+		if (Mathf.Abs(playerBody.velocity.y) > 0.1f) {
+			if (playerBody.velocity.y > 0) {
+				anim.SetBool ("rising", true);
+			} else {
+				anim.SetBool ("rising", false);
+			}
 		}
 
 		if (h > 0 && !facingRight) {
@@ -98,8 +208,8 @@ public class PlayerControl : NetworkBehaviour
 	}
 
 	void CarryPlayer() {
-		float spriteOffset = 0.5f;
-		float pickupDist = 1.0f;
+		float spriteOffset = 0.2f;
+		float pickupDist = 0.5f;
 		Vector2 start = playerBody.position + transform.localScale.x * Vector2.right * spriteOffset;
 		Vector2 dir = transform.localScale.x * Vector2.right * pickupDist;
 		Debug.DrawRay (start, dir, Color.blue, 1f);
@@ -119,11 +229,12 @@ public class PlayerControl : NetworkBehaviour
 		carried.GetComponent<CarryControl> ().CmdSetCarry(carryPlayer);
 	}
 
+	private Collision2D wallCollision = null;
+
 	void OnCollisionEnter2D(Collision2D collision) {
-		Collider2D collider = collision.collider;
 		foreach (string validTag in groundTags) {
-			if (collider.tag == validTag) {
-				currentPlatformCollider = collider;
+			if (collision.gameObject.tag == validTag) {
+				currentPlatformCollider = collision.collider;
 
 				// Check if all contacts are between -45 and 45 degs to normal of top of collider
 				// If it is, then we consider ourselves grounded
@@ -140,10 +251,25 @@ public class PlayerControl : NetworkBehaviour
 		}
 	}
 
+	[Command] 
+	void CmdFlipClients() {
+		RpcFlipClients ();
+	}
+
+	[ClientRpc]
+	void RpcFlipClients() {
+		if (isLocalPlayer)
+			return;
+		Vector3 theScale = transform.localScale;
+		theScale.x *= -1;
+		transform.localScale = theScale;
+	}
+
 	void Flip() {
 		facingRight = !facingRight;
 		Vector3 theScale = transform.localScale;
 		theScale.x *= -1;
 		transform.localScale = theScale;
+		CmdFlipClients ();
 	}
 }
