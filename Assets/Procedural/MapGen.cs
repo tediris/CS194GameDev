@@ -46,8 +46,11 @@ public class MapGen : MonoBehaviour {
 
 	public int numRoomsWidth = 4;
 	public int numRoomsHeight = 2;
+
+	public int numRandomConnections = 4;
 	Room[,] rooms;
 
+	[HideInInspector]
 	public System.Random rand;
 	public string seed = "mario";
 
@@ -63,6 +66,21 @@ public class MapGen : MonoBehaviour {
 
 	void InitMap() {
 		CreateRoomLayout ();
+		RemoveRandomWalls ();
+	}
+
+	void RemoveRandomWalls() {
+		for (int i = 0; i < numRandomConnections; i++) {
+			int x = rand.Next (numRoomsWidth);
+			int y = rand.Next (numRoomsHeight);
+
+			List<Room> neighbors = GetUnconnectedNeighbors (x, y);
+			if (neighbors.Count == 0)
+				continue;
+			Room nextRoom = neighbors [rand.Next (neighbors.Count)];
+			rooms [x, y].connectedRooms[(int)rooms[x, y].GetRelation(nextRoom.x, nextRoom.y)] = true;
+			nextRoom.connectedRooms [(int)nextRoom.GetRelation (x, y)] = true;;
+		}
 	}
 
 	void SpawnMap() {
@@ -112,6 +130,23 @@ public class MapGen : MonoBehaviour {
 		portalScript.toY = -startY * roomHeight - 0.5f * roomHeight;
 
 		RecursiveBuildMaze (startX, startY, 0);
+	}
+
+	List<Room> GetUnconnectedNeighbors(int x, int y) {
+		List<Room> neighbors = new List<Room>();
+		if (x > 0 && !rooms[x,y].connectedRooms[(int) Direction.WEST]) {
+			neighbors.Add (rooms [x - 1, y]);
+		}
+		if (x < numRoomsWidth - 1 && !rooms[x,y].connectedRooms[(int) Direction.EAST]) {
+			neighbors.Add(rooms[x + 1, y]);
+		}
+		if (y > 0 && !rooms[x,y].connectedRooms[(int) Direction.SOUTH]) {
+			neighbors.Add (rooms [x, y - 1]);
+		}
+		if (y < numRoomsHeight - 1 && !rooms[x,y].connectedRooms[(int) Direction.NORTH]) {
+			neighbors.Add (rooms [x, y + 1]);
+		}
+		return neighbors;
 	}
 
 	List<Room> GetConnectedUnvisitedRooms(int x, int y) {

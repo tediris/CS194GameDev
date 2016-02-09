@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-up" width="20" height="10" tilewidth="32" tileheight="32" nextobjectid="19">
+ <tileset firstgid="1" name="ground" tilewidth="32" tileheight="32" tilecount="70" columns="10">
+  <image source="../../Tilemaps/ground_sprites.png" width="320" height="224"/>
+ </tileset>
+ <layer name="Tile Layer 1" width="20" height="10">
+  <data encoding="csv">
+61,11,3,4,5,6,7,8,3,4,5,6,3,4,5,6,7,8,9,10,
+61,21,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,19,5,
+61,31,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+61,41,0,0,59,63,64,65,63,64,65,66,67,68,52,0,0,0,0,0,
+61,21,0,0,40,70,70,70,70,70,70,70,70,70,62,52,0,0,0,0,
+61,31,0,0,50,2,3,4,3,4,5,6,7,8,20,62,52,0,0,0,
+61,41,0,0,19,12,0,0,0,0,0,0,0,0,40,70,62,52,0,0,
+61,31,0,0,0,0,0,0,0,0,0,0,0,0,30,70,70,62,52,0,
+61,41,0,0,0,0,0,0,33,34,35,38,0,0,40,70,70,70,62,67,
+61,62,66,67,68,52,0,0,0,0,0,0,0,0,50,70,70,70,70,70
+</data>
+ </layer>
+ <objectgroup name="Colliders">
+  <object id="2" x="0" y="0" width="64" height="320"/>
+  <object id="3" x="64" y="288" width="128" height="32"/>
+  <object id="4" x="64" y="0" width="512" height="32"/>
+  <object id="6" x="576" y="0" width="64" height="64"/>
+  <object id="8" x="128" y="96" width="64" height="128"/>
+  <object id="10" x="256" y="256" width="128" height="32"/>
+  <object id="11" x="192" y="96" width="288" height="96"/>
+  <object id="12" x="448" y="192" width="32" height="128"/>
+  <object id="13" x="480" y="128" width="32" height="192"/>
+  <object id="14" x="512" y="160" width="32" height="160"/>
+  <object id="15" x="544" y="192" width="32" height="128"/>
+  <object id="16" x="576" y="224" width="32" height="96"/>
+  <object id="17" x="608" y="256" width="32" height="64"/>
+ </objectgroup>
+</map>

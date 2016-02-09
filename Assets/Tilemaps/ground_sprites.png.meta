@@ -1,9 +1,79 @@
 fileFormatVersion: 2
 guid: 2e48229e44ae84ae0bc2481b882a4cc4
-timeCreated: 1454892050
+timeCreated: 1454893967
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: ground_sprites_0
+    21300002: ground_sprites_1
+    21300004: ground_sprites_2
+    21300006: ground_sprites_3
+    21300008: ground_sprites_4
+    21300010: ground_sprites_5
+    21300012: ground_sprites_6
+    21300014: ground_sprites_7
+    21300016: ground_sprites_8
+    21300018: ground_sprites_9
+    21300020: ground_sprites_10
+    21300022: ground_sprites_11
+    21300024: ground_sprites_12
+    21300026: ground_sprites_13
+    21300028: ground_sprites_14
+    21300030: ground_sprites_15
+    21300032: ground_sprites_16
+    21300034: ground_sprites_17
+    21300036: ground_sprites_18
+    21300038: ground_sprites_19
+    21300040: ground_sprites_20
+    21300042: ground_sprites_21
+    21300044: ground_sprites_22
+    21300046: ground_sprites_23
+    21300048: ground_sprites_24
+    21300050: ground_sprites_25
+    21300052: ground_sprites_26
+    21300054: ground_sprites_27
+    21300056: ground_sprites_28
+    21300058: ground_sprites_29
+    21300060: ground_sprites_30
+    21300062: ground_sprites_31
+    21300064: ground_sprites_32
+    21300066: ground_sprites_33
+    21300068: ground_sprites_34
+    21300070: ground_sprites_35
+    21300072: ground_sprites_36
+    21300074: ground_sprites_37
+    21300076: ground_sprites_38
+    21300078: ground_sprites_39
+    21300080: ground_sprites_40
+    21300082: ground_sprites_41
+    21300084: ground_sprites_42
+    21300086: ground_sprites_43
+    21300088: ground_sprites_44
+    21300090: ground_sprites_45
+    21300092: ground_sprites_46
+    21300094: ground_sprites_47
+    21300096: ground_sprites_48
+    21300098: ground_sprites_49
+    21300100: ground_sprites_50
+    21300102: ground_sprites_51
+    21300104: ground_sprites_52
+    21300106: ground_sprites_53
+    21300108: ground_sprites_54
+    21300110: ground_sprites_55
+    21300112: ground_sprites_56
+    21300114: ground_sprites_57
+    21300116: ground_sprites_58
+    21300118: ground_sprites_59
+    21300120: ground_sprites_60
+    21300122: ground_sprites_61
+    21300124: ground_sprites_62
+    21300126: ground_sprites_63
+    21300128: ground_sprites_64
+    21300130: ground_sprites_65
+    21300132: ground_sprites_66
+    21300134: ground_sprites_67
+    21300136: ground_sprites_68
+    21300138: ground_sprites_69
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -30,7 +100,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     filterMode: -1
-    aniso: -1
+    aniso: 16
     mipBias: -1
     wrapMode: 1
   nPOTScale: 0
@@ -38,7 +108,7 @@ TextureImporter:
   rGBM: 0
   compressionQuality: 50
   allowsAlphaSplitting: 0
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -49,7 +119,1060 @@ TextureImporter:
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
-    sprites: []
+    sprites:
+    - name: ground_sprites_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 192
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: ground_sprites_1
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 192
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: ground_sprites_2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 192
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: ground_sprites_3
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 192
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: ground_sprites_4
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 192
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: ground_sprites_5
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 192
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: ground_sprites_6
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 192
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: ground_sprites_7
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 192
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: ground_sprites_8
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 192
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: ground_sprites_9
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 192
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: ground_sprites_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 160
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: ground_sprites_11
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 160
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: ground_sprites_12
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 160
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: ground_sprites_13
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 160
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: ground_sprites_14
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 160
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: ground_sprites_15
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 160
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: ground_sprites_16
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 160
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: ground_sprites_17
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 160
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: ground_sprites_18
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 160
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: ground_sprites_19
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 160
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: ground_sprites_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 128
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: ground_sprites_21
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 128
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: ground_sprites_22
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 128
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: ground_sprites_23
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 128
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: ground_sprites_24
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 128
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: ground_sprites_25
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 128
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: ground_sprites_26
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 128
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: ground_sprites_27
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 128
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: ground_sprites_28
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 128
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: ground_sprites_29
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 128
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: ground_sprites_30
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 96
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: ground_sprites_31
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 96
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: ground_sprites_32
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 96
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -24}
+        - {x: 5, y: -32}
+        - {x: 31, y: -32}
+        - {x: 32, y: -30}
+        - {x: 32, y: 0}
+    - name: ground_sprites_33
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 96
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: ground_sprites_34
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 96
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: ground_sprites_35
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 96
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: ground_sprites_36
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 96
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: ground_sprites_37
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 96
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 28, y: -32}
+        - {x: 32, y: -28}
+        - {x: 32, y: 0}
+    - name: ground_sprites_38
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 96
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: ground_sprites_39
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 96
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: ground_sprites_40
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: ground_sprites_41
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 64
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: ground_sprites_42
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: ground_sprites_43
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 64
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: ground_sprites_44
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 64
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: ground_sprites_45
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 64
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: ground_sprites_46
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 64
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: ground_sprites_47
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 64
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: ground_sprites_48
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 64
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: ground_sprites_49
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 64
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: ground_sprites_50
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 32
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: ground_sprites_51
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 32
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: ground_sprites_52
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 32
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: ground_sprites_53
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 32
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: ground_sprites_54
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 32
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: ground_sprites_55
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 32
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: ground_sprites_56
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 32
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: ground_sprites_57
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 32
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: ground_sprites_58
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 32
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: ground_sprites_59
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 32
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: ground_sprites_60
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: ground_sprites_61
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: ground_sprites_62
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: ground_sprites_63
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: ground_sprites_64
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: ground_sprites_65
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: ground_sprites_66
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: ground_sprites_67
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 0
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: ground_sprites_68
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: ground_sprites_69
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 0
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
     outline: []
   spritePackingTag: 
   userData: 
