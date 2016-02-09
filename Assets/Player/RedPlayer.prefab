@@ -41,6 +41,7 @@ GameObject:
   - 114: {fileID: 11479046}
   - 114: {fileID: 11427102}
   - 114: {fileID: 11464598}
+  - 114: {fileID: 11472580}
   m_Layer: 8
   m_Name: RedPlayer
   m_TagString: Player
@@ -317,6 +318,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d18fac9ee8914e508a0c11a4bf24d13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11472580
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 187436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeeba0934e11a47a39f35471283f0f6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numCoins: 0
 --- !u!114 &11479046
 MonoBehaviour:
   m_ObjectHideFlags: 1

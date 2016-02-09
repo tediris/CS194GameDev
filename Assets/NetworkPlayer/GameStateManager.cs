@@ -10,6 +10,7 @@ public class GameStateManager : NetworkBehaviour {
 	PlayerIDs idStore;
 	List<GameObject> players;
 	ServerComm localPlayerComm;
+	CoinPlacement coinPlacer = null;
 
 	public override void OnStartServer()
 	{
@@ -17,6 +18,8 @@ public class GameStateManager : NetworkBehaviour {
 		curSeed = System.DateTime.Now.ToString();
 		players = new List<GameObject> ();
 		mapGenerator.GenerateNewMap (curSeed);
+		coinPlacer = GameObject.Find ("Coins").GetComponent<CoinPlacement>();
+		coinPlacer.PlaceCoins ();
 		// disable client stuff
 	}
 
@@ -52,6 +55,7 @@ public class GameStateManager : NetworkBehaviour {
 		if (isServer) {
 			curSeed = System.DateTime.Now.ToString ();
 			CmdGenerateMaps (curSeed);
+			coinPlacer.PlaceCoins ();
 		} else {
 			Debug.LogError ("STOP TRYING TO MAKE A NEW LEVEL AS A CLIENT T_T");
 		}

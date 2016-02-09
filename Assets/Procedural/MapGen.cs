@@ -64,6 +64,21 @@ public class MapGen : MonoBehaviour {
 //		SpawnMap ();
 	}
 
+	public class MapBound
+	{
+		public Vector2 topLeft, botRight;
+		public MapBound(Vector2 topLeft, Vector2 botRight) {
+			this.topLeft = topLeft;
+			this.botRight = botRight;
+		}
+	}
+
+	public MapBound GetMapBounds() {
+		Vector2 minVec = new Vector2((numRoomsWidth - 1) * -roomWidth, 0f);
+		Vector2 maxVec = new Vector2(roomWidth, numRoomsHeight * -roomHeight);
+		return new MapBound (minVec, maxVec);
+	}
+
 	public void GenerateNewMap(string seed) {
 		portalScript = GameObject.Find ("StartPortal").GetComponent<Teleport> ();
 		rand = new System.Random (seed.GetHashCode());
@@ -118,6 +133,7 @@ public class MapGen : MonoBehaviour {
 
 		GameObject portal = Instantiate (endPortal, pos, Quaternion.identity) as GameObject;
 		portal.transform.parent = transform;
+
 		Teleport endPortalScript = portal.GetComponent<Teleport> ();
 		endPortalScript.toX = 3.2f;
 		endPortalScript.toY = 98.4f;
