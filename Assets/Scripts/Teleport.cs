@@ -9,10 +9,12 @@ public class Teleport : NetworkBehaviour {
 	public bool isEnd = false;
 
 	private PlayerIDs idStore;
+	private GameStateManager GSManager;
 
 	// Use this for initialization
 	void Start () {
 		idStore = GameObject.Find ("PlayerManager").GetComponent<PlayerIDs> ();
+		GSManager = GameObject.Find ("GameState").GetComponent<GameStateManager> ();
 	}
 
 	// Update is called once per frame
@@ -36,6 +38,7 @@ public class Teleport : NetworkBehaviour {
 	[Command]
 	void CmdReturnPlayers() {
 		RpcReturnPlayer ();
+		GSManager.GenerateNewMap ();
 	}
 
 	[ClientRpc]

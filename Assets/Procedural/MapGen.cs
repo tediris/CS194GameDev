@@ -64,6 +64,13 @@ public class MapGen : MonoBehaviour {
 //		SpawnMap ();
 	}
 
+	public void GenerateNewMap(string seed) {
+		portalScript = GameObject.Find ("StartPortal").GetComponent<Teleport> ();
+		rand = new System.Random (seed.GetHashCode());
+		InitMap ();
+		SpawnMap ();
+	}
+
 	void InitMap() {
 		CreateRoomLayout ();
 		RemoveRandomWalls ();
@@ -110,6 +117,7 @@ public class MapGen : MonoBehaviour {
 		Vector3 pos = Vector3.up * (-y - 0.5f) * roomHeight + Vector3.right * (-x + 0.5f) * roomWidth;
 
 		GameObject portal = Instantiate (endPortal, pos, Quaternion.identity) as GameObject;
+		portal.transform.parent = transform;
 		Teleport endPortalScript = portal.GetComponent<Teleport> ();
 		endPortalScript.toX = 3.2f;
 		endPortalScript.toY = 98.4f;
