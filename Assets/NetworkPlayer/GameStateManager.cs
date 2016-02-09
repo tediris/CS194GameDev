@@ -7,11 +7,15 @@ public class GameStateManager : NetworkBehaviour {
 
 	public MapGen mapGenerator;
 	[SyncVar] public string curSeed = "null";
+	PlayerIDs idStore;
+	List<GameObject> players;
+	ServerComm localPlayerComm;
 
 	public override void OnStartServer()
 	{
 		Debug.Log ("Server started");
 		curSeed = System.DateTime.Now.ToString();
+		players = new List<GameObject> ();
 		mapGenerator.GenerateNewMap (curSeed);
 		// disable client stuff
 	}
@@ -31,6 +35,18 @@ public class GameStateManager : NetworkBehaviour {
 		mapGenerator.GenerateNewMap (curSeed);
 	}
 
+	public void AddPlayer(GameObject player) {
+		if (!isServer) {
+			Debug.Log ("WARNING: trying to add a player on a client");
+			return;
+		}
+		players.Add (player);
+	}
+
+	public void StoreLocalPlayer(ServerComm comm) {
+		localPlayerComm = comm;
+	}
+
 	public void GenerateNewMap() {
 		//DESTROY EVERYTHING
 		if (isServer) {
@@ -41,9 +57,18 @@ public class GameStateManager : NetworkBehaviour {
 		}
 	}
 
+	public void ResetPlayerLocation(float x, float y) {
+		if (isServer) {
+			CmdReturnPlayers (x, y);
+		} else {
+			Debug.LogError ("Non command trying to move players around");
+		}
+	}
+
 	// Use this for initialization
 	void Awake () {
 		mapGenerator = GameObject.Find ("TileGenParent").GetComponent<MapGen> ();
+		idStore = GameObject.Find ("PlayerManager").GetComponent<PlayerIDs> ();
 	}
 	
 //	// Update is called once per frame
@@ -62,5 +87,16 @@ public class GameStateManager : NetworkBehaviour {
 		foreach (Transform child in mapGenerator.gameObject.transform) children.Add(child.gameObject);
 		children.ForEach(child => Destroy(child));
 		mapGenerator.GenerateNewMap (seed);
+	}
+
+	[Command]
+	void CmdReturnPlayers(float x, float y) {
+		RpcReturnPlayer (x, y);
+	}
+
+	[ClientRpc]
+	void RpcReturnPlayer(float x, float y) {
+		Debug.Log ("trying to move players back to start");
+		localPlayerComm.MoveTo (x, y);
 	}
 }
