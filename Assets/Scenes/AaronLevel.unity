@@ -140,41 +140,41 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   endPortal: {fileID: 169894, guid: a0dc72db3489842a784d2c257b2738a2, type: 2}
   omniPrefabs:
-  - {fileID: 176088, guid: d0cc747a765c5428eb088789062e3ddc, type: 2}
+  - {fileID: 115448, guid: 0902bec0ec15a4fd9b9e1375243438f1, type: 2}
   northPrefabs:
-  - {fileID: 110856, guid: 4789d459e2bd54b988efdee0b3dfe2b9, type: 2}
+  - {fileID: 191686, guid: dc8ccab0bad4a4fb58a9d11ce21a82ef, type: 2}
   eastPrefabs:
-  - {fileID: 143944, guid: fb419e7876c044c00afef1d02d12f9eb, type: 2}
+  - {fileID: 183850, guid: 94c870e1ab4d744359852e382c529887, type: 2}
   southPrefabs:
-  - {fileID: 121290, guid: dc8a0166fd30b4a44bc3c9057ec165ce, type: 2}
+  - {fileID: 184916, guid: 50e897bba9436499ea071d8d85397325, type: 2}
   westPrefabs:
-  - {fileID: 126148, guid: 533d9bc0851c64ea49e1ac5b37362fa5, type: 2}
+  - {fileID: 198668, guid: e376d03d9b8344f4d9d77b704e2e512c, type: 2}
   northEastPrefabs:
-  - {fileID: 101920, guid: b8e2323fcf9df43f5be248b5d596e8ba, type: 2}
+  - {fileID: 162680, guid: 0b10226572101497e903e4341afd23ea, type: 2}
   northSouthPrefabs:
-  - {fileID: 177878, guid: 4382ad91fabde466fbf4b7d65e577ec8, type: 2}
+  - {fileID: 116366, guid: 12f8a46ee4cc4441f9150236449d4672, type: 2}
   northWestPrefabs:
-  - {fileID: 147216, guid: ab2f19313c212425097089068094a688, type: 2}
+  - {fileID: 132438, guid: e8ad31ccc308e4c2b858939f41206d85, type: 2}
   southEastPrefabs:
-  - {fileID: 109438, guid: 8becf4760571f488bbbcffc106420a31, type: 2}
+  - {fileID: 183452, guid: b6ff13db2304b4d999861ba914a1a649, type: 2}
   southWestPrefabs:
-  - {fileID: 119006, guid: 9915523fa5f7f48c69f151536f3202e8, type: 2}
+  - {fileID: 177314, guid: 4acf41db5a11d454d96bdc7b82438648, type: 2}
   eastWestPrefabs:
-  - {fileID: 162548, guid: 1db513754cfad48a79f462508cd2f415, type: 2}
+  - {fileID: 114900, guid: 915d675768637472798560828a85fe5e, type: 2}
   northEastSouthPrefabs:
-  - {fileID: 195374, guid: b37a8961b23024853af9aaf18db691fa, type: 2}
+  - {fileID: 113016, guid: 3d04cf047e5db402584d49e912bea4c1, type: 2}
   northEastWestPrefabs:
-  - {fileID: 165390, guid: 87753b085caee4df39186d85b258e1e8, type: 2}
+  - {fileID: 126376, guid: 903e0f3316b0b42cb87e710111d4ce52, type: 2}
   northSouthWestPrefabs:
-  - {fileID: 135222, guid: 318c6b3f43dda4e429bf17111c3e64a0, type: 2}
+  - {fileID: 102164, guid: 3718e1719a3174633a238a8b6c7e3480, type: 2}
   southEastWestPrefabs:
-  - {fileID: 138686, guid: e4bd2cb49398e41768e4fd25a5838fe5, type: 2}
+  - {fileID: 198972, guid: 0dfa72ed369aa4b4c83bbad2c59a2249, type: 2}
   tileSize: 32
   roomWidth: 6.4
   roomHeight: 3.2
-  numRoomsWidth: 5
-  numRoomsHeight: 5
-  numRandomConnections: 8
+  numRoomsWidth: 3
+  numRoomsHeight: 3
+  numRandomConnections: 3
   seed: morgan
 --- !u!1 &676121135
 GameObject:
