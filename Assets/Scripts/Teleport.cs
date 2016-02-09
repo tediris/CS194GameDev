@@ -23,9 +23,6 @@ public class Teleport : NetworkBehaviour {
 //	}
 
 	void OnTriggerEnter2D (Collider2D other) {
-		if (!isServer)
-			return;
-		
 		if (other.tag == "Player") {
 			other.GetComponent<PlayerMove>().MoveTo(toX, toY);
 //			Camera.main.transform.position = new Vector3 (toX, toY, Camera.main.transform.position.z);
