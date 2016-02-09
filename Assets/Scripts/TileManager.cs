@@ -16,7 +16,8 @@ public class TileManager : MonoBehaviour {
 		                   );
 		for (int i = -n_tiles; i < n_tiles; i++) {
 			for (int j = -n_tiles; j < n_tiles; j++) {
-				Instantiate (tile, new Vector3 (i * tileSize.x, j * tileSize.y, 0), Quaternion.identity);
+				SpriteRenderer background = (SpriteRenderer) Instantiate (tile, new Vector3 (i * tileSize.x, j * tileSize.y, 0), Quaternion.identity);
+				background.transform.parent = transform;
 			}
 		}
 		//Instantiate (tile, new Vector3 (0, 0, 0), Quaternion.identity);

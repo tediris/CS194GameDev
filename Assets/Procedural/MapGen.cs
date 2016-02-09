@@ -52,13 +52,13 @@ public class MapGen : MonoBehaviour {
 	public string seed = "mario";
 
 	private Teleport portalScript;
-
+	
 	// Use this for initialization
 	void Start () {
-		portalScript = GameObject.Find ("StartPortal").GetComponent<Teleport> ();
-		rand = new System.Random (seed.GetHashCode());
-		InitMap ();
-		SpawnMap ();
+//		portalScript = GameObject.Find ("StartPortal").GetComponent<Teleport> ();
+//		rand = new System.Random (seed.GetHashCode());
+//		InitMap ();
+//		SpawnMap ();
 	}
 
 	void InitMap() {

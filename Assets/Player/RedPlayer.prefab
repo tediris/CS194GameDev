@@ -39,6 +39,7 @@ GameObject:
   - 114: {fileID: 11417272}
   - 95: {fileID: 9555094}
   - 114: {fileID: 11479046}
+  - 114: {fileID: 11427102}
   m_Layer: 8
   m_Name: RedPlayer
   m_TagString: Player
@@ -166,9 +167,13 @@ MonoBehaviour:
   facingRight: 1
   grounded: 1
   distToBottom: 0.5
+  anim: {fileID: 0}
   responsiveness: 0.5
   maxAirSpeed: 3
   airControl: 0.05
+  climbSpeed: 1
+  wallJumpPush: 2
+  grabbingWall: 0
 --- !u!114 &11407572
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -181,6 +186,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   touchingWall: 0
+  masterController: {fileID: 0}
 --- !u!114 &11417272
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -258,6 +264,17 @@ MonoBehaviour:
     i15: 95
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 1
+--- !u!114 &11427102
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 187436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eed25b8cb173b40ec85c793a43757eaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11446158
 MonoBehaviour:
   m_ObjectHideFlags: 1

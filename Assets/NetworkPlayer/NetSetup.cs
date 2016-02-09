@@ -7,8 +7,13 @@ public class NetSetup : NetworkBehaviour {
 	[SyncVar]
 	public int playerNum = -1;
 
+	private PlayerIDs idStore;
+
 	// Use this for initialization
 	void Start () {
+		idStore = GameObject.Find ("PlayerManager").GetComponent<PlayerIDs> ();
+
+
 		//Physics2D.Ig
 		if (isServer) {
 			GameObject.Find ("PlayerManager").GetComponent<CarryManager> ().AddPlayer (gameObject);
@@ -28,6 +33,10 @@ public class NetSetup : NetworkBehaviour {
 			yield return new WaitForSeconds (0.1f);
 		}
 		gameObject.name = "Player" + playerNum;
+
+		if (isLocalPlayer) {
+			idStore.localID = gameObject.name;
+		}
 	}
 	
 	// Update is called once per frame
