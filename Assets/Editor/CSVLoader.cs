@@ -76,6 +76,18 @@ public class CSVLoader : EditorWindow {
 		}
 		GUILayout.EndHorizontal ();
 
+		GUILayout.BeginHorizontal ();
+
+		if (GUILayout.Button("Find Platforms", GUILayout.Width(128)))
+		{   
+			if (fileToLoad != null) {
+				ItemPlacements items = parentTransform.gameObject.AddComponent<ItemPlacements> ();
+				tileMapping = CSVLoader.ParseCSV (fileToLoad);
+				items.FindItemPlacements (tileMapping);
+			}
+		}
+		GUILayout.EndHorizontal ();
+
 //		// "target" can be any class derrived from ScriptableObject 
 //		// (could be EditorWindow, MonoBehaviour, etc)
 //		ScriptableObject target = this;
