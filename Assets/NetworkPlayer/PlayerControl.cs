@@ -41,6 +41,10 @@ public class PlayerControl : NetworkBehaviour
 
 	private WallCheck wallCheck;
 
+	public void SetAirSpeed(float value) {
+		airSpeed = value;
+	}
+
 	bool canMoveHorizontally() {
 		return !carryControl.carried;
 	}
