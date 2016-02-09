@@ -11,10 +11,12 @@ public class CarryControl : NetworkBehaviour {
 
 	Rigidbody2D body;
 	float standardGrav;
+	PlayerControl playerController;
 
 	// Use this for initialization
 	void Start () {
 		body = GetComponent<Rigidbody2D> ();
+		playerController = GetComponent<PlayerControl> ();
 	}
 	
 	// Update is called once per frame
@@ -45,7 +47,9 @@ public class CarryControl : NetworkBehaviour {
 		body.isKinematic = false;
 		if (isLocalPlayer) {
 			body.velocity = new Vector2 (direction * throwSpeed, throwSpeed);
-			GetComponent<PlayerControl> ().grounded = false;
+			playerController.grounded = false;
+			playerController.SetAirSpeed(body.velocity.x);
+
 		}
 	}
 

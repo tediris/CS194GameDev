@@ -326,7 +326,7 @@ MonoBehaviour:
   roomHeight: 3.2
   numRoomsWidth: 2
   numRoomsHeight: 2
-  numRandomConnections: 8
+  numRandomConnections: 3
   seed: taami
 --- !u!1 &354571549
 GameObject:
@@ -874,7 +874,9 @@ MonoBehaviour:
   m_PlayerSpawnMethod: 0
   m_OfflineScene: 
   m_OnlineScene: 
-  m_SpawnPrefabs: []
+  m_SpawnPrefabs:
+  - {fileID: 110378, guid: 59ad0e74ec7554b05b4893b530982dd5, type: 2}
+  - {fileID: 151486, guid: f198a78cf27304012a5fee0143839cc2, type: 2}
   m_CustomConfig: 0
   m_MaxConnections: 4
   m_ConnectionConfig:
@@ -1129,7 +1131,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numCoins: 10
+  numEnemies: 5
   coinPrefab: {fileID: 110378, guid: 59ad0e74ec7554b05b4893b530982dd5, type: 2}
+  enemyPrefab: {fileID: 151486, guid: f198a78cf27304012a5fee0143839cc2, type: 2}
 --- !u!114 &2097155987
 MonoBehaviour:
   m_ObjectHideFlags: 0
