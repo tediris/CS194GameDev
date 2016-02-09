@@ -40,6 +40,7 @@ GameObject:
   - 95: {fileID: 9555094}
   - 114: {fileID: 11479046}
   - 114: {fileID: 11427102}
+  - 114: {fileID: 11464598}
   m_Layer: 8
   m_Name: RedPlayer
   m_TagString: Player
@@ -305,6 +306,17 @@ MonoBehaviour:
   - {fileID: 106724, guid: 1faa04b85b7ba4eceab4e069afeb0941, type: 2}
   pickupPrefab: {fileID: 119926, guid: 0529b65e1ed8b4020b294b608e129b3c, type: 2}
   itemAvailable: -1
+--- !u!114 &11464598
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 187436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d18fac9ee8914e508a0c11a4bf24d13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11479046
 MonoBehaviour:
   m_ObjectHideFlags: 1

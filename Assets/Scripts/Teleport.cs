@@ -24,28 +24,14 @@ public class Teleport : NetworkBehaviour {
 
 	void OnTriggerEnter2D (Collider2D other) {
 		if (other.tag == "Player") {
-			other.GetComponent<PlayerMove>().MoveTo(toX, toY);
+			other.GetComponent<PlayerMove> ().MoveTo (toX, toY);
 //			Camera.main.transform.position = new Vector3 (toX, toY, Camera.main.transform.position.z);
 			if (isEnd) {
-				ReturnPlayers ();
+				ServerComm serverComm = other.gameObject.GetComponent<ServerComm> ();
+				serverComm.RequestMap ();
+				serverComm.MovePlayers (toX, toY);
 			}
 		}
-	}
-
-	[ClientCallback]
-	void ReturnPlayers() {
-		CmdReturnPlayers ();
-	}
-
-	[Command]
-	void CmdReturnPlayers() {
-		RpcReturnPlayer ();
-		GSManager.GenerateNewMap ();
-	}
-
-	[ClientRpc]
-	void RpcReturnPlayer() {
-		GameObject.Find (idStore.localID).GetComponent<PlayerMove> ().MoveTo (toX, toY);
 	}
 
 }
