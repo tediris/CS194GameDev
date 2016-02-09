@@ -27,9 +27,14 @@ public class Teleport : NetworkBehaviour {
 			other.GetComponent<PlayerMove>().MoveTo(toX, toY);
 //			Camera.main.transform.position = new Vector3 (toX, toY, Camera.main.transform.position.z);
 			if (isEnd) {
-				CmdReturnPlayers ();
+				ReturnPlayers ();
 			}
 		}
+	}
+
+	[ClientCallback]
+	void ReturnPlayers() {
+		CmdReturnPlayers ();
 	}
 
 	[Command]
