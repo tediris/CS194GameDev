@@ -8,12 +8,22 @@ public class PlayerHealth : NetworkBehaviour
 	[SyncVar] public int maxHealth = 5;
 	[SyncVar] public int health = 5;
 
-	Rigidbody2D playerBody;
 	GameObject playerManager;
+	Transform panel;
+	RectTransform healthBar;
+	RectTransform healthBarBackground;
 
 	// Use this for initialization
 	void Start () {
-		playerBody = this.gameObject.GetComponent<Rigidbody2D> ();
+		if (isLocalPlayer) {
+			panel = GameObject.Find ("Canvas").transform.FindChild ("Player 0");
+		} else {
+			// Need to actually use the 
+//			panel = GameObject.Find ("Canvas").transform.FindChild ("Player 0");
+			return;
+		}
+		healthBarBackground = panel.FindChild ("Health Background").GetComponent<RectTransform> ();
+		healthBar = healthBarBackground.FindChild ("Health Foreground").GetComponent<RectTransform> ();
 	}
 
 	void FindPlayerManager() {
@@ -24,11 +34,10 @@ public class PlayerHealth : NetworkBehaviour
 
 	// Update is called once per frame
 	void Update () {
-		
-	}
-
-	void OnGUI () {
-		GUI.Box (new Rect (playerBody.transform.localPosition.x, playerBody.transform.localPosition.y, 20, 20), health + "/" + maxHealth);
+		if (healthBar) {
+			Vector3 newScale = new Vector3 ((1.0f * health) / maxHealth, healthBar.localScale.y, healthBar.localScale.z);
+			healthBar.localScale = newScale;
+		}
 	}
 
 	public void TakeDamage(int damage, Damager damager) {

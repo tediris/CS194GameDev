@@ -166,9 +166,13 @@ MonoBehaviour:
   facingRight: 1
   grounded: 1
   distToBottom: 0.5
+  anim: {fileID: 0}
   responsiveness: 0.5
   maxAirSpeed: 3
   airControl: 0.05
+  climbSpeed: 1
+  wallJumpPush: 2
+  grabbingWall: 0
 --- !u!114 &11407572
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -181,13 +185,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   touchingWall: 0
+  masterController: {fileID: 0}
 --- !u!114 &11417272
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 187436}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dfb86bdbc7f5c43a7996eb62948830bd, type: 3}
   m_Name: 
@@ -271,6 +276,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carried: 0
   throwSpeed: 3.5
+  carryHeight: 0.3
 --- !u!114 &11447320
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -444,7 +450,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: maxSpeed
