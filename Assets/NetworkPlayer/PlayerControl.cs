@@ -67,13 +67,13 @@ public class PlayerControl : NetworkBehaviour
 			buttonValue -= 1.0f;
 		}
 		if (Input.GetKey(KeyCode.D)) {
-			buttonValue += 1.0f;	
+			buttonValue += 1.0f;
 		}
 		dirInput = Mathf.Lerp (dirInput, buttonValue, responsiveness);
 	}
 
 	bool moveButtonDown() {
-		return Mathf.Abs (dirInput) > 0f;
+		return Mathf.Abs(dirInput) > 0f;
 	}
 
 	// Use this for initialization
@@ -121,7 +121,7 @@ public class PlayerControl : NetworkBehaviour
 				playerBody.velocity = new Vector2 (airSpeed, playerBody.velocity.y);
 			}
 		}
-			
+
 	}
 
 	void AnimateLeavingWall() {
@@ -180,7 +180,7 @@ public class PlayerControl : NetworkBehaviour
 					anim.SetBool ("standing", true);
 				}
 			}
-		} 
+		}
 
 		if (Mathf.Abs(playerBody.velocity.y) > 0.1f) {
 			if (playerBody.velocity.y > 0) {
@@ -255,7 +255,7 @@ public class PlayerControl : NetworkBehaviour
 		}
 	}
 
-	[Command] 
+	[Command]
 	void CmdFlipClients() {
 		RpcFlipClients ();
 	}

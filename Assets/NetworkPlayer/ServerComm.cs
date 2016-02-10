@@ -5,12 +5,14 @@ using UnityEngine.Networking;
 public class ServerComm : NetworkBehaviour {
 
 	GameStateManager GSManager;
-	PlayerIDs idStore;
+    PlayerIDs idStore;
+    WallCheck wallCheck;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
 		idStore = GameObject.Find ("PlayerManager").GetComponent<PlayerIDs> ();
-		GSManager = GameObject.Find ("GameState").GetComponent<GameStateManager> ();
+        GSManager = GameObject.Find("GameState").GetComponent<GameStateManager>();
+		wallCheck = GetComponentInChildren<WallCheck>();
 		if (isServer) {
 			GSManager.AddPlayer (this.gameObject);
 		}
@@ -18,10 +20,10 @@ public class ServerComm : NetworkBehaviour {
 			GSManager.StoreLocalPlayer (this);
 		}
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
-	
+
 	}
 
 	public void RequestMap() {
@@ -64,7 +66,10 @@ public class ServerComm : NetworkBehaviour {
 	}
 
 	[ClientRpc]
-	void RpcSetPosition(float x, float y) {
-		gameObject.transform.position = new Vector3 (x, y, gameObject.transform.position.z);
-	}
+    void RpcSetPosition(float x, float y)
+    {
+		wallCheck.ResetOnTeleport();
+        gameObject.transform.position = new Vector3(x, y, gameObject.transform.position.z);
+
+    }
 }

@@ -4,25 +4,34 @@ using System.Collections.Generic;
 
 public class WallCheck : MonoBehaviour {
 
-	public bool touchingWall = false;
-	public PlayerControl masterController;
-	HashSet<Collider2D> walls;
-	// Use this for initialization
-	void Start () {
+    public bool touchingWall = false;
+    public PlayerControl masterController;
+    int wallCount = 0;
+    // Use this for initialization
+    void Start () {
 		masterController = GetComponentInParent<PlayerControl> ();
-		walls = new HashSet<Collider2D> ();
-	}
-	
+    }
+
 	public bool TouchingWall() {
 		return touchingWall;
+    }
+
+	public void ResetOnTeleport() {
+		wallCount = 0;
+		touchingWall = false;
+		DetachFromWall();
 	}
 
-	void OnTriggerEnter2D(Collider2D other) {
-		if (other.tag != "Ground") {
-			return;
+	void DetachFromWall() {
+		if (masterController.grabbingWall) {
+			masterController.grabbingWall = false;
+			masterController.anim.SetBool ("climbing", false);
+			masterController.anim.SetBool ("onWall", false);
+			masterController.SetGravity (true);
 		}
-		touchingWall = true;
-		walls.Add (other);
+    }
+
+	void AttachToWall() {
 		if (!masterController.grounded) {
 			masterController.grabbingWall = true;
 			masterController.SetGravity (false);
@@ -30,19 +39,23 @@ public class WallCheck : MonoBehaviour {
 		}
 	}
 
+	void OnTriggerEnter2D(Collider2D other) {
+		if (other.tag != "Ground") {
+			return;
+		}
+        touchingWall = true;
+        wallCount++;
+        AttachToWall();
+	}
+
 	void OnTriggerExit2D(Collider2D other) {
 		if (other.tag != "Ground") {
 			return;
 		}
-		walls.Remove (other);
-		if (walls.Count > 0)
+        wallCount--;
+        if (wallCount > 0)
 			return;
 		touchingWall = false;
-		if (masterController.grabbingWall) {
-			masterController.grabbingWall = false;
-			masterController.anim.SetBool ("climbing", false);
-			masterController.anim.SetBool ("onWall", false);
-			masterController.SetGravity (true);
-		}
+		DetachFromWall();
 	}
 }
