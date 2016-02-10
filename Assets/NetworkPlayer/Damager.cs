@@ -19,13 +19,13 @@ public class Damager : NetworkBehaviour {
 	void Update () {
 	}
 
-	void OnCollisionEnter2D(Collision2D collision) {
-		Collider2D collider = collision.collider;
-		foreach (string validTag in damagableTags) {
-			if (collider.tag == validTag) {
-				PlayerHealth damagedHealth = collider.gameObject.GetComponent<PlayerHealth> ();
-				damagedHealth.TakeDamage (damage, this);
-			}
-		}
-	}
+//	void OnCollisionEnter2D(Collision2D collision) {
+//		Collider2D collider = collision.collider;
+//		foreach (string validTag in damagableTags) {
+//			if (collider.tag == validTag) {
+//				PlayerHealth damagedHealth = collider.gameObject.GetComponent<PlayerHealth> ();
+//				damagedHealth.TakeDamage (damage, this);
+//			}
+//		}
+//	}
 }

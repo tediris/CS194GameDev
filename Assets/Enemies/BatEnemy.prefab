@@ -17,6 +17,7 @@ GameObject:
   - 114: {fileID: 11476122}
   - 114: {fileID: 11411886}
   - 114: {fileID: 11417870}
+  - 114: {fileID: 11451530}
   m_Layer: 0
   m_Name: BatEnemy
   m_TagString: Enemy
@@ -127,7 +128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 290ff3402a2ce43feba239cb6416a367, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  travelRadius: 3
+  travelRadius: 1
   speed: 0.2
 --- !u!114 &11417870
 MonoBehaviour:
@@ -160,6 +161,17 @@ MonoBehaviour:
   m_SnapThreshold: 5
   m_InterpolateRotation: 1
   m_InterpolateMovement: 1
+--- !u!114 &11451530
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 151486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf716a2daa10344f58be589794b7678d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11476122
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -227,7 +239,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: travelRadius
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: speed

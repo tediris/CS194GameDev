@@ -12,6 +12,10 @@ public class GameStateManager : NetworkBehaviour {
 	ServerComm localPlayerComm;
 	CoinPlacement coinPlacer = null;
 
+	public GameObject GetLocalPlayer() {
+		return localPlayerComm.gameObject;
+	}
+
 	public override void OnStartServer()
 	{
 		Debug.Log ("Server started");
