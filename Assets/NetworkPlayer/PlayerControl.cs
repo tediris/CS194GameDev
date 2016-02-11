@@ -18,6 +18,8 @@ public class PlayerControl : NetworkBehaviour
 	private bool carrying = false;
 	int carryingPlayer = -1;
 
+	Carryable carryingObject;
+
 	Rigidbody2D playerBody;
 
 	NetSetup networkInfo;
@@ -120,8 +122,23 @@ public class PlayerControl : NetworkBehaviour
 				airSpeed = Mathf.Clamp (airSpeed, -maxAirSpeed, maxAirSpeed);
 				playerBody.velocity = new Vector2 (airSpeed, playerBody.velocity.y);
 			}
-		}
+		} else {
+			if (wallCheck.touchingWall) {
+				if (grabbingWall) {
+					playerBody.velocity = Vector2.zero;
+					if (Input.GetKey (KeyCode.W)) {
+						playerBody.velocity += Vector2.up * climbSpeed;
+						anim.SetBool ("climbing", true);
+					} else if (Input.GetKey (KeyCode.S)) {
+						playerBody.velocity -= Vector2.up * climbSpeed;
+						anim.SetBool ("climbing", true);
+					} else {
+						anim.SetBool ("climbing", false);
+					}
 
+				}
+			}
+		}
 	}
 
 	void AnimateLeavingWall() {
@@ -198,9 +215,21 @@ public class PlayerControl : NetworkBehaviour
 	}
 
 	void ThrowPlayer() {
-		CmdThrowPlayer (carryingPlayer, transform.localScale.x);
-		carrying = false;
-		carryingPlayer = -1;
+		if (carryingPlayer >= 0) {
+			CmdThrowPlayer (carryingPlayer, transform.localScale.x);
+			carrying = false;
+			carryingPlayer = -1;
+		} else {
+			// we are throwing an object
+			CmdThrowCarryable(carryingObject.gameObject);
+			carrying = false;
+			carryingObject = null;
+		}
+	}
+
+	[Command]
+	void CmdThrowCarryable(GameObject carryingObject) {
+		carryingObject.GetComponent<Carryable> ().UnsetCarry ();
 	}
 
 	[Command]
@@ -222,7 +251,21 @@ public class PlayerControl : NetworkBehaviour
 			carrying = true;
 			carryingPlayer = hit.collider.gameObject.GetComponent<NetSetup> ().playerNum;
 			CmdInitiatePickup (networkInfo.playerNum, carryingPlayer);
+		} else if (hit.collider != null && hit.collider.gameObject.GetComponent<Carryable>() != null) {
+			carryingObject = hit.collider.gameObject.GetComponent<Carryable> ();
+			if (carryingObject.carried) {
+				carryingObject = null;
+				return;
+			}
+			carrying = true;
+			CmdCarryItem (hit.collider.gameObject);
 		}
+	}
+
+	[Command]
+	void CmdCarryItem(GameObject objToCarry) {
+		carryingObject = objToCarry.GetComponent<Carryable> ();
+		carryingObject.SetCarrying (GetComponent<NetSetup>().playerNum);
 	}
 
 	[Command]
