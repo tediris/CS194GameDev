@@ -32,11 +32,11 @@ public class WallCheck : MonoBehaviour {
     }
 
 	void AttachToWall() {
-		if (!masterController.grounded) {
+		//if (!masterController.grounded) {
 			masterController.grabbingWall = true;
 			masterController.SetGravity (false);
 			masterController.anim.SetBool ("onWall", true);
-		}
+		//}
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {
