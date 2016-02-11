@@ -14,7 +14,7 @@ GameObject:
   - 61: {fileID: 6162424}
   - 61: {fileID: 6101392}
   - 114: {fileID: 11438356}
-  - 114: {fileID: 11437396}
+  - 95: {fileID: 9525928}
   m_Layer: 10
   m_Name: Coin
   m_TagString: Coin
@@ -79,6 +79,23 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 0.2, y: 0.32}
+--- !u!95 &9525928
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 110378}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a4f8483ef01d041cbb64e7628a61e207, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &11408232
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -111,17 +128,6 @@ MonoBehaviour:
     i15: 213
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
---- !u!114 &11437396
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 110378}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68828467923be447b8b096f1e141213a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &11438356
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -160,7 +166,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 483883415
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: d88f38addf74e40d09c135feba790b86, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5689981a2cb35423881c74f9b1c72239, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
