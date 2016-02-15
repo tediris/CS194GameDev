@@ -317,6 +317,8 @@ MonoBehaviour:
   - {fileID: 119006, guid: 9915523fa5f7f48c69f151536f3202e8, type: 2}
   eastWestPrefabs:
   - {fileID: 162548, guid: 1db513754cfad48a79f462508cd2f415, type: 2}
+  - {fileID: 137922, guid: a38f0137f2d9a42faa946667b857bf5f, type: 2}
+  - {fileID: 164886, guid: 37ab90c083f7b423f84f444cdbbe4c8f, type: 2}
   northEastSouthPrefabs:
   - {fileID: 195374, guid: b37a8961b23024853af9aaf18db691fa, type: 2}
   northEastWestPrefabs:
@@ -330,7 +332,7 @@ MonoBehaviour:
   roomHeight: 3.2
   numRoomsWidth: 3
   numRoomsHeight: 3
-  numRandomConnections: 5
+  numRandomConnections: 4
   seed: taami
 --- !u!1 &354571549
 GameObject:
@@ -464,10 +466,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 110809343}
   m_RootOrder: 1
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -291.45, y: 121.84997}
-  m_SizeDelta: {x: 76.1, y: 30.5}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 62.549988, y: -41.150032}
+  m_SizeDelta: {x: 76.100006, y: 30.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &445361119
 MonoBehaviour:
@@ -611,9 +613,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  damping: 1
-  lookAheadFactor: 3
-  lookAheadReturnSpeed: 0.5
+  damping: 0.5
+  lookAheadFactor: 2
+  lookAheadReturnSpeed: 0.8
   lookAheadMoveThreshold: 0.1
   jumpThreshold: 30
 --- !u!1 &722504895
@@ -645,10 +647,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 110809343}
   m_RootOrder: 4
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -279.49997, y: 150.54999}
-  m_SizeDelta: {x: 30, y: 26.9}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 74.50003, y: -12.450012}
+  m_SizeDelta: {x: 30, y: 26.899994}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &722504897
 MonoBehaviour:
@@ -775,6 +777,10 @@ Prefab:
     - target: {fileID: 2079668, guid: 43ebd927f72654b6d952b67321a66318, type: 2}
       propertyPath: orthographic size
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 112928, guid: 43ebd927f72654b6d952b67321a66318, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 43ebd927f72654b6d952b67321a66318, type: 2}
@@ -1028,10 +1034,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 110809343}
   m_RootOrder: 2
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -309.5, y: 150.54997}
-  m_SizeDelta: {x: 30, y: 26.9}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 44.5, y: -12.450027}
+  m_SizeDelta: {x: 30, y: 26.899994}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1451882519
 MonoBehaviour:
@@ -1122,10 +1128,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 110809343}
   m_RootOrder: 3
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -339.5, y: 150.55}
-  m_SizeDelta: {x: 30, y: 26.9}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 14.5, y: -12.449997}
+  m_SizeDelta: {x: 30, y: 26.899994}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1737694378
 MonoBehaviour:

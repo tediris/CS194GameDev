@@ -100,7 +100,7 @@ public class MapGen : MonoBehaviour {
 			if (neighbors.Count == 0)
 				continue;
 			Room nextRoom = neighbors [rand.Next (neighbors.Count)];
-			rooms [x, y].connectedRooms[(int)rooms[x, y].GetRelation(nextRoom.x, nextRoom.y)] = true;
+			rooms [y, x].connectedRooms[(int)rooms[y, x].GetRelation(nextRoom.x, nextRoom.y)] = true;
 			nextRoom.connectedRooms [(int)nextRoom.GetRelation (x, y)] = true;;
 		}
 	}
@@ -111,8 +111,8 @@ public class MapGen : MonoBehaviour {
 		int maxDistY = -1;
 		for (int x = 0; x < numRoomsWidth; x++) {
 			for (int y = 0; y < numRoomsHeight; y++) {
-				if (rooms [x, y].dist > maxDist) {
-					maxDist = rooms [x, y].dist;
+				if (rooms [y, x].dist > maxDist) {
+					maxDist = rooms [y, x].dist;
 					maxDistX = x;
 					maxDistY = y;
 				}
@@ -123,7 +123,7 @@ public class MapGen : MonoBehaviour {
 
 		for (int x = 0; x < numRoomsWidth; x++) {
 			for (int y = 0; y < numRoomsHeight; y++) {
-				rooms [x, y].Create ();
+				rooms [y, x].Create ();
 			}
 		}
 	}
@@ -141,10 +141,10 @@ public class MapGen : MonoBehaviour {
 	}
 
 	void CreateRoomLayout() {
-		rooms = new Room[numRoomsWidth, numRoomsHeight];
+		rooms = new Room[numRoomsHeight, numRoomsWidth];
 		for (int x = 0; x < numRoomsWidth; x++) {
 			for (int y = 0; y < numRoomsHeight; y++) {
-				rooms [x, y] = new Room (x, y, this, -1);
+				rooms [y, x] = new Room (x, y, this, -1);
 			}
 		}
 		int startX = rand.Next (numRoomsWidth);
@@ -158,47 +158,47 @@ public class MapGen : MonoBehaviour {
 
 	List<Room> GetUnconnectedNeighbors(int x, int y) {
 		List<Room> neighbors = new List<Room>();
-		if (x > 0 && !rooms[x,y].connectedRooms[(int) Direction.WEST]) {
-			neighbors.Add (rooms [x - 1, y]);
+		if (x > 0 && !rooms[y,x].connectedRooms[(int) Direction.WEST]) {
+			neighbors.Add (rooms [y, x-1]);
 		}
-		if (x < numRoomsWidth - 1 && !rooms[x,y].connectedRooms[(int) Direction.EAST]) {
-			neighbors.Add(rooms[x + 1, y]);
+		if (x < numRoomsWidth - 1 && !rooms[y,x].connectedRooms[(int) Direction.EAST]) {
+			neighbors.Add(rooms[y, x+1]);
 		}
-		if (y > 0 && !rooms[x,y].connectedRooms[(int) Direction.SOUTH]) {
-			neighbors.Add (rooms [x, y - 1]);
+		if (y > 0 && !rooms[y,x].connectedRooms[(int) Direction.SOUTH]) {
+			neighbors.Add (rooms [y-1, x]);
 		}
-		if (y < numRoomsHeight - 1 && !rooms[x,y].connectedRooms[(int) Direction.NORTH]) {
-			neighbors.Add (rooms [x, y + 1]);
+		if (y < numRoomsHeight - 1 && !rooms[y,x].connectedRooms[(int) Direction.NORTH]) {
+			neighbors.Add (rooms [y+1, x]);
 		}
 		return neighbors;
 	}
 
 	List<Room> GetConnectedUnvisitedRooms(int x, int y) {
 		List<Room> connected = new List<Room>();
-		if (x > 0 && !rooms [x - 1, y].IsConnected()) {
-			connected.Add (rooms [x - 1, y]);
+		if (x > 0 && !rooms [y, x-1].IsConnected()) {
+			connected.Add (rooms [y, x-1]);
 		}
-		if (x < numRoomsWidth - 1 && !rooms [x + 1, y].IsConnected()) {
-			connected.Add(rooms[x + 1, y]);
+		if (x < numRoomsWidth - 1 && !rooms [y, x+1].IsConnected()) {
+			connected.Add(rooms[y, x+1]);
 		}
-		if (y > 0 && !rooms [x, y - 1].IsConnected()) {
-			connected.Add (rooms [x, y - 1]);
+		if (y > 0 && !rooms [y-1, x].IsConnected()) {
+			connected.Add (rooms [y-1, x]);
 		}
-		if (y < numRoomsHeight - 1 && !rooms [x, y + 1].IsConnected()) {
-			connected.Add (rooms [x, y + 1]);
+		if (y < numRoomsHeight - 1 && !rooms [y+1, x].IsConnected()) {
+			connected.Add (rooms [y+1, x]);
 		}
 		return connected;
 	}
 
 	void RecursiveBuildMaze(int x, int y, int dist) {
-		rooms[x,y].dist = dist;
+		rooms[y,x].dist = dist;
 		while (true) {
 			List<Room> connected = GetConnectedUnvisitedRooms (x, y);
 			if (connected.Count == 0)
 				return;
 			Room nextRoom = connected [rand.Next (connected.Count)];
-			rooms [x, y].connectedRooms[(int)rooms[x, y].GetRelation(nextRoom.x, nextRoom.y)] = true;
-			nextRoom.connectedRooms [(int)nextRoom.GetRelation (x, y)] = true;;
+			rooms [y, x].connectedRooms[(int)rooms[y, x].GetRelation(nextRoom.x, nextRoom.y)] = true;
+			nextRoom.connectedRooms [(int)nextRoom.GetRelation (x, y)] = true;
 			RecursiveBuildMaze (nextRoom.x, nextRoom.y, dist + 1);
 		}
 	}
