@@ -68,7 +68,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 187436}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.0496945, y: -2.4206097, z: 0}
+  m_LocalPosition: {x: -4.824713, y: -5.41693, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 465950}
@@ -102,9 +102,9 @@ CircleCollider2D:
   m_Material: {fileID: 6200000, guid: 5eaf406dd04bc403bbbf5ee0935672d1, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: 0, y: -0.06}
+  m_Offset: {x: 0, y: -0.04}
   serializedVersion: 2
-  m_Radius: 0.09
+  m_Radius: 0.1
 --- !u!61 &6161676
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -130,9 +130,9 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_Offset: {x: 0.1, y: 0.03}
+  m_Offset: {x: 0.07, y: 0.02}
   serializedVersion: 2
-  m_Size: {x: 0.05, y: 0.15}
+  m_Size: {x: 0.07, y: 0.19}
 --- !u!95 &9555094
 Animator:
   serializedVersion: 3
@@ -175,6 +175,7 @@ MonoBehaviour:
   airControl: 0.05
   climbSpeed: 1
   wallJumpPush: 2
+  controllerEnabled: 0
   grabbingWall: 0
 --- !u!114 &11407572
 MonoBehaviour:

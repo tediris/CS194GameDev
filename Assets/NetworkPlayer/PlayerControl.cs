@@ -43,6 +43,81 @@ public class PlayerControl : NetworkBehaviour
 
 	private WallCheck wallCheck;
 
+	// Gamepad code
+	[HideInInspector]
+	public bool controllerEnabled = false;
+	public GeneralInput input;
+
+	public class GeneralInput
+	{
+		public bool controllerEnabled = false;
+		public Platform platform;
+		public enum Platform
+		{
+			OSX = 0,
+			Windows = 1
+		}
+		public GeneralInput() {
+			RuntimePlatform current = Application.platform;
+			if (current == RuntimePlatform.OSXEditor || current == RuntimePlatform.OSXPlayer) {
+				platform = Platform.OSX;
+			} else if (current == RuntimePlatform.WindowsEditor || current == RuntimePlatform.WindowsPlayer) {
+				platform = Platform.Windows;
+			}
+		}
+		public bool UpInput() {
+			if (controllerEnabled) {
+				return Input.GetAxis ("Vertical") > 0f;
+			} else {
+				return Input.GetKey (KeyCode.W);
+			}
+		}
+		public bool DownInput() {
+			if (controllerEnabled) {
+				return Input.GetAxis ("Vertical") < 0f;
+			} else {
+				return Input.GetKey (KeyCode.S);
+			}
+		}
+
+		public bool isOSX() {
+			return platform == Platform.OSX;
+		}
+
+		public bool isWindows() {
+			return platform == Platform.Windows;
+		}
+
+		public bool JumpButton() {
+			if (controllerEnabled) {
+				if (isOSX ()) {
+					return Input.GetKeyDown ("joystick button 16");
+				} else if (isWindows ()) {
+					return Input.GetKeyDown ("joystick button 0");
+				} else {
+					return false;
+				}
+			} else {
+				return (Input.GetKeyDown (KeyCode.Space) || Input.GetKeyDown (KeyCode.U));
+			}
+
+		}
+
+		public bool CarryButton() {
+			if (controllerEnabled) {
+				if (isOSX ()) {
+					return Input.GetKeyDown ("joystick button 17");
+				} else if (isWindows ()) {
+					return Input.GetKeyDown ("joystick button 1");
+				} else {
+					return false;
+				}
+			} else {
+				return Input.GetKeyDown (KeyCode.P);
+			}
+		}
+	};
+
 	public void SetAirSpeed(float value) {
 		airSpeed = value;
 	}
@@ -65,11 +140,15 @@ public class PlayerControl : NetworkBehaviour
 
 	void UpdateLRMovement() {
 		buttonValue = 0.0f;
-		if (Input.GetKey (KeyCode.A)) {
-			buttonValue -= 1.0f;
-		}
-		if (Input.GetKey(KeyCode.D)) {
-			buttonValue += 1.0f;
+		if (controllerEnabled) {
+			buttonValue = Input.GetAxis("Horizontal");
+		} else {
+			if (Input.GetKey (KeyCode.A)) {
+				buttonValue -= 1.0f;
+			}
+			if (Input.GetKey (KeyCode.D)) {
+				buttonValue += 1.0f;
+			}
 		}
 		dirInput = Mathf.Lerp (dirInput, buttonValue, responsiveness);
 	}
@@ -86,6 +165,15 @@ public class PlayerControl : NetworkBehaviour
 		anim = GetComponent<Animator> ();
 		gravityInitial = playerBody.gravityScale;
 		wallCheck = GetComponentInChildren<WallCheck> ();
+		string[] controllers = Input.GetJoystickNames ();
+		foreach (string s in controllers) {
+			Debug.Log (s);
+		}
+		if (controllers.Length > 0) {
+			controllerEnabled = true;
+		}
+		input = new GeneralInput ();
+		input.controllerEnabled = controllerEnabled;
 	}
 
 	void FindPlayerManager() {
@@ -101,10 +189,10 @@ public class PlayerControl : NetworkBehaviour
 			if (wallCheck.touchingWall) {
 				if (grabbingWall) {
 					playerBody.velocity = Vector2.zero;
-					if (Input.GetKey (KeyCode.W)) {
+					if (input.UpInput()) {
 						playerBody.velocity += Vector2.up * climbSpeed;
 						anim.SetBool ("climbing", true);
-					} else if (Input.GetKey (KeyCode.S)) {
+					} else if (input.DownInput()) {
 						playerBody.velocity -= Vector2.up * climbSpeed;
 						anim.SetBool ("climbing", true);
 					} else {
@@ -126,10 +214,10 @@ public class PlayerControl : NetworkBehaviour
 			if (wallCheck.touchingWall) {
 				if (grabbingWall) {
 					playerBody.velocity = Vector2.zero;
-					if (Input.GetKey (KeyCode.W)) {
+					if (input.UpInput()) {
 						playerBody.velocity += Vector2.up * climbSpeed;
 						anim.SetBool ("climbing", true);
-					} else if (Input.GetKey (KeyCode.S)) {
+					} else if (input.DownInput()) {
 						playerBody.velocity -= Vector2.up * climbSpeed;
 						anim.SetBool ("climbing", true);
 					} else {
@@ -156,7 +244,7 @@ public class PlayerControl : NetworkBehaviour
 			currentPlatformCollider = null;
 		}
 
-		if (Input.GetKeyDown(KeyCode.P)) {
+		if (input.CarryButton()) {
 			if (!carrying) {
 				CarryPlayer ();
 			} else {
@@ -172,7 +260,7 @@ public class PlayerControl : NetworkBehaviour
 
 		float h = Input.GetAxis ("Horizontal");
 
-		if (canJump() && (Input.GetKeyDown (KeyCode.Space) || Input.GetKeyDown(KeyCode.U))) {
+		if (canJump() && input.JumpButton()) {
 			if (!grounded) {
 				Debug.Log ("Trying to wall jump");
 				wallJumped = true;

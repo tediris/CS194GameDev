@@ -40,7 +40,8 @@ public class GameStateManager : NetworkBehaviour {
 		while (curSeed == "null") {
 			yield return new WaitForSeconds (0.1f);
 		}
-		mapGenerator.GenerateNewMap (curSeed);
+		if (!isServer)
+			mapGenerator.GenerateNewMap (curSeed);
 	}
 
 	public void AddPlayer(GameObject player) {

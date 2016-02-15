@@ -246,6 +246,7 @@ public class MapGen : MonoBehaviour {
 			GameObject prefab;
 
 			if (this.dist == 0) {
+				Debug.Log("Room " + x + ", " + y + " has dist 0");
 				prefab = Instantiate (generator.startRoomPrefab, pos, Quaternion.identity) as GameObject;
 				for (int i = 0; i < 4; i++) {
 					if (!connectedRooms [i]) {
@@ -253,7 +254,7 @@ public class MapGen : MonoBehaviour {
 						wall.transform.parent = prefab.transform;
 					}
 				}
-
+				prefab.transform.parent = generator.gameObject.transform;
 				return;
 			}
 
