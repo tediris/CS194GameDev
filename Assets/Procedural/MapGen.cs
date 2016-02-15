@@ -23,6 +23,8 @@ public class MapGen : MonoBehaviour {
 
 	public GameObject endPortal;
 
+	public GameObject startRoomPrefab;
+	public List<GameObject> sealingWallNSEWPrefabs;
 	public List<GameObject> omniPrefabs;
 	public List<GameObject> northPrefabs;
 	public List<GameObject> eastPrefabs;
@@ -242,6 +244,18 @@ public class MapGen : MonoBehaviour {
 			Vector3 pos = Vector3.up * -y * generator.roomHeight + Vector3.right * -x * generator.roomWidth;
 
 			GameObject prefab;
+
+			if (this.dist == 0) {
+				prefab = Instantiate (generator.startRoomPrefab, pos, Quaternion.identity) as GameObject;
+				for (int i = 0; i < 4; i++) {
+					if (connectedRooms [i]) {
+						GameObject wall = Instantiate (generator.sealingWallNSEWPrefabs [i], pos, Quaternion.identity) as GameObject;
+						wall.transform.parent = prefab.transform;
+					}
+				}
+
+				return;
+			}
 
 			if (connectedRooms[(int)Direction.NORTH] && connectedRooms[(int)Direction.SOUTH] && connectedRooms[(int)Direction.EAST] && connectedRooms[(int)Direction.WEST]) {
 				prefab = generator.omniPrefabs[generator.rand.Next(generator.omniPrefabs.Count)];

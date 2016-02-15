@@ -294,6 +294,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   endPortal: {fileID: 169894, guid: a0dc72db3489842a784d2c257b2738a2, type: 2}
+  startRoomPrefab: {fileID: 164182, guid: 9802a1d27ab29406e84c165ca032a81b, type: 2}
+  sealingWallNSEWPrefabs:
+  - {fileID: 149766, guid: 389e27f910b084f378e3db8781822faf, type: 2}
+  - {fileID: 100834, guid: e30648d45bb3542b584a06da5a97e6c1, type: 2}
+  - {fileID: 175744, guid: 51b364b1ee3f146b981bbd4ad79ee3f3, type: 2}
+  - {fileID: 170078, guid: db5c678745fd641d9b44a0bada2cac91, type: 2}
   omniPrefabs:
   - {fileID: 176088, guid: d0cc747a765c5428eb088789062e3ddc, type: 2}
   northPrefabs:
