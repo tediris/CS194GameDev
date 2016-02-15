@@ -248,7 +248,7 @@ public class MapGen : MonoBehaviour {
 			if (this.dist == 0) {
 				prefab = Instantiate (generator.startRoomPrefab, pos, Quaternion.identity) as GameObject;
 				for (int i = 0; i < 4; i++) {
-					if (connectedRooms [i]) {
+					if (!connectedRooms [i]) {
 						GameObject wall = Instantiate (generator.sealingWallNSEWPrefabs [i], pos, Quaternion.identity) as GameObject;
 						wall.transform.parent = prefab.transform;
 					}
