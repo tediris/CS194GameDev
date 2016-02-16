@@ -217,6 +217,7 @@ public class PlayerControl : NetworkBehaviour
 					if (input.UpInput()) {
 						playerBody.velocity += Vector2.up * climbSpeed;
 						anim.SetBool ("climbing", true);
+						grounded = false;
 					} else if (input.DownInput()) {
 						playerBody.velocity -= Vector2.up * climbSpeed;
 						anim.SetBool ("climbing", true);
@@ -262,13 +263,15 @@ public class PlayerControl : NetworkBehaviour
 
 		if (canJump() && input.JumpButton()) {
 			if (!grounded) {
-				Debug.Log ("Trying to wall jump");
-				wallJumped = true;
-				grabbingWall = false;
-				AnimateLeavingWall ();
-				airSpeed = transform.localScale.x * wallJumpPush * -1;
-				playerBody.velocity =  new Vector2 (airSpeed, jumpSpeed);
-				SetGravity (true);
+				if (grabbingWall) {
+					Debug.Log ("Trying to wall jump");
+					wallJumped = true;
+					grabbingWall = false;
+					AnimateLeavingWall ();
+					airSpeed = transform.localScale.x * wallJumpPush * -1;
+					playerBody.velocity = new Vector2 (airSpeed, jumpSpeed);
+					SetGravity (true);
+				}
 			} else {
 				grounded = false;
 				airSpeed = playerBody.velocity.x;

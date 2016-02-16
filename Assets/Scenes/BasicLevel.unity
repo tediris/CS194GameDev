@@ -330,7 +330,7 @@ MonoBehaviour:
   northEastWestPrefabs:
   - {fileID: 165390, guid: 87753b085caee4df39186d85b258e1e8, type: 2}
   northSouthWestPrefabs:
-  - {fileID: 135222, guid: 318c6b3f43dda4e429bf17111c3e64a0, type: 2}
+  - {fileID: 158332, guid: 318c6b3f43dda4e429bf17111c3e64a0, type: 2}
   southEastWestPrefabs:
   - {fileID: 138686, guid: e4bd2cb49398e41768e4fd25a5838fe5, type: 2}
   tileSize: 32
