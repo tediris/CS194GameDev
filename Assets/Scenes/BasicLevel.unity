@@ -281,7 +281,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 5
 --- !u!114 &115989040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -301,6 +301,7 @@ MonoBehaviour:
   - {fileID: 175744, guid: 51b364b1ee3f146b981bbd4ad79ee3f3, type: 2}
   - {fileID: 170078, guid: db5c678745fd641d9b44a0bada2cac91, type: 2}
   omniPrefabs:
+  - {fileID: 175986, guid: 061b62f3c27544762a2abf00ef421f51, type: 2}
   - {fileID: 176088, guid: d0cc747a765c5428eb088789062e3ddc, type: 2}
   northPrefabs:
   - {fileID: 110856, guid: 4789d459e2bd54b988efdee0b3dfe2b9, type: 2}
@@ -336,9 +337,9 @@ MonoBehaviour:
   tileSize: 32
   roomWidth: 6.4
   roomHeight: 3.2
-  numRoomsWidth: 3
-  numRoomsHeight: 3
-  numRandomConnections: 4
+  numRoomsWidth: 4
+  numRoomsHeight: 4
+  numRandomConnections: 15
   seed: taami
 --- !u!1 &354571549
 GameObject:

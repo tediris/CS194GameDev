@@ -1,9 +1,12 @@
 ﻿using UnityEngine;
 using UnityEditor;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using SimpleJSON;
+using TiledSharp;
+using Utility;
 
 public class CSVLoader : EditorWindow {
 
@@ -13,6 +16,13 @@ public class CSVLoader : EditorWindow {
 	public GameObject spriteBase;
 	public TextAsset colliderFile;
 	public GameObject colliderBase;
+
+	// TMX Parsing Info
+	public TextAsset tmxFile;
+	public string baseLayerName = "";
+	public string optionalLayerName = "";
+	public GameObject optionalBase;
+	public string colliderLayerName = "";
 
 	public string[] options;
 	public Sprite[] allSprites;
@@ -57,6 +67,11 @@ public class CSVLoader : EditorWindow {
 		colliderBase = (GameObject) EditorGUILayout.ObjectField(colliderBase, typeof(GameObject),true,GUILayout.Width(128));
 		GUILayout.EndHorizontal ();
 
+		GUILayout.BeginHorizontal();
+		EditorGUILayout.LabelField("OptionalPrefab", GUILayout.Width(128));
+		optionalBase = (GameObject) EditorGUILayout.ObjectField(optionalBase, typeof(GameObject),true,GUILayout.Width(128));
+		GUILayout.EndHorizontal ();
+
 		GUILayout.BeginHorizontal ();
 
 		if (GUILayout.Button("Generate Tilemap", GUILayout.Width(128)))
@@ -88,14 +103,41 @@ public class CSVLoader : EditorWindow {
 		}
 		GUILayout.EndHorizontal ();
 
-//		// "target" can be any class derrived from ScriptableObject 
-//		// (could be EditorWindow, MonoBehaviour, etc)
-//		ScriptableObject target = this;
-//		SerializedObject so = new SerializedObject(target);
-//		SerializedProperty stringsProperty = so.FindProperty("SpriteArray");
-//
-//		EditorGUILayout.PropertyField(stringsProperty, true); // True means show children
-//		so.ApplyModifiedProperties(); // Remember to apply modified properties
+		GUILayout.BeginHorizontal();
+		EditorGUILayout.LabelField("TMX File", GUILayout.Width(128));
+		tmxFile = (TextAsset) EditorGUILayout.ObjectField(tmxFile, typeof(TextAsset),true,GUILayout.Width(128));
+		GUILayout.EndHorizontal ();
+
+		GUILayout.BeginHorizontal();
+		EditorGUILayout.LabelField("Base Layer", GUILayout.Width(128));
+		baseLayerName = (string) EditorGUILayout.TextField(baseLayerName, GUILayout.Width(128));
+		GUILayout.EndHorizontal ();
+
+		GUILayout.BeginHorizontal();
+		EditorGUILayout.LabelField("Collider Layer", GUILayout.Width(128));
+		colliderLayerName = (string) EditorGUILayout.TextField(colliderLayerName, GUILayout.Width(128));
+		GUILayout.EndHorizontal ();
+
+		GUILayout.BeginHorizontal();
+		EditorGUILayout.LabelField("Optional Tile Layer", GUILayout.Width(128));
+		optionalLayerName = (string) EditorGUILayout.TextField(optionalLayerName, GUILayout.Width(128));
+		GUILayout.EndHorizontal ();
+
+		GUILayout.BeginHorizontal ();
+
+		if (GUILayout.Button("Parse TMX", GUILayout.Width(128)))
+		{   
+			if (tmxFile != null) {
+				//ItemPlacements items = parentTransform.gameObject.AddComponent<ItemPlacements> ();
+				//tileMapping = CSVLoader.ParseCSV (fileToLoad);
+				//items.FindItemPlacements (tileMapping);
+				var map = new TmxMap("Assets/Levels/" + tmxFile.name + ".xml");
+//				var objectLayer = map.Tilesets["Tile Layer 1"];
+				//Debug.Log (map.Tilesets);
+				GenerateTiles(map);
+			}
+		}
+		GUILayout.EndHorizontal ();
 
 		if (!Directory.Exists(Application.dataPath + "/Tilemaps/"))
 		{
@@ -128,6 +170,58 @@ public class CSVLoader : EditorWindow {
 					go.transform.parent = parentTransform;
 				}
 			}
+		}
+	}
+
+	public void GenerateTiles(TmxMap map) {
+		TmxLayer baseLayer = map.Layers[baseLayerName];
+		foreach (var tile in baseLayer.Tiles) {
+			int val = tile.Gid - 1;
+			if (val != -1) {
+				float xpos = tile.X * 0.32f;
+				float ypos = tile.Y * -0.32f;
+				GameObject go = Instantiate (spriteBase);
+				go.transform.position = new Vector3 (xpos, ypos, go.transform.position.z);
+				go.GetComponent<SpriteRenderer> ().sprite = allSprites [val];
+				go.transform.parent = parentTransform;
+			}
+		}
+
+		TmxLayer optionalLayer = map.Layers[optionalLayerName];
+		//parentTransform.gameObject.AddComponent<RandomCreation> ();
+		RandomCreation rCreate = parentTransform.gameObject.GetComponent<RandomCreation> ();
+		rCreate.randomEntities = new List<GameObject> ();
+		rCreate.randChances = new List<float> ();
+		foreach (var tile in optionalLayer.Tiles) {
+			int val = tile.Gid - 1;
+			if (val != -1) {
+				float xpos = tile.X * 0.32f;
+				float ypos = tile.Y * -0.32f;
+				GameObject go = Instantiate (optionalBase);
+				go.transform.position = new Vector3 (xpos, ypos, go.transform.position.z);
+				go.GetComponent<SpriteRenderer> ().sprite = allSprites [val];
+				go.transform.parent = parentTransform;
+				rCreate.randomEntities.Add(go);
+				rCreate.randChances.Add (0.5f);
+			}
+		}
+
+		TmxObjectGroup colliderGroup = map.ObjectGroups ["Colliders"];
+		foreach (var item in colliderGroup.Objects) {
+			// instantiate the collider
+			GameObject go = Instantiate (colliderBase);
+			BoxCollider2D collider = go.GetComponent<BoxCollider2D> ();
+
+			// extract the information
+			float colWidth = (float) item.Width * 0.01f;
+			float colHeight = (float) item.Height * 0.01f;
+			float xPos = (float) item.X * 0.01f + (colWidth/2);
+			float yPos = (float) item.Y * -0.01f - (colHeight/2);
+
+			// position the collider
+			collider.size = new Vector2 (colWidth, colHeight);
+			go.transform.position = new Vector3 (xPos, yPos, go.transform.position.z);
+			go.transform.parent = parentTransform;
 		}
 	}
 
