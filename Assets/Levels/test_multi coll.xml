@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-up" width="20" height="10" tilewidth="32" tileheight="32" nextobjectid="2">
+ <tileset firstgid="1" name="twilight" tilewidth="32" tileheight="32" tilecount="64">
+  <image source="twilight_tiles.png" width="256" height="256"/>
+ </tileset>
+ <layer name="base" width="20" height="10">
+  <data encoding="base64" compression="zlib">
+   eJzlzLcRACAQxEBcgkkwCab/OlERl71mNpVzdvMIiEiCX0ZBRRP8OgYmluC3cXDxBD8LfU9PAOk=
+  </data>
+ </layer>
+ <layer name="optional" width="20" height="10">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgF2IAiECsBsTIQqwywW0bBwAEAGC8Aiw==
+  </data>
+ </layer>
+ <objectgroup name="Colliders">
+  <object id="1" x="96" y="96" width="128" height="128"/>
+ </objectgroup>
+</map>
