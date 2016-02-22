@@ -50,7 +50,6 @@ GameObject:
   - 50: {fileID: 5016044}
   - 61: {fileID: 6187032}
   - 61: {fileID: 6177742}
-  - 114: {fileID: 11447754}
   - 114: {fileID: 11402478}
   - 114: {fileID: 11443228}
   - 58: {fileID: 5875026}
@@ -92,7 +91,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 187748}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.0949728, y: 98.41409, z: 0}
+  m_LocalPosition: {x: -0.14737082, y: -0.13251686, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 425906}
@@ -185,7 +184,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0.04}
   serializedVersion: 2
-  m_Size: {x: 0.26, y: 0.2}
+  m_Size: {x: 0.26, y: 0.14}
 --- !u!95 &9516108
 Animator:
   serializedVersion: 3
@@ -266,17 +265,6 @@ MonoBehaviour:
   groundCheck: {fileID: 11411984}
   wallCheck: {fileID: 11412396}
   speed: 1
---- !u!114 &11447754
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 187748}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d219ce1b2d3f497ca854fc259a6c8e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &11454044
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -365,7 +353,11 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 187748}
