@@ -26,7 +26,7 @@ public class Teleport : NetworkBehaviour {
 		if (other.tag == "Player") {
 			other.GetComponent<PlayerMove> ().MoveTo (toX, toY);
 //			Camera.main.transform.position = new Vector3 (toX, toY, Camera.main.transform.position.z);
-			if (isEnd) {
+			if (isEnd && other.GetComponent<PlayerHealth>().alive) {
 				ServerComm serverComm = other.gameObject.GetComponent<ServerComm> ();
 				serverComm.RequestMap ();
 				serverComm.MovePlayers (toX, toY);

@@ -15,6 +15,12 @@ public class PlayerHealth : NetworkBehaviour
 //	RectTransform healthBar;
 //	RectTransform healthBarBackground;
 
+	Animator playerAnimator;
+	SpriteRenderer playerSprite;
+	GameObject ghosty;
+
+	public bool alive = true;
+
 	Image[] hearts;
 
 	// Use this for initialization
@@ -24,6 +30,13 @@ public class PlayerHealth : NetworkBehaviour
 //			panel = GameObject.Find ("Canvas").transform.FindChild ("Player 0");
 			for (int i = 0; i < maxHealth; i++) {
 				hearts [i] = GameObject.Find ("Heart" + (i + 1)).GetComponent<Image> ();
+			}
+			playerAnimator = GetComponent<Animator> ();
+			playerSprite = GetComponent<SpriteRenderer> ();
+			foreach (Transform child in this.gameObject.transform) {
+				if (child.name == "Ghost") {
+					ghosty = child.gameObject;
+				}
 			}
 		} else {
 			// Need to actually use the 
@@ -35,7 +48,7 @@ public class PlayerHealth : NetworkBehaviour
 	}
 
 	public void Hit() {
-		if (!canBeHit)
+		if (!canBeHit || !alive)
 			return;
 		HitAnimation ();
 		canBeHit = false;
@@ -44,7 +57,25 @@ public class PlayerHealth : NetworkBehaviour
 		hearts [health].color = Color.black;
 		if (health == 0) {
 			Debug.Log ("CHARACTER DIED");
+//			Heal ();
+			ToggleAlive();
+		}
+	}
+
+	public void ToggleAlive() {
+		alive = !alive;
+		playerAnimator.enabled = alive;
+		playerSprite.enabled = alive;
+		ghosty.SetActive(!alive);
+
+		if (alive) {
 			Heal ();
+		}
+	}
+
+	public void BringToLife() {
+		if (!alive) {
+			ToggleAlive ();
 		}
 	}
 
