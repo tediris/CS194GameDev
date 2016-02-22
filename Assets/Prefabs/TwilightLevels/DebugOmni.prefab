@@ -981,7 +981,6 @@ GameObject:
   - 50: {fileID: 5004852}
   - 61: {fileID: 6158078}
   - 61: {fileID: 6102794}
-  - 114: {fileID: 11484560}
   - 114: {fileID: 11488810}
   - 114: {fileID: 11471976}
   - 58: {fileID: 5867356}
@@ -3376,7 +3375,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0.04}
   serializedVersion: 2
-  m_Size: {x: 0.26, y: 0.2}
+  m_Size: {x: 0.26, y: 0.16}
 --- !u!61 &6161444
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -3635,17 +3634,6 @@ MonoBehaviour:
   groundCheck: {fileID: 11438936}
   wallCheck: {fileID: 11468270}
   speed: 1
---- !u!114 &11484560
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 158254}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d219ce1b2d3f497ca854fc259a6c8e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &11488810
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6453,7 +6441,11 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_Size.y
+      value: 0.16
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 164372}

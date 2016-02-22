@@ -2,11 +2,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 
 public class PlayerControl : NetworkBehaviour
 {
 	public float maxSpeed = 5.0f;
 	public float jumpSpeed = 20.0f;
+	public bool hasJetpack = false;
+	public int powerJumps = 0;
 	public List<string> groundTags;
 	[HideInInspector] public bool facingRight = true;
 	[HideInInspector] public bool grounded = true;
@@ -42,6 +45,8 @@ public class PlayerControl : NetworkBehaviour
 	private float gravityInitial = 0.0f;
 
 	private WallCheck wallCheck;
+
+	public Text superJumpModeText;
 
 	// Gamepad code
 	[HideInInspector]
@@ -116,6 +121,10 @@ public class PlayerControl : NetworkBehaviour
 				return Input.GetKeyDown (KeyCode.P);
 			}
 		}
+
+		public bool ItemButton() {
+			return Input.GetKeyDown (KeyCode.F1);
+		}
 	};
 
 	public void SetAirSpeed(float value) {
@@ -174,6 +183,8 @@ public class PlayerControl : NetworkBehaviour
 		}
 		input = new GeneralInput ();
 		input.controllerEnabled = controllerEnabled;
+
+		superJumpModeText = GameObject.Find ("PowerJumpMode").GetComponent<Text> ();
 	}
 
 	void FindPlayerManager() {
@@ -261,7 +272,24 @@ public class PlayerControl : NetworkBehaviour
 
 		float h = Input.GetAxis ("Horizontal");
 
+		if (input.ItemButton ()) {
+			if (hasJetpack) {
+				hasJetpack = false;
+				powerJumps = 3;
+				superJumpModeText.enabled = true;
+			}
+		}
+
 		if (canJump() && input.JumpButton()) {
+			float effectiveJumpSpeed = jumpSpeed;
+			if (powerJumps > 0) {
+				effectiveJumpSpeed = 1.8f * jumpSpeed;
+				powerJumps = powerJumps - 1;
+
+				if (powerJumps == 0) {
+					superJumpModeText.enabled = false;
+				}
+			}
 			if (!grounded) {
 				if (grabbingWall) {
 					Debug.Log ("Trying to wall jump");
@@ -269,13 +297,13 @@ public class PlayerControl : NetworkBehaviour
 					grabbingWall = false;
 					AnimateLeavingWall ();
 					airSpeed = transform.localScale.x * wallJumpPush * -1;
-					playerBody.velocity = new Vector2 (airSpeed, jumpSpeed);
+					playerBody.velocity = new Vector2 (airSpeed, effectiveJumpSpeed);
 					SetGravity (true);
 				}
 			} else {
 				grounded = false;
 				airSpeed = playerBody.velocity.x;
-				playerBody.velocity =  new Vector2 (playerBody.velocity.x, jumpSpeed);
+				playerBody.velocity =  new Vector2 (playerBody.velocity.x, effectiveJumpSpeed);
 			}
 		}
 
