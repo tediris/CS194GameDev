@@ -174,54 +174,63 @@ public class CSVLoader : EditorWindow {
 	}
 
 	public void GenerateTiles(TmxMap map) {
-		TmxLayer baseLayer = map.Layers[baseLayerName];
-		foreach (var tile in baseLayer.Tiles) {
-			int val = tile.Gid - 1;
-			if (val != -1) {
-				float xpos = tile.X * 0.32f;
-				float ypos = tile.Y * -0.32f;
-				GameObject go = Instantiate (spriteBase);
-				go.transform.position = new Vector3 (xpos, ypos, go.transform.position.z);
-				go.GetComponent<SpriteRenderer> ().sprite = allSprites [val];
-				go.transform.parent = parentTransform;
+
+		if (baseLayerName != "") {
+			TmxLayer baseLayer = map.Layers [baseLayerName];
+			foreach (var tile in baseLayer.Tiles) {
+				int val = tile.Gid - 1;
+				if (val != -1) {
+					float xpos = tile.X * 0.32f;
+					float ypos = tile.Y * -0.32f;
+					GameObject go = Instantiate (spriteBase);
+					go.transform.position = new Vector3 (xpos, ypos, go.transform.position.z);
+					go.GetComponent<SpriteRenderer> ().sprite = allSprites [val];
+					go.transform.parent = parentTransform;
+				}
 			}
 		}
 
-		TmxLayer optionalLayer = map.Layers[optionalLayerName];
-		//parentTransform.gameObject.AddComponent<RandomCreation> ();
-		RandomCreation rCreate = parentTransform.gameObject.GetComponent<RandomCreation> ();
-		rCreate.randomEntities = new List<GameObject> ();
-		rCreate.randChances = new List<float> ();
-		foreach (var tile in optionalLayer.Tiles) {
-			int val = tile.Gid - 1;
-			if (val != -1) {
-				float xpos = tile.X * 0.32f;
-				float ypos = tile.Y * -0.32f;
-				GameObject go = Instantiate (optionalBase);
-				go.transform.position = new Vector3 (xpos, ypos, go.transform.position.z);
-				go.GetComponent<SpriteRenderer> ().sprite = allSprites [val];
-				go.transform.parent = parentTransform;
-				rCreate.randomEntities.Add(go);
-				rCreate.randChances.Add (0.5f);
+		if (optionalLayerName != "") {
+
+			TmxLayer optionalLayer = map.Layers [optionalLayerName];
+			//parentTransform.gameObject.AddComponent<RandomCreation> ();
+			RandomCreation rCreate = parentTransform.gameObject.GetComponent<RandomCreation> ();
+			rCreate.randomEntities = new List<GameObject> ();
+			rCreate.randChances = new List<float> ();
+			foreach (var tile in optionalLayer.Tiles) {
+				int val = tile.Gid - 1;
+				if (val != -1) {
+					float xpos = tile.X * 0.32f;
+					float ypos = tile.Y * -0.32f;
+					GameObject go = Instantiate (optionalBase);
+					go.transform.position = new Vector3 (xpos, ypos, go.transform.position.z);
+					go.GetComponent<SpriteRenderer> ().sprite = allSprites [val];
+					go.transform.parent = parentTransform;
+					rCreate.randomEntities.Add (go);
+					rCreate.randChances.Add (0.5f);
+				}
 			}
 		}
 
-		TmxObjectGroup colliderGroup = map.ObjectGroups ["Colliders"];
-		foreach (var item in colliderGroup.Objects) {
-			// instantiate the collider
-			GameObject go = Instantiate (colliderBase);
-			BoxCollider2D collider = go.GetComponent<BoxCollider2D> ();
+		if (colliderLayerName != "") {
 
-			// extract the information
-			float colWidth = (float) item.Width * 0.01f;
-			float colHeight = (float) item.Height * 0.01f;
-			float xPos = (float) item.X * 0.01f + (colWidth/2);
-			float yPos = (float) item.Y * -0.01f - (colHeight/2);
+			TmxObjectGroup colliderGroup = map.ObjectGroups [colliderLayerName];
+			foreach (var item in colliderGroup.Objects) {
+				// instantiate the collider
+				GameObject go = Instantiate (colliderBase);
+				BoxCollider2D collider = go.GetComponent<BoxCollider2D> ();
 
-			// position the collider
-			collider.size = new Vector2 (colWidth, colHeight);
-			go.transform.position = new Vector3 (xPos, yPos, go.transform.position.z);
-			go.transform.parent = parentTransform;
+				// extract the information
+				float colWidth = (float)item.Width * 0.01f;
+				float colHeight = (float)item.Height * 0.01f;
+				float xPos = (float)item.X * 0.01f + (colWidth / 2);
+				float yPos = (float)item.Y * -0.01f - (colHeight / 2);
+
+				// position the collider
+				collider.size = new Vector2 (colWidth, colHeight);
+				go.transform.position = new Vector3 (xPos, yPos, go.transform.position.z);
+				go.transform.parent = parentTransform;
+			}
 		}
 	}
 
