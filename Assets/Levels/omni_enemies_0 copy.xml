@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-up" width="20" height="10" tilewidth="32" tileheight="32" nextobjectid="13">
+<map version="1.0" orientation="orthogonal" renderorder="right-up" width="20" height="10" tilewidth="32" tileheight="32" nextobjectid="15">
  <tileset firstgid="1" name="twilight" tilewidth="32" tileheight="32" tilecount="64">
   <image source="../twilight_tiles.png" width="256" height="256"/>
   <terraintypes>
@@ -34,4 +34,7 @@
    eJxjYBiZQAmIlemobxSQBxSBWGUA7QcAPn8A0A==
   </data>
  </layer>
+ <objectgroup name="Enemies">
+  <object id="14" name="FireDino" x="256" y="96" width="32" height="32"/>
+ </objectgroup>
 </map>

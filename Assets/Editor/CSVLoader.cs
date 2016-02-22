@@ -23,6 +23,8 @@ public class CSVLoader : EditorWindow {
 	public string optionalLayerName = "";
 	public GameObject optionalBase;
 	public string colliderLayerName = "";
+	public GameObject fireDino;
+	public string enemyLayerName = "";
 
 	public string[] options;
 	public Sprite[] allSprites;
@@ -121,6 +123,16 @@ public class CSVLoader : EditorWindow {
 		GUILayout.BeginHorizontal();
 		EditorGUILayout.LabelField("Optional Tile Layer", GUILayout.Width(128));
 		optionalLayerName = (string) EditorGUILayout.TextField(optionalLayerName, GUILayout.Width(128));
+		GUILayout.EndHorizontal ();
+
+		GUILayout.BeginHorizontal();
+		EditorGUILayout.LabelField("Enemy Layer", GUILayout.Width(128));
+		enemyLayerName = (string) EditorGUILayout.TextField(enemyLayerName, GUILayout.Width(128));
+		GUILayout.EndHorizontal ();
+
+		GUILayout.BeginHorizontal();
+		EditorGUILayout.LabelField("FireDinoEnemy Prefab", GUILayout.Width(128));
+		fireDino = (GameObject) EditorGUILayout.ObjectField(fireDino, typeof(GameObject),true,GUILayout.Width(128));
 		GUILayout.EndHorizontal ();
 
 		GUILayout.BeginHorizontal ();
@@ -228,6 +240,28 @@ public class CSVLoader : EditorWindow {
 
 				// position the collider
 				collider.size = new Vector2 (colWidth, colHeight);
+				go.transform.position = new Vector3 (xPos, yPos, go.transform.position.z);
+				go.transform.parent = parentTransform;
+			}
+		}
+
+		if (enemyLayerName != "") {
+
+			TmxObjectGroup enemyGroup = map.ObjectGroups [enemyLayerName];
+			foreach (var enemy in enemyGroup.Objects) {
+				// instantiate the enemy
+				GameObject go = null;
+				if (enemy.Name == "FireDino") {
+					go = Instantiate (fireDino);
+				}
+
+				if (go == null)
+					continue;
+				// extract the information
+				float xPos = (float)enemy.X * 0.01f + (0.16f);
+				float yPos = (float)enemy.Y * -0.01f - (0.16f);
+
+				// position the enemy
 				go.transform.position = new Vector3 (xPos, yPos, go.transform.position.z);
 				go.transform.parent = parentTransform;
 			}
