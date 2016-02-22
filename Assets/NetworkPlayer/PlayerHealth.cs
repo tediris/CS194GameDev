@@ -25,19 +25,25 @@ public class PlayerHealth : NetworkBehaviour
 
 	// Use this for initialization
 	void Start () {
+		playerSprite = GetComponent<SpriteRenderer> ();
+		foreach (Transform child in this.gameObject.transform) {
+			if (child.name == "Ghost") {
+				ghosty = child.gameObject;
+			}
+		}
 		if (isLocalPlayer) {
 			hearts = new Image[maxHealth];
 //			panel = GameObject.Find ("Canvas").transform.FindChild ("Player 0");
 			for (int i = 0; i < maxHealth; i++) {
 				hearts [i] = GameObject.Find ("Heart" + (i + 1)).GetComponent<Image> ();
 			}
-			playerAnimator = GetComponent<Animator> ();
-			playerSprite = GetComponent<SpriteRenderer> ();
-			foreach (Transform child in this.gameObject.transform) {
-				if (child.name == "Ghost") {
-					ghosty = child.gameObject;
-				}
-			}
+//			playerAnimator = GetComponent<Animator> ();
+//			playerSprite = GetComponent<SpriteRenderer> ();
+//			foreach (Transform child in this.gameObject.transform) {
+//				if (child.name == "Ghost") {
+//					ghosty = child.gameObject;
+//				}
+//			}
 		} else {
 			// Need to actually use the 
 //			panel = GameObject.Find ("Canvas").transform.FindChild ("Player 0");
@@ -58,25 +64,48 @@ public class PlayerHealth : NetworkBehaviour
 		if (health == 0) {
 			Debug.Log ("CHARACTER DIED");
 //			Heal ();
-			ToggleAlive();
+			BringToDeath();
+			CmdKillPlayer ();
 		}
 	}
 
 	public void ToggleAlive() {
 		alive = !alive;
-		playerAnimator.enabled = alive;
+//		playerAnimator.enabled = alive;
 		playerSprite.enabled = alive;
 		ghosty.SetActive(!alive);
-
-		if (alive) {
-			Heal ();
-		}
 	}
 
 	public void BringToLife() {
 		if (!alive) {
 			ToggleAlive ();
 		}
+	}
+
+	public void BringToDeath() {
+		if (alive) {
+			ToggleAlive ();
+		}
+	}
+
+	[Command]
+	void CmdKillPlayer() {
+		RpcKillPlayer ();
+	}
+
+	[ClientRpc]
+	void RpcKillPlayer() {
+		BringToDeath ();
+	}
+
+	[Command]
+	public void CmdRevivePlayer() {
+		RpcRevivePlayer ();
+	}
+
+	[ClientRpc]
+	void RpcRevivePlayer() {
+		BringToLife ();
 	}
 
 	void HitAnimation() {
