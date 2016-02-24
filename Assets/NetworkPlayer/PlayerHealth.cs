@@ -109,7 +109,7 @@ public class PlayerHealth : NetworkBehaviour
 	}
 
 	void HitAnimation() {
-		//?
+		Camera.main.GetComponent<CameraShake> ().Shake (1f);
 	}
 
 	IEnumerator Invulnerable(float time) {
