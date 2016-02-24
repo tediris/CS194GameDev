@@ -110,11 +110,13 @@ public class PlayerHealth : NetworkBehaviour
 
 	void HitAnimation() {
 		Camera.main.GetComponent<CameraShake> ().Shake (1f);
+		playerSprite.color = Color.red;
 	}
 
 	IEnumerator Invulnerable(float time) {
 		yield return new WaitForSeconds (time);
 		canBeHit = true;
+		playerSprite.color = Color.white;
 	}
 
 	public void Heal() {
