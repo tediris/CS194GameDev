@@ -4,6 +4,7 @@ using System.Collections;
 public class ShrineRespawn : MonoBehaviour {
 
 	GameStateManager stateManager;
+	ScreenAction screenAction;
 
 	// Use this for initialization
 	void Start () {

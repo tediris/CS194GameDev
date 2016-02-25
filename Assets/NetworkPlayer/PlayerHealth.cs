@@ -23,8 +23,11 @@ public class PlayerHealth : NetworkBehaviour
 
 	Image[] hearts;
 
+	ScreenAction screenAction;
+
 	// Use this for initialization
 	void Start () {
+		screenAction = GameObject.Find ("Screen").GetComponent<ScreenAction> ();
 		playerSprite = GetComponent<SpriteRenderer> ();
 		foreach (Transform child in this.gameObject.transform) {
 			if (child.name == "Ghost") {
@@ -123,6 +126,9 @@ public class PlayerHealth : NetworkBehaviour
 		health = maxHealth;
 		for (int i = 0; i < maxHealth; i++) {
 			hearts [i].color = Color.white;
+		}
+		if (!alive) {
+			screenAction.Flash (Color.white);
 		}
 	}
 
