@@ -318,7 +318,7 @@ public class PlayerControl : NetworkBehaviour
 			}
 		}
 
-		if (Mathf.Abs(playerBody.velocity.y) > 0.1f) {
+		if (Mathf.Abs(playerBody.velocity.y) > 0.01f) {
 			if (playerBody.velocity.y > 0) {
 				anim.SetBool ("rising", true);
 			} else {
