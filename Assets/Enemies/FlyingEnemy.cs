@@ -1,13 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Networking;
 
-public class FlyingEnemy : MonoBehaviour {
+public class FlyingEnemy : NetworkBehaviour {
 
 	public float travelRadius = 3f;
 	public float speed = 0.1f;
 
 	Vector2 startPosition;
-	Vector2 destination;
+	public Vector2 currPosition;
+	public Vector2 destination;
+
 
 	Rigidbody2D body;
 
@@ -24,10 +27,10 @@ public class FlyingEnemy : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		startPosition = new Vector2 (gameObject.transform.position.x, gameObject.transform.position.y);
-		destination = startPosition;
-		rand = new System.Random ();
 		body = GetComponent<Rigidbody2D> ();
+		startPosition = new Vector2 (body.position.x, body.position.y);
+		destination = new Vector2(startPosition.x, startPosition.y);
+		rand = new System.Random (System.DateTime.Now.GetHashCode());
 	}
 
 	private float distToDest() {
@@ -42,7 +45,7 @@ public class FlyingEnemy : MonoBehaviour {
 			Vector2 potentialDestination = offsetVector + startPosition;
 			if ((potentialDestination - destination).magnitude > (travelRadius / 2)) {
 				destination = potentialDestination;
-				body.velocity = (destination - startPosition).normalized * speed;
+				body.velocity = (destination - body.position).normalized * speed;
 				break;
 			}
 		}
@@ -50,6 +53,7 @@ public class FlyingEnemy : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
+		currPosition = body.position;
 		if (distToDest () < 0.2f) {
 			setNewDest ();
 		}

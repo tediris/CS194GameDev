@@ -241,8 +241,8 @@ MonoBehaviour:
   tileSize: 32
   roomWidth: 6.4
   roomHeight: 3.2
-  numRoomsWidth: 3
-  numRoomsHeight: 5
+  numRoomsWidth: 2
+  numRoomsHeight: 2
   numRandomConnections: 30
   seed: taami
 --- !u!1 &153124620
