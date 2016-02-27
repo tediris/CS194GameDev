@@ -20,7 +20,7 @@ public class CoinGateway : NetworkBehaviour {
 	void OnTriggerEnter2D (Collider2D other) {
 		if (other.tag == "Player") {
 			CoinCollector collector = other.GetComponent<CoinCollector> ();
-			if (collector.numCoins < coinRequirement) {
+			if (collector.numCoins >= coinRequirement) {
 				other.GetComponent<PlayerMove> ().MoveByDelta (deltaX, deltaY);
 			}
 		}
