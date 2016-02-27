@@ -10,4 +10,12 @@ public class PlayerMove : NetworkBehaviour {
 			transform.position = new Vector3 (x, y, transform.position.z);
 		}
 	}
+
+	public void MoveByDelta(float deltaX, float deltaY) {
+		if (isLocalPlayer) {
+			float x = transform.position.x + deltaX;
+			float y = transform.position.y + deltaY;
+			transform.position = new Vector3 (x, y, transform.position.z);
+		}
+	}
 }
