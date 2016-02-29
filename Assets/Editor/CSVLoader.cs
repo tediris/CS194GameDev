@@ -16,6 +16,7 @@ public class CSVLoader : EditorWindow {
 	public GameObject spriteBase;
 	public TextAsset colliderFile;
 	public GameObject colliderBase;
+	public GameObject doorPrefab;
 
 	// TMX Parsing Info
 	public TextAsset tmxFile;
@@ -25,6 +26,7 @@ public class CSVLoader : EditorWindow {
 	public string colliderLayerName = "";
 	public GameObject fireDino;
 	public string enemyLayerName = "";
+	public string doorLayerName = "";
 
 	public string[] options;
 	public Sprite[] allSprites;
@@ -72,6 +74,11 @@ public class CSVLoader : EditorWindow {
 		GUILayout.BeginHorizontal();
 		EditorGUILayout.LabelField("OptionalPrefab", GUILayout.Width(128));
 		optionalBase = (GameObject) EditorGUILayout.ObjectField(optionalBase, typeof(GameObject),true,GUILayout.Width(128));
+		GUILayout.EndHorizontal ();
+
+		GUILayout.BeginHorizontal();
+		EditorGUILayout.LabelField("DoorPrefab", GUILayout.Width(128));
+		doorPrefab = (GameObject) EditorGUILayout.ObjectField(doorPrefab, typeof(GameObject),true,GUILayout.Width(128));
 		GUILayout.EndHorizontal ();
 
 		GUILayout.BeginHorizontal ();
@@ -133,6 +140,11 @@ public class CSVLoader : EditorWindow {
 		GUILayout.BeginHorizontal();
 		EditorGUILayout.LabelField("FireDinoEnemy Prefab", GUILayout.Width(128));
 		fireDino = (GameObject) EditorGUILayout.ObjectField(fireDino, typeof(GameObject),true,GUILayout.Width(128));
+		GUILayout.EndHorizontal ();
+
+		GUILayout.BeginHorizontal();
+		EditorGUILayout.LabelField("Door Layer", GUILayout.Width(128));
+		doorLayerName = (string) EditorGUILayout.TextField(doorLayerName, GUILayout.Width(128));
 		GUILayout.EndHorizontal ();
 
 		GUILayout.BeginHorizontal ();
@@ -264,6 +276,29 @@ public class CSVLoader : EditorWindow {
 				// position the enemy
 				go.transform.position = new Vector3 (xPos, yPos, go.transform.position.z);
 				go.transform.parent = parentTransform;
+			}
+		}
+
+		if (doorLayerName != "") {
+			TmxObjectGroup doorGroup = map.ObjectGroups [doorLayerName];
+			foreach (var door in doorGroup.Objects) {
+				GameObject go = null;
+				go = Instantiate (doorPrefab);
+				BoxCollider2D collider = go.GetComponent<BoxCollider2D> ();
+
+				float colWidth = (float)door.Width * 0.01f;
+				float colHeight = (float)door.Height * 0.01f;
+				float xPos = (float)door.X * 0.01f + (colWidth / 2);
+				float yPos = (float)door.Y * -0.01f - (colHeight / 2);
+
+				collider.size = new Vector2 (colWidth, colHeight);
+				go.transform.position = new Vector3 (xPos, yPos, go.transform.position.z);
+				go.transform.parent = parentTransform;
+
+				CoinGateway coinGateway = go.GetComponent<CoinGateway> ();
+				coinGateway.deltaX = float.Parse(door.Properties ["deltaX"]);
+				coinGateway.deltaY = float.Parse(door.Properties ["deltaY"]);
+				coinGateway.coinRequirement = int.Parse (door.Properties ["Coin Requirement"]);
 			}
 		}
 	}
