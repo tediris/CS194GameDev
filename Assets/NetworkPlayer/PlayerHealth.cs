@@ -15,9 +15,11 @@ public class PlayerHealth : NetworkBehaviour
 //	RectTransform healthBar;
 //	RectTransform healthBarBackground;
 
-	Animator playerAnimator;
+//	Animator playerAnimator;
+	PlayerControl playerControl;
 	SpriteRenderer playerSprite;
 	GameObject ghosty;
+	public float deathAnimationTime = 0.6f;
 
 	public bool alive = true;
 
@@ -29,6 +31,8 @@ public class PlayerHealth : NetworkBehaviour
 	void Start () {
 		screenAction = GameObject.Find ("Screen").GetComponent<ScreenAction> ();
 		playerSprite = GetComponent<SpriteRenderer> ();
+		playerControl = GetComponent<PlayerControl> ();
+//		playerAnimator = GetComponent<Animator> ();
 		foreach (Transform child in this.gameObject.transform) {
 			if (child.name == "Ghost") {
 				ghosty = child.gameObject;
@@ -87,8 +91,16 @@ public class PlayerHealth : NetworkBehaviour
 
 	public void BringToDeath() {
 		if (alive) {
+			playerControl.enabled = false;
+			StartCoroutine (WaitForGhost ());
 			ToggleAlive ();
 		}
+	}
+
+	IEnumerator WaitForGhost() {
+		yield return new WaitForSeconds (deathAnimationTime);
+
+		playerControl.enabled = true;
 	}
 
 	[Command]
