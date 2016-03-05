@@ -25,8 +25,11 @@ public class PlayerHealth : NetworkBehaviour
 
 	ScreenAction screenAction;
 
+	List<DeathListener> deathListeners;
+
 	// Use this for initialization
 	void Start () {
+		deathListeners = new List<DeathListener> ();
 		screenAction = GameObject.Find ("Screen").GetComponent<ScreenAction> ();
 		playerSprite = GetComponent<SpriteRenderer> ();
 		foreach (Transform child in this.gameObject.transform) {
@@ -54,6 +57,11 @@ public class PlayerHealth : NetworkBehaviour
 		}
 //		healthBarBackground = panel.FindChild ("Health Background").GetComponent<RectTransform> ();
 //		healthBar = healthBarBackground.FindChild ("Health Foreground").GetComponent<RectTransform> ();
+	}
+
+	public void addDeathListener(DeathListener dl) {
+		deathListeners.Add (dl);
+		Debug.Log("Death Listener added");
 	}
 
 	public void Hit() {
@@ -91,8 +99,23 @@ public class PlayerHealth : NetworkBehaviour
 		}
 	}
 
+	void CallDeathListeners() {
+		Debug.Log("calling death listeners");
+		List<DeathListener> toRemove = new List<DeathListener> ();
+		for (int i = 0; i < deathListeners.Count; i++) {
+			deathListeners [i].PlayerDied (this.gameObject);
+			if (deathListeners [i].destroyOnUse ()) {
+				toRemove.Add (deathListeners [i]);
+			}
+		}
+		for (int i = 0; i < toRemove.Count; i++) {
+			deathListeners.Remove (toRemove [i]);
+		}
+	}
+
 	[Command]
 	void CmdKillPlayer() {
+		CallDeathListeners ();
 		RpcKillPlayer ();
 	}
 

@@ -8,6 +8,7 @@ TagManager:
   - Ground
   - MinimapCamera
   - Coin
+  - Shrine
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - Player
   - StaticLevel
   - Pickups
-  - 
+  - Enemies
   - 
   - 
   - 

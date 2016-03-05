@@ -11,6 +11,7 @@ public class GameStateManager : NetworkBehaviour {
 	List<GameObject> players;
 	ServerComm localPlayerComm;
 	CoinPlacement coinPlacer = null;
+	public GameObject eggPrefab;
 
 	public GameObject GetLocalPlayer() {
 		return localPlayerComm.gameObject;
@@ -54,6 +55,35 @@ public class GameStateManager : NetworkBehaviour {
 
 	public void StoreLocalPlayer(ServerComm comm) {
 		localPlayerComm = comm;
+	}
+
+	public void SpawnEgg(Vector3 loc) {
+		if (!isServer)
+			return;
+		GameObject egg = (GameObject)Instantiate (eggPrefab, loc, Quaternion.identity);
+		egg.transform.parent = mapGenerator.gameObject.transform;
+		NetworkServer.Spawn (egg);
+	}
+
+	public void CreateOverNetwork (GameObject go, Vector3 pos) {
+		if (!isServer)
+			return;
+		GameObject instance = (GameObject)Instantiate (go, pos, Quaternion.identity);
+		instance.transform.parent = mapGenerator.gameObject.transform;
+		NetworkServer.Spawn (instance);
+	}
+
+	public void SpawnEggMonster(GameObject go, Vector3 pos, List<Rigidbody2D> waypoints) {
+		if (!isServer)
+			return;
+		GameObject monster = (GameObject)Instantiate (go, pos, Quaternion.identity);
+		WaypointFollow wayFollow = monster.GetComponent<WaypointFollow> ();
+		if (wayFollow != null) {
+			wayFollow.wayPoints = waypoints;
+			wayFollow.enable = true;
+		}
+		monster.transform.parent = mapGenerator.gameObject.transform;
+		NetworkServer.Spawn (monster);
 	}
 
 	public void GenerateNewMap() {

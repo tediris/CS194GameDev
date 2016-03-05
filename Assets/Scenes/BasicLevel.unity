@@ -115,6 +115,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapGenerator: {fileID: 0}
   curSeed: null
+  eggPrefab: {fileID: 160362, guid: e26cf9cc31c6e4feeafde824dba091e1, type: 2}
 --- !u!114 &32943559
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -991,15 +992,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3f0377663db548bea73fcc4430b7158, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  eggPrefab: {fileID: 160362, guid: e26cf9cc31c6e4feeafde824dba091e1, type: 2}
+  gameMode: 1
   endPortal: {fileID: 169894, guid: a0dc72db3489842a784d2c257b2738a2, type: 2}
   startRoomPrefab: {fileID: 164182, guid: 9802a1d27ab29406e84c165ca032a81b, type: 2}
+  eggRoomPrefab:
+  - {fileID: 164864, guid: f11fcaa6fc31a4187b8e5e8f01e73cd4, type: 2}
   sealingWallNSEWPrefabs:
   - {fileID: 149766, guid: 389e27f910b084f378e3db8781822faf, type: 2}
   - {fileID: 100834, guid: e30648d45bb3542b584a06da5a97e6c1, type: 2}
   - {fileID: 175744, guid: 51b364b1ee3f146b981bbd4ad79ee3f3, type: 2}
   - {fileID: 170078, guid: db5c678745fd641d9b44a0bada2cac91, type: 2}
   omniPrefabs:
-  - {fileID: 164372, guid: 061b62f3c27544762a2abf00ef421f51, type: 2}
+  - {fileID: 133072, guid: 470068979528343138de5a1d6bd094be, type: 2}
   northPrefabs:
   - {fileID: 110856, guid: 4789d459e2bd54b988efdee0b3dfe2b9, type: 2}
   eastPrefabs:
@@ -1036,7 +1041,7 @@ MonoBehaviour:
   roomHeight: 3.2
   numRoomsWidth: 2
   numRoomsHeight: 2
-  numRandomConnections: 30
+  numRandomConnections: 10
   seed: taami
 --- !u!1 &153124620
 GameObject:
@@ -2827,7 +2832,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tile: {fileID: 21219446, guid: c08125a5214b843658ad694c1208d603, type: 2}
-  n_tiles: 100
+  n_tiles: 16
   parentObj: {fileID: 0}
 --- !u!4 &354571551
 Transform:
@@ -9061,6 +9066,9 @@ MonoBehaviour:
   m_SpawnPrefabs:
   - {fileID: 110378, guid: 59ad0e74ec7554b05b4893b530982dd5, type: 2}
   - {fileID: 151486, guid: f198a78cf27304012a5fee0143839cc2, type: 2}
+  - {fileID: 160362, guid: e26cf9cc31c6e4feeafde824dba091e1, type: 2}
+  - {fileID: 187748, guid: 885599c5cd11d4a16a283eb8e5a060fd, type: 2}
+  - {fileID: 159086, guid: eb55e646dc84145248b0f7aa8152b17d, type: 2}
   m_CustomConfig: 0
   m_MaxConnections: 4
   m_ConnectionConfig:

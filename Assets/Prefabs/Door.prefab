@@ -14,7 +14,7 @@ GameObject:
   - 114: {fileID: 11439276}
   - 114: {fileID: 11416126}
   m_Layer: 0
-  m_Name: EndPortal
+  m_Name: Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77,22 +77,22 @@ MonoBehaviour:
   m_SceneId:
     m_Value: 0
   m_AssetId:
-    i0: 160
-    i1: 220
-    i2: 114
-    i3: 219
-    i4: 52
-    i5: 137
-    i6: 132
-    i7: 42
-    i8: 120
-    i9: 77
-    i10: 44
-    i11: 37
-    i12: 123
-    i13: 39
-    i14: 56
-    i15: 162
+    i0: 240
+    i1: 85
+    i2: 216
+    i3: 116
+    i4: 27
+    i5: 179
+    i6: 196
+    i7: 33
+    i8: 168
+    i9: 154
+    i10: 61
+    i11: 5
+    i12: 108
+    i13: 131
+    i14: 14
+    i15: 161
   m_ServerOnly: 1
   m_LocalPlayerAuthority: 0
 --- !u!114 &11439276

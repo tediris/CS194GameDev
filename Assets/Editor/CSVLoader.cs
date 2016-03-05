@@ -258,13 +258,21 @@ public class CSVLoader : EditorWindow {
 		}
 
 		if (enemyLayerName != "") {
+			NetEnemySpawner enemySpawner = parentTransform.gameObject.GetComponent<NetEnemySpawner> ();
+			if (enemySpawner == null) {
+				parentTransform.gameObject.AddComponent<NetEnemySpawner> ();
+				enemySpawner = parentTransform.gameObject.GetComponent<NetEnemySpawner> ();
+			}
+			enemySpawner.thingsToSpawn = new List<GameObject> ();
+			enemySpawner.spawnPositions = new List<Vector3> ();
 
 			TmxObjectGroup enemyGroup = map.ObjectGroups [enemyLayerName];
 			foreach (var enemy in enemyGroup.Objects) {
 				// instantiate the enemy
 				GameObject go = null;
 				if (enemy.Name == "FireDino") {
-					go = Instantiate (fireDino);
+					go = fireDino;
+					//go = Instantiate (fireDino);
 				}
 
 				if (go == null)
@@ -274,8 +282,10 @@ public class CSVLoader : EditorWindow {
 				float yPos = (float)enemy.Y * -0.01f - (0.16f);
 
 				// position the enemy
-				go.transform.position = new Vector3 (xPos, yPos, go.transform.position.z);
-				go.transform.parent = parentTransform;
+				Vector3 pos = new Vector3 (xPos, yPos, go.transform.position.z);
+				// go.transform.parent = parentTransform;
+				enemySpawner.thingsToSpawn.Add(go);
+				enemySpawner.spawnPositions.Add (pos);
 			}
 		}
 
