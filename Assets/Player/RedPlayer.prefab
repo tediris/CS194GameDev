@@ -210,6 +210,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSpeed: 1.5
   jumpSpeed: 3
+  hasJetpack: 0
+  powerJumps: 0
   groundTags:
   - Ground
   - Player
@@ -222,6 +224,7 @@ MonoBehaviour:
   airControl: 0.05
   climbSpeed: 1
   wallJumpPush: 2
+  superJumpModeText: {fileID: 0}
   controllerEnabled: 0
   grabbingWall: 0
 --- !u!114 &11407572
@@ -250,6 +253,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 3
   health: 3
+  deathAnimationTime: 2
   alive: 1
 --- !u!114 &11419108
 MonoBehaviour:
@@ -700,6 +704,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: deathAnimationTime
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

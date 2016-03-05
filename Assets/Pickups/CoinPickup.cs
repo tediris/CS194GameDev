@@ -13,13 +13,17 @@ public class CoinPickup : NetworkBehaviour {
 	
 	void OnTriggerEnter2D(Collider2D other) {
 		if (other.tag == "Player") {
-			if (!isServer) {
-				Destroy (this.gameObject);
-			} else {
+			if (isServer) {
 				int playerNum = other.name [other.name.Length - 1];
 				other.gameObject.GetComponent<CoinCollector> ().CmdIncrementCoins (value);
-				Destroy (this.gameObject);
 			}
+			this.transform.position = new Vector3(100000000.0f,10000000.0f,10000000.0f);
+			StartCoroutine (DestroyOnNextFrame (this.gameObject));
 		}
+	}
+
+	IEnumerator DestroyOnNextFrame(GameObject o) { 
+		yield return new WaitForFixedUpdate ();
+		Destroy (o);
 	}
 }
