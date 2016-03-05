@@ -27,8 +27,11 @@ public class PlayerHealth : NetworkBehaviour
 
 	ScreenAction screenAction;
 
+	List<DeathListener> deathListeners;
+
 	// Use this for initialization
 	void Start () {
+		deathListeners = new List<DeathListener> ();
 		screenAction = GameObject.Find ("Screen").GetComponent<ScreenAction> ();
 		playerSprite = GetComponent<SpriteRenderer> ();
 		playerControl = GetComponent<PlayerControl> ();
@@ -52,12 +55,17 @@ public class PlayerHealth : NetworkBehaviour
 //				}
 //			}
 		} else {
-			// Need to actually use the 
+			// Need to actually use the
 //			panel = GameObject.Find ("Canvas").transform.FindChild ("Player 0");
 			return;
 		}
 //		healthBarBackground = panel.FindChild ("Health Background").GetComponent<RectTransform> ();
 //		healthBar = healthBarBackground.FindChild ("Health Foreground").GetComponent<RectTransform> ();
+	}
+
+	public void addDeathListener(DeathListener dl) {
+		deathListeners.Add (dl);
+		Debug.Log("Death Listener added");
 	}
 
 	public void Hit() {
@@ -97,6 +105,25 @@ public class PlayerHealth : NetworkBehaviour
 		}
 	}
 
+
+    void CallDeathListeners()
+    {
+        Debug.Log("calling death listeners");
+        List<DeathListener> toRemove = new List<DeathListener>();
+        for (int i = 0; i < deathListeners.Count; i++)
+        {
+            deathListeners[i].PlayerDied(this.gameObject);
+            if (deathListeners[i].destroyOnUse())
+            {
+                toRemove.Add(deathListeners[i]);
+            }
+        }
+        for (int i = 0; i < toRemove.Count; i++)
+        {
+            deathListeners.Remove(toRemove[i]);
+        }
+    }
+
 	IEnumerator WaitForGhost() {
 		yield return new WaitForSeconds (deathAnimationTime);
 
@@ -105,6 +132,7 @@ public class PlayerHealth : NetworkBehaviour
 
 	[Command]
 	void CmdKillPlayer() {
+		CallDeathListeners ();
 		RpcKillPlayer ();
 	}
 

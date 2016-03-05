@@ -21,9 +21,20 @@ public class MapGen : MonoBehaviour {
 		OMNI
 	}
 
+	public enum GameMode {
+		Race = 0,
+		//Treasure = 1,
+		Steal = 1
+	}
+
+	public GameObject eggPrefab;
+
+	public GameMode gameMode;
+
 	public GameObject endPortal;
 
 	public GameObject startRoomPrefab;
+	public List<GameObject> eggRoomPrefab;
 	public List<GameObject> sealingWallNSEWPrefabs;
 	public List<GameObject> omniPrefabs;
 	public List<GameObject> northPrefabs;
@@ -84,8 +95,14 @@ public class MapGen : MonoBehaviour {
 	public void GenerateNewMap(string seed) {
 		portalScript = GameObject.Find ("StartPortal").GetComponent<Teleport> ();
 		rand = new System.Random (seed.GetHashCode());
+		ChooseGameMode ();
 		InitMap ();
 		SpawnMap ();
+	}
+
+	void ChooseGameMode() {
+		int numGameModes = System.Enum.GetValues (typeof(GameMode)).Length;
+		gameMode = (GameMode) rand.Next (numGameModes);
 	}
 
 	void InitMap() {
@@ -108,6 +125,40 @@ public class MapGen : MonoBehaviour {
 	}
 
 	void SpawnMap() {
+//		int maxDist = -1;
+//		int maxDistX = -1;
+//		int maxDistY = -1;
+//		for (int x = 0; x < numRoomsWidth; x++) {
+//			for (int y = 0; y < numRoomsHeight; y++) {
+//				if (rooms [y, x].dist > maxDist) {
+//					maxDist = rooms [y, x].dist;
+//					maxDistX = x;
+//					maxDistY = y;
+//				}
+//			}
+//		}
+//
+//		CreateEnd (maxDistX, maxDistY);
+		SetupGameMode();
+
+		for (int x = 0; x < numRoomsWidth; x++) {
+			for (int y = 0; y < numRoomsHeight; y++) {
+				rooms [y, x].Create ();
+			}
+		}
+	}
+
+	void SetupGameMode() {
+		if (gameMode == GameMode.Race) {
+			// place the end portal
+			SetupRaceMode ();
+		} else if (gameMode == GameMode.Steal) {
+			Debug.Log ("It's an egg game mode");
+			SetupStealMode ();
+		}
+	}
+
+	void SetupRaceMode() {
 		int maxDist = -1;
 		int maxDistX = -1;
 		int maxDistY = -1;
@@ -120,14 +171,23 @@ public class MapGen : MonoBehaviour {
 				}
 			}
 		}
-
 		CreateEnd (maxDistX, maxDistY);
+	}
 
+	void SetupStealMode() {
+		int maxDist = -1;
+		int maxDistX = -1;
+		int maxDistY = -1;
 		for (int x = 0; x < numRoomsWidth; x++) {
 			for (int y = 0; y < numRoomsHeight; y++) {
-				rooms [y, x].Create ();
+				if (rooms [y, x].dist > maxDist) {
+					maxDist = rooms [y, x].dist;
+					maxDistX = x;
+					maxDistY = y;
+				}
 			}
 		}
+		rooms [maxDistX, maxDistY].isEggRoom = true;
 	}
 
 	void CreateEnd(int x, int y) {
@@ -206,6 +266,7 @@ public class MapGen : MonoBehaviour {
 	}
 
 	public class Room {
+		public bool isEggRoom = false;
 		public int x, y, dist;
 		public bool[] connectedRooms;
 		public MapGen generator;
@@ -245,6 +306,25 @@ public class MapGen : MonoBehaviour {
 
 			GameObject prefab;
 
+			if (isEggRoom) {
+				GameStateManager gsManager = GameObject.Find ("GameState").GetComponent<GameStateManager> ();
+				GameObject eggRoom = generator.eggRoomPrefab[generator.rand.Next(generator.eggRoomPrefab.Count)];
+				prefab = Instantiate (eggRoom, pos, Quaternion.identity) as GameObject;
+				// get the position of the egg
+				EggDummy eggID = prefab.GetComponentInChildren<EggDummy>();
+				Vector3 eggPos = eggID.transform.position;
+				Destroy (eggID.gameObject);
+				gsManager.SpawnEgg (eggPos);
+				for (int i = 0; i < 4; i++) {
+					if (!connectedRooms [i]) {
+						GameObject wall = Instantiate (generator.sealingWallNSEWPrefabs [i], pos, Quaternion.identity) as GameObject;
+						wall.transform.parent = prefab.transform;
+					}
+				}
+				prefab.transform.parent = generator.gameObject.transform;
+				return;
+			}
+				
 			if (this.dist == 0) {
 				Debug.Log("Room " + x + ", " + y + " has dist 0");
 				prefab = Instantiate (generator.startRoomPrefab, pos, Quaternion.identity) as GameObject;

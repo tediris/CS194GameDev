@@ -51,12 +51,12 @@ public class ServerComm : NetworkBehaviour {
 	}
 
 	[Command]
-	void CmdRequestPositionReset(float x, float y) {
+	public void CmdRequestPositionReset(float x, float y) {
 		GSManager.ResetPlayerLocation (x, y);
 	}
 
 	[Command]
-	void CmdRequestNewMap() {
+	public void CmdRequestNewMap() {
 		GSManager.GenerateNewMap ();
 	}
 
