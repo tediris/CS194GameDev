@@ -122,6 +122,15 @@ public class GameStateManager : NetworkBehaviour {
 		RpcGenerateMaps (seed);
 	}
 
+	void SendToGraveyard(GameObject obj) {
+		StartCoroutine (DestroyOnNextFrame (obj));
+	}
+
+	IEnumerator DestroyOnNextFrame(GameObject o) { 
+		yield return new WaitForFixedUpdate ();
+		Destroy (o);
+	}
+
 	[ClientRpc]
 	void RpcGenerateMaps(string seed) {
 		var children = new List<GameObject>();
