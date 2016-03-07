@@ -1,8 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Utility;
 
 public class MapGen : MonoBehaviour {
+
+	public enum GameType
+	{
+		Race = 0,
+		Treasure = 1,
+		Steal = 2
+	}
 
 	public enum Direction
 	{
@@ -23,18 +31,21 @@ public class MapGen : MonoBehaviour {
 
 	public enum GameMode {
 		Race = 0,
-		//Treasure = 1,
-		Steal = 1
+		Treasure = 1,
+		Steal = 2
 	}
 
 	public GameObject eggPrefab;
 
 	public GameMode gameMode;
+	public bool testGameMode = false;
+	public GameMode debugGameMode;
 
 	public GameObject endPortal;
 
 	public GameObject startRoomPrefab;
 	public List<GameObject> eggRoomPrefab;
+	public GameObject treasureRoomPrefab;
 	public List<GameObject> sealingWallNSEWPrefabs;
 	public List<GameObject> omniPrefabs;
 	public List<GameObject> northPrefabs;
@@ -59,6 +70,8 @@ public class MapGen : MonoBehaviour {
 
 	public int numRoomsWidth = 4;
 	public int numRoomsHeight = 2;
+
+	public int numTreasureRooms = 1;
 
 	public int numRandomConnections = 4;
 	Room[,] rooms;
@@ -103,6 +116,9 @@ public class MapGen : MonoBehaviour {
 	void ChooseGameMode() {
 		int numGameModes = System.Enum.GetValues (typeof(GameMode)).Length;
 		gameMode = (GameMode) rand.Next (numGameModes);
+		if (testGameMode) {
+			gameMode = debugGameMode;
+		}
 	}
 
 	void InitMap() {
@@ -152,6 +168,8 @@ public class MapGen : MonoBehaviour {
 		if (gameMode == GameMode.Race) {
 			// place the end portal
 			SetupRaceMode ();
+		} else if (gameMode == GameMode.Treasure) {
+			SetupTreasureMode ();
 		} else if (gameMode == GameMode.Steal) {
 			Debug.Log ("It's an egg game mode");
 			SetupStealMode ();
@@ -172,6 +190,21 @@ public class MapGen : MonoBehaviour {
 			}
 		}
 		CreateEnd (maxDistX, maxDistY);
+	}
+
+	void SetupTreasureMode() {
+		List<Pair<int, int>> treasureRooms = new List<Pair<int, int>>();
+		while (treasureRooms.Count < numTreasureRooms) {
+			int x = rand.Next (numRoomsWidth);
+			int y = rand.Next (numRoomsHeight);
+			Pair<int, int> room = new Pair<int,int> (x, y);
+			if (!treasureRooms.Contains(room)) {
+				treasureRooms.Add(room);
+				rooms [x, y].hasTreasure = true;
+				Debug.Log (x);
+				Debug.Log (y);
+			}
+		}
 	}
 
 	void SetupStealMode() {
@@ -266,10 +299,11 @@ public class MapGen : MonoBehaviour {
 	}
 
 	public class Room {
-		public bool isEggRoom = false;
 		public int x, y, dist;
 		public bool[] connectedRooms;
 		public MapGen generator;
+		public bool hasTreasure = false;
+		public bool isEggRoom = false;
 
 		public Room(int x, int y, MapGen gen, int dist) {
 			this.x = x;
@@ -277,6 +311,7 @@ public class MapGen : MonoBehaviour {
 			this.dist = dist;
 			connectedRooms = new bool[4];
 			generator = gen;
+			hasTreasure = false;
 		}
 
 		public bool IsConnected() {
@@ -328,6 +363,19 @@ public class MapGen : MonoBehaviour {
 			if (this.dist == 0) {
 				Debug.Log("Room " + x + ", " + y + " has dist 0");
 				prefab = Instantiate (generator.startRoomPrefab, pos, Quaternion.identity) as GameObject;
+				for (int i = 0; i < 4; i++) {
+					if (!connectedRooms [i]) {
+						GameObject wall = Instantiate (generator.sealingWallNSEWPrefabs [i], pos, Quaternion.identity) as GameObject;
+						wall.transform.parent = prefab.transform;
+					}
+				}
+				prefab.transform.parent = generator.gameObject.transform;
+				return;
+			}
+
+			if (hasTreasure) {
+				Debug.Log ("Adding treasure to Room " + x + ", " + y);
+				prefab = Instantiate (generator.treasureRoomPrefab, pos, Quaternion.identity) as GameObject;
 				for (int i = 0; i < 4; i++) {
 					if (!connectedRooms [i]) {
 						GameObject wall = Instantiate (generator.sealingWallNSEWPrefabs [i], pos, Quaternion.identity) as GameObject;

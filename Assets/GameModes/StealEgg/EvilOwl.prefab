@@ -15,6 +15,8 @@ GameObject:
   - 114: {fileID: 11400916}
   - 114: {fileID: 11437606}
   - 114: {fileID: 11486752}
+  - 114: {fileID: 11410082}
+  - 114: {fileID: 11479478}
   m_Layer: 0
   m_Name: EvilOwl
   m_TagString: Untagged
@@ -100,6 +102,22 @@ MonoBehaviour:
     i15: 125
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
+--- !u!114 &11410082
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 159086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10d5753c4cfde41d99238ae89c98d8ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  egg: {fileID: 0}
+  spinRadius: 0.5
+  speed: 0.6
+  chase: 0
+  controlScript: {fileID: 11476090}
 --- !u!114 &11437606
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -126,6 +144,21 @@ MonoBehaviour:
   wayPoints: []
   speed: 0.6
   enable: 0
+--- !u!114 &11479478
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 159086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e5048451559945cc86536778aaedbbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 146224, guid: 624629922c4834b79b39141358cd576f, type: 2}
+  numProjectiles: 6
+  fireRate: 2
+  fireSpeed: 2
 --- !u!114 &11486752
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -197,7 +230,31 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spinRadius
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: chase
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: speed
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: projectilePrefab
+      value: 
+      objectReference: {fileID: 146224, guid: 624629922c4834b79b39141358cd576f, type: 2}
+    - target: {fileID: 0}
+      propertyPath: numProjectiles
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: fireSpeed
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

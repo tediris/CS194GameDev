@@ -53,6 +53,9 @@ public class PlayerControl : NetworkBehaviour
 
 	public Text superJumpModeText;
 
+	private bool didGetHit = false;
+	public Vector2 hitForce = new Vector2 (0, 0);
+
 	// Gamepad code
 	[HideInInspector]
 	public bool controllerEnabled = false;
@@ -162,6 +165,14 @@ public class PlayerControl : NetworkBehaviour
 
 	public void SetAirSpeed(float value) {
 		airSpeed = value;
+	}
+
+	public void DidGetHit(Vector2 enemyPos) {
+	    Vector2 playerPos = playerBody.position;
+		Vector2 force = playerPos - enemyPos;
+		didGetHit = true;
+		hitForce = force;
+		controllerEnabled = false;
 	}
 
 	bool canMoveHorizontally() {
@@ -376,6 +387,17 @@ public class PlayerControl : NetworkBehaviour
 		} else if (h < 0 && facingRight) {
 			Flip ();
 		}
+
+		if (didGetHit) {
+			playerBody.velocity = hitForce * 5.0f;
+			didGetHit = false;
+			StartCoroutine (WaitToEnableControl());
+			}
+	}
+
+	IEnumerator WaitToEnableControl() {
+		yield return new WaitForSeconds(2.0f);
+		controllerEnabled = true;
 	}
 
 	void ThrowPlayer() {
