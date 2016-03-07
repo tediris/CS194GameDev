@@ -22,6 +22,15 @@ public class CoinPickup : NetworkBehaviour {
 		}
 	}
 
+	public void CollectCoin(GameObject player) {
+		if (isServer) {
+			int playerNum = player.name [player.name.Length - 1];
+			player.GetComponent<CoinCollector> ().CmdIncrementCoins (value);
+		}
+		this.transform.position = new Vector3(100000000.0f,10000000.0f,10000000.0f);
+		StartCoroutine (DestroyOnNextFrame (this.gameObject));
+	}
+
 	IEnumerator DestroyOnNextFrame(GameObject o) { 
 		yield return new WaitForFixedUpdate ();
 		Destroy (o);
