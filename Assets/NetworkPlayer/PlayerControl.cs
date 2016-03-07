@@ -23,6 +23,9 @@ public class PlayerControl : NetworkBehaviour
 
 	Carryable carryingObject;
 
+	GameObject pet = null;
+	PetGenericInteract petInteract = null;
+
 	Rigidbody2D playerBody;
 
 	NetSetup networkInfo;
@@ -270,6 +273,12 @@ public class PlayerControl : NetworkBehaviour
 			currentPlatformCollider = null;
 		}
 
+		if (input.ActivateButton()) {
+			if (pet != null) {
+				petInteract.Activate ();
+			}
+		}
+
 		if (input.CarryButton()) {
 			if (!carrying) {
 				CarryPlayer ();
@@ -451,5 +460,10 @@ public class PlayerControl : NetworkBehaviour
 		theScale.x *= -1;
 		transform.localScale = theScale;
 		CmdFlipClients ();
+	}
+
+	public void SetPet(GameObject pet) {
+		this.pet = pet;
+		petInteract = pet.GetComponent<PetGenericInteract> ();
 	}
 }
