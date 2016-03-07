@@ -4034,6 +4034,7 @@ GameObject:
   - 114: {fileID: 537219130}
   - 114: {fileID: 537219132}
   - 114: {fileID: 537219133}
+  - 114: {fileID: 537219131}
   m_Layer: 0
   m_Name: Pet
   m_TagString: Untagged
@@ -4164,6 +4165,19 @@ MonoBehaviour:
   seekDuration: 60
   moveSpeed: 2
   player: {fileID: 0}
+--- !u!114 &537219131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 537219123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f889da7ec9ff54fefbf6403286d32958, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionMessage: Money, money, money!
+  petScript: {fileID: 537219130}
 --- !u!114 &537219132
 MonoBehaviour:
   m_ObjectHideFlags: 0
