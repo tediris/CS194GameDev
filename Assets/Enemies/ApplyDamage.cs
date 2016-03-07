@@ -15,6 +15,7 @@ public class ApplyDamage : NetworkBehaviour {
 			return;
 		}
 		if (other.gameObject.name == stateManager.GetLocalPlayer().name) {
+			other.GetComponent<PlayerControl> ().DidGetHit (this.gameObject.GetComponent<Rigidbody2D>().position);
 			other.GetComponent<PlayerHealth> ().Hit ();
 		}
 	}
