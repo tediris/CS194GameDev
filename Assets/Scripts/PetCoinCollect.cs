@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class PetCoinCollect : MonoBehaviour {
+public class PetCoinCollect : PetAction {
 
 	HashSet<GameObject> coins;
 	GameObject curTarget = null;
@@ -29,10 +29,10 @@ public class PetCoinCollect : MonoBehaviour {
 
 		StartCoroutine (SeekInFifteen());
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
-		if (seeking) {
+		if (seeking && player != null) {
 			if (!(coins.Count == 0)) {
 				followScript.followingPlayer = false;
 				if (curTarget == null) {
@@ -57,6 +57,14 @@ public class PetCoinCollect : MonoBehaviour {
 		IEnumerator setEnum = coins.GetEnumerator ();
 		setEnum.MoveNext ();
 		return (GameObject)setEnum.Current;
+	}
+
+	public override void Activate() {
+		SeekCoins ();
+	}
+
+	public override void Setup(GameObject player) {
+		this.player = player;
 	}
 
 	public void SeekCoins() {
