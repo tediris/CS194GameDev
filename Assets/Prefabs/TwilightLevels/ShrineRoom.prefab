@@ -156,6 +156,7 @@ GameObject:
   - 212: {fileID: 21276186}
   - 58: {fileID: 5810008}
   - 114: {fileID: 11471448}
+  - 114: {fileID: 11418716}
   m_Layer: 0
   m_Name: Shrine
   m_TagString: Shrine
@@ -2462,6 +2463,19 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &11418716
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 110670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a65551013c32b4916bb8e1d1b1dcf1a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toX: 3.2
+  toY: 96
 --- !u!114 &11471448
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4437,6 +4451,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_TagString
       value: Shrine
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: toX
+      value: 3.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: toY
+      value: 96
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

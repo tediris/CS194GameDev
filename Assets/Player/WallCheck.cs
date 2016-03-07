@@ -23,6 +23,7 @@ public class WallCheck : MonoBehaviour {
 	}
 
 	void DetachFromWall() {
+		//masterController = GetComponentInParent<PlayerControl> ();
 		if (masterController.grabbingWall) {
 			masterController.grabbingWall = false;
 			masterController.anim.SetBool ("climbing", false);
