@@ -61,6 +61,7 @@ public class GameStateManager : NetworkBehaviour {
 		if (!isServer)
 			return;
 		GameObject egg = (GameObject)Instantiate (eggPrefab, loc, Quaternion.identity);
+		egg.name = "Egg_Capture";
 		egg.transform.parent = mapGenerator.gameObject.transform;
 		NetworkServer.Spawn (egg);
 	}
