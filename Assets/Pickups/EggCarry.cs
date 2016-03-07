@@ -4,7 +4,8 @@ using UnityEngine.Networking;
 
 public class EggCarry : DeathListener {
 
-	GameObject playerObj;
+	[SerializeField]
+	public GameObject playerObj;
 	Transform playerBody;
 	//Trans body;
 	//[SyncVar]
@@ -20,9 +21,9 @@ public class EggCarry : DeathListener {
 	void Start () {
 		//body = GetComponent<Rigidbody2D> ();
 		transform.parent = null; // detach the egg from the room prefab
-		if (isServer) {
-			NetworkServer.Spawn (this.gameObject);
-		}
+//		if (isServer) {
+//			NetworkServer.Spawn (this.gameObject);
+//		}
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {
@@ -34,7 +35,7 @@ public class EggCarry : DeathListener {
 			
 		if (other.tag == "Player") {
 			if (other.gameObject.GetComponent<PlayerHealth> ().alive) {
-				Debug.Log ("Player is picking up the object");
+				Debug.Log (other.gameObject.name + " is picking up the object");
 				CmdSetCarried (other.gameObject.name);
 			}
 		}
@@ -51,6 +52,7 @@ public class EggCarry : DeathListener {
 
 	[ClientRpc]
 	void RpcSetCarried(string playerName) {
+		Debug.Log ("RPC Set carried called,  PLAYER: " + playerName);
 		playerObj = GameObject.Find (playerName);
 		playerBody = playerObj.transform;
 		carried = true;
@@ -58,11 +60,11 @@ public class EggCarry : DeathListener {
 	
 	// Update is called once per frame
 	void Update () {
-		if (!isServer)
-			return;
 		if (carried) {
-			Vector3 targetPos = playerBody.position + Vector3.up * offset;
-			transform.position = new Vector3 (targetPos.x, targetPos.y, transform.position.z);
+			if (playerObj != null) {
+				Vector3 targetPos = playerObj.transform.position + Vector3.up * offset;
+				gameObject.transform.position = new Vector3 (targetPos.x, targetPos.y, transform.position.z);
+			}
 		}
 	}
 
