@@ -125,6 +125,20 @@ public class PlayerControl : NetworkBehaviour
 			}
 		}
 
+		public bool ActivateButton() {
+			if (controllerEnabled) {
+				if (isOSX ()) {
+					return Input.GetKeyDown ("joystick button 19");
+				} else if (isWindows ()) {
+					return Input.GetKeyDown ("joystick button 3");
+				} else {
+					return false;
+				}
+			} else {
+				return Input.GetKeyDown (KeyCode.I);
+			}
+		}
+
 		public bool ItemButton() {
 			return Input.GetKeyDown (KeyCode.F1);
 		}
