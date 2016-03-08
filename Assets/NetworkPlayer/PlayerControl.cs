@@ -228,8 +228,8 @@ public class PlayerControl : NetworkBehaviour
 		}
 		input = new GeneralInput ();
 		input.controllerEnabled = controllerEnabled;
-
-		superJumpModeText = GameObject.Find ("PowerJumpMode").GetComponent<Text> ();
+//
+//		superJumpModeText = GameObject.Find ("PowerJumpMode").GetComponent<Text> ();
 	}
 
 	void FindPlayerManager() {

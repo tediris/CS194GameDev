@@ -12,18 +12,19 @@ public class PlayerShop : NetworkBehaviour {
 	CoinCollector coinCol;
 	PlayerControl control;
 
-
+	NotificationText shopText;
 
 	// Use this for initialization
 	void Start () {
 		coinCol = GetComponent<CoinCollector> ();
 		control = GetComponent<PlayerControl> ();
+		shopText = GameObject.Find ("Notice").GetComponent<NotificationText> ();
 	}
 	
 	// Update is called once per frame
-	void Update () {
-	
-	}
+//	void Update () {
+//	
+//	}
 
 	public void Buy() {
 		if (canBuy) {
@@ -56,14 +57,14 @@ public class PlayerShop : NetworkBehaviour {
 	}
 
 	public void EnableBuy(GameObject petForSale, int price) {
-		Debug.Log ("Can buy!");
 		canBuy = true;
 		petAvailable = petForSale;
 		buyPrice = price;
+		shopText.SetNotice (price + " coins! Press the O key to buy", Color.white);
 	}
 
 	public void DisableBuy() {
-		Debug.Log ("Can't buy...");
 		canBuy = false;
+		shopText.ClearNotice ();
 	}
 }

@@ -21,4 +21,10 @@ public class Shop : MonoBehaviour {
 			other.gameObject.GetComponent<PlayerShop> ().EnableBuy (petForSale, price);
 		}
 	}
+
+	void OnTriggerExit2D(Collider2D other) {
+		if (other.tag == "Player") {
+			other.gameObject.GetComponent<PlayerShop> ().DisableBuy ();
+		}
+	}
 }
