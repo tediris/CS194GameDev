@@ -64,16 +64,17 @@ public class GameStateManager : NetworkBehaviour {
 			return;
 		GameObject egg = (GameObject)Instantiate (eggPrefab, loc, Quaternion.identity);
 		egg.name = "Egg_Capture";
-		egg.transform.parent = networkEntityPool.transform;
+		egg.transform.SetParent(networkEntityPool.transform, true);
 		NetworkServer.Spawn (egg);
 	}
 
 	public void CreateOverNetwork (GameObject go, Vector3 pos) {
 		if (!isServer)
 			return;
-		GameObject instance = (GameObject)Instantiate (go, pos, Quaternion.identity);
-		instance.transform.parent = mapGenerator.gameObject.transform;
-		NetworkServer.Spawn (instance);
+//		GameObject instance = (GameObject)Instantiate (go, pos, Quaternion.identity);
+//		instance.transform.SetParent(networkEntityPool.transform, true);
+		//NetworkServer.Spawn (instance);
+		SpawnEnemyDelayed(go, pos);
 	}
 
 	public void SpawnEggMonster(GameObject go, Vector3 pos, List<Rigidbody2D> waypoints) {
@@ -85,8 +86,20 @@ public class GameStateManager : NetworkBehaviour {
 			wayFollow.wayPoints = waypoints;
 			wayFollow.enable = true;
 		}
-		monster.transform.parent = mapGenerator.gameObject.transform;
+		monster.transform.SetParent(networkEntityPool.transform, true);
 		NetworkServer.Spawn (monster);
+	}
+
+	void SpawnEnemyDelayed(GameObject go, Vector3 pos) {
+		StartCoroutine (SpawnAfterDelay(go, pos));
+	}
+
+	IEnumerator SpawnAfterDelay(GameObject go, Vector3 pos) {
+//		yield return new WaitForSeconds (1.0f);
+		yield return new WaitForFixedUpdate();
+		GameObject instance = (GameObject)Instantiate (go, pos, Quaternion.identity);
+		instance.transform.SetParent(networkEntityPool.transform, true);
+		NetworkServer.Spawn (go);
 	}
 
 	public void GenerateNewMap() {
@@ -95,6 +108,8 @@ public class GameStateManager : NetworkBehaviour {
 			curSeed = System.DateTime.Now.ToString ();
 			CmdGenerateMaps (curSeed);
 			coinPlacer.PlaceCoins ();
+			// destroy all the network entities
+			networkEntityPool.GetComponent<DestroyAllChildren>().ResetLevel();
 			//coinPlacer.PlaceEnemies ();
 		} else {
 			Debug.LogError ("STOP TRYING TO MAKE A NEW LEVEL AS A CLIENT T_T");
@@ -129,7 +144,7 @@ public class GameStateManager : NetworkBehaviour {
 		StartCoroutine (DestroyOnNextFrame (obj));
 	}
 
-	IEnumerator DestroyOnNextFrame(GameObject o) { 
+	IEnumerator DestroyOnNextFrame(GameObject o) {
 		yield return new WaitForFixedUpdate ();
 		Destroy (o);
 	}
