@@ -25,6 +25,7 @@ public class CSVLoader : EditorWindow {
 	public GameObject optionalBase;
 	public string colliderLayerName = "";
 	public GameObject fireDino;
+	public GameObject squishSlime;
 	public string enemyLayerName = "";
 	public string doorLayerName = "";
 
@@ -140,6 +141,11 @@ public class CSVLoader : EditorWindow {
 		GUILayout.BeginHorizontal();
 		EditorGUILayout.LabelField("FireDinoEnemy Prefab", GUILayout.Width(128));
 		fireDino = (GameObject) EditorGUILayout.ObjectField(fireDino, typeof(GameObject),true,GUILayout.Width(128));
+		GUILayout.EndHorizontal ();
+
+		GUILayout.BeginHorizontal();
+		EditorGUILayout.LabelField("SquishSlime Prefab", GUILayout.Width(128));
+		squishSlime = (GameObject) EditorGUILayout.ObjectField(squishSlime, typeof(GameObject),true,GUILayout.Width(128));
 		GUILayout.EndHorizontal ();
 
 		GUILayout.BeginHorizontal();
@@ -273,6 +279,8 @@ public class CSVLoader : EditorWindow {
 				if (enemy.Name == "FireDino") {
 					go = fireDino;
 					//go = Instantiate (fireDino);
+				} else if (enemy.Name == "Slime") {
+					go = squishSlime;
 				}
 
 				if (go == null)

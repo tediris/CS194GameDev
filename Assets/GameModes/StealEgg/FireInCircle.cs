@@ -35,8 +35,8 @@ public class FireInCircle : NetworkBehaviour {
 			Vector2 speed = new Vector2 (Mathf.Cos (angle), Mathf.Sin (angle));
 			speed = speed.normalized * fireSpeed;
 			GameObject projectile = (GameObject) Instantiate (projectilePrefab, this.gameObject.transform.position, Quaternion.identity);
+			//projectile.transform.parent = this.gameObject.transform;
 			projectile.GetComponent<Rigidbody2D> ().velocity = speed;
-			projectile.transform.parent = this.gameObject.transform;
 			NetworkServer.Spawn (projectile);
 			angle += angleOffset;
 		}

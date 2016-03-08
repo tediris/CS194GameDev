@@ -994,10 +994,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eggPrefab: {fileID: 160362, guid: e26cf9cc31c6e4feeafde824dba091e1, type: 2}
   gameMode: 1
+  testGameMode: 1
+  debugGameMode: 2
   endPortal: {fileID: 169894, guid: a0dc72db3489842a784d2c257b2738a2, type: 2}
   startRoomPrefab: {fileID: 164182, guid: 9802a1d27ab29406e84c165ca032a81b, type: 2}
   eggRoomPrefab:
   - {fileID: 164864, guid: f11fcaa6fc31a4187b8e5e8f01e73cd4, type: 2}
+  treasureRoomPrefab: {fileID: 0}
   sealingWallNSEWPrefabs:
   - {fileID: 149766, guid: 389e27f910b084f378e3db8781822faf, type: 2}
   - {fileID: 100834, guid: e30648d45bb3542b584a06da5a97e6c1, type: 2}
@@ -1019,7 +1022,7 @@ MonoBehaviour:
   - {fileID: 177878, guid: 4382ad91fabde466fbf4b7d65e577ec8, type: 2}
   northWestPrefabs:
   - {fileID: 147216, guid: ab2f19313c212425097089068094a688, type: 2}
-  - {fileID: 123886, guid: 5146640b9c60b478c95902c09796219a, type: 2}
+  - {fileID: 152026, guid: 05e3ee6f0c63f4f2d9fb6b5274a145ce, type: 2}
   southEastPrefabs:
   - {fileID: 109438, guid: 8becf4760571f488bbbcffc106420a31, type: 2}
   southWestPrefabs:
@@ -1027,7 +1030,7 @@ MonoBehaviour:
   eastWestPrefabs:
   - {fileID: 162548, guid: 1db513754cfad48a79f462508cd2f415, type: 2}
   - {fileID: 137922, guid: a38f0137f2d9a42faa946667b857bf5f, type: 2}
-  - {fileID: 164886, guid: 37ab90c083f7b423f84f444cdbbe4c8f, type: 2}
+  - {fileID: 103272, guid: 1e7b2084632e04a61a4735c3782a25be, type: 2}
   northEastSouthPrefabs:
   - {fileID: 195374, guid: b37a8961b23024853af9aaf18db691fa, type: 2}
   northEastWestPrefabs:
@@ -1041,6 +1044,7 @@ MonoBehaviour:
   roomHeight: 3.2
   numRoomsWidth: 2
   numRoomsHeight: 2
+  numTreasureRooms: 1
   numRandomConnections: 10
   seed: taami
 --- !u!1 &153124620
@@ -8069,6 +8073,48 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
+--- !u!1001 &1221051560
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 402364, guid: 1e7b2084632e04a61a4735c3782a25be, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 402364, guid: 1e7b2084632e04a61a4735c3782a25be, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 402364, guid: 1e7b2084632e04a61a4735c3782a25be, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 402364, guid: 1e7b2084632e04a61a4735c3782a25be, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 402364, guid: 1e7b2084632e04a61a4735c3782a25be, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 402364, guid: 1e7b2084632e04a61a4735c3782a25be, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 402364, guid: 1e7b2084632e04a61a4735c3782a25be, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 402364, guid: 1e7b2084632e04a61a4735c3782a25be, type: 2}
+      propertyPath: m_RootOrder
+      value: 14
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 1e7b2084632e04a61a4735c3782a25be, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1259507718
 GameObject:
   m_ObjectHideFlags: 0
@@ -9336,6 +9382,7 @@ MonoBehaviour:
   - {fileID: 160362, guid: e26cf9cc31c6e4feeafde824dba091e1, type: 2}
   - {fileID: 187748, guid: 885599c5cd11d4a16a283eb8e5a060fd, type: 2}
   - {fileID: 159086, guid: eb55e646dc84145248b0f7aa8152b17d, type: 2}
+  - {fileID: 128220, guid: e18d3e2b7ca2046aba8e948c0ac827f6, type: 2}
   m_CustomConfig: 0
   m_MaxConnections: 4
   m_ConnectionConfig:
@@ -14687,7 +14734,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numCoins: 30
-  numEnemies: 5
+  numEnemies: 2
   coinPrefab: {fileID: 110378, guid: 59ad0e74ec7554b05b4893b530982dd5, type: 2}
   enemyPrefab: {fileID: 151486, guid: f198a78cf27304012a5fee0143839cc2, type: 2}
 --- !u!114 &2097155987
