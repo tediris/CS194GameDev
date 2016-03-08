@@ -23,7 +23,11 @@ public class CoinCollector : NetworkBehaviour {
 	[ClientRpc]
 	void RpcIncrementCoins(int value) {
 		if (isLocalPlayer) {
-			coinText.text = value.ToString ();
+			SetText (value);
 		}
+	}
+
+	public void SetText(int value) {
+		coinText.text = value.ToString ();
 	}
 }

@@ -136,7 +136,7 @@ public class GameStateManager : NetworkBehaviour {
 	void RpcGenerateMaps(string seed) {
 		var children = new List<GameObject>();
 		foreach (Transform child in mapGenerator.gameObject.transform) children.Add(child.gameObject);
-		children.ForEach(child => Destroy(child));
+		children.ForEach(child => SendToGraveyard(child));
 		mapGenerator.GenerateNewMap (seed);
 	}
 

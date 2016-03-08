@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-up" width="20" height="10" tilewidth="32" tileheight="32" nextobjectid="2">
+ <tileset firstgid="1" name="twilight_tiles" tilewidth="32" tileheight="32" tilecount="64">
+  <image source="../Workspace/CS194GameDev/Assets/Tilemaps/twilight_tiles.png" width="256" height="256"/>
+ </tileset>
+ <layer name="Tile Layer 1" width="20" height="10">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2BkAFUgVkOi1YFYg4AeACiMAOY=
+  </data>
+ </layer>
+ <objectgroup name="Colliders">
+  <object id="1" x="224" y="288" width="192" height="32"/>
+ </objectgroup>
+</map>

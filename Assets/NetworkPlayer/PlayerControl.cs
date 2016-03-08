@@ -23,6 +23,11 @@ public class PlayerControl : NetworkBehaviour
 
 	Carryable carryingObject;
 
+	GameObject pet = null;
+	PetGenericInteract petInteract = null;
+
+	PlayerShop shop;
+
 	Rigidbody2D playerBody;
 
 	NetSetup networkInfo;
@@ -139,6 +144,20 @@ public class PlayerControl : NetworkBehaviour
 			}
 		}
 
+		public bool BuyButton() {
+			if (controllerEnabled) {
+				if (isOSX ()) {
+					return Input.GetKeyDown ("joystick button 18");
+				} else if (isWindows ()) {
+					return Input.GetKeyDown ("joystick button 2");
+				} else {
+					return false;
+				}
+			} else {
+				return Input.GetKeyDown (KeyCode.O);
+			}
+		}
+
 		public bool ItemButton() {
 			return Input.GetKeyDown (KeyCode.F1);
 		}
@@ -193,6 +212,7 @@ public class PlayerControl : NetworkBehaviour
 
 	// Use this for initialization
 	void Start () {
+		shop = GetComponent<PlayerShop> ();
 		playerBody = GetComponent<Rigidbody2D> ();
 		networkInfo = GetComponent<NetSetup> ();
 		carryControl = GetComponent<CarryControl> ();
@@ -208,8 +228,8 @@ public class PlayerControl : NetworkBehaviour
 		}
 		input = new GeneralInput ();
 		input.controllerEnabled = controllerEnabled;
-
-		superJumpModeText = GameObject.Find ("PowerJumpMode").GetComponent<Text> ();
+//
+//		superJumpModeText = GameObject.Find ("PowerJumpMode").GetComponent<Text> ();
 	}
 
 	void FindPlayerManager() {
@@ -281,12 +301,23 @@ public class PlayerControl : NetworkBehaviour
 			currentPlatformCollider = null;
 		}
 
+		if (input.ActivateButton()) {
+			if (pet != null) {
+				petInteract.Activate ();
+			}
+		}
+
 		if (input.CarryButton()) {
 			if (!carrying) {
 				CarryPlayer ();
 			} else {
 				ThrowPlayer ();
 			}
+		}
+
+		if (input.BuyButton () && pet == null) {
+			Debug.Log ("Buying...");
+			shop.Buy ();
 		}
 
 		if (grabbingWall && Input.GetKeyDown(KeyCode.X)) {
@@ -473,5 +504,10 @@ public class PlayerControl : NetworkBehaviour
 		theScale.x *= -1;
 		transform.localScale = theScale;
 		CmdFlipClients ();
+	}
+
+	public void SetPet(GameObject pet) {
+		this.pet = pet;
+		petInteract = pet.GetComponent<PetGenericInteract> ();
 	}
 }

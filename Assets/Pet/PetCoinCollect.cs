@@ -14,9 +14,11 @@ public class PetCoinCollect : PetAction {
 
 	public float coinDist = 0.2f;
 	public float seekDuration = 60f;
+	public float cooldownDuration = 180f;
 	public float moveSpeed = 2.0f;
 	public GameObject player;
 	bool seeking = false;
+	bool cooldown = false;
 
 	Vector2 curVelocity;
 
@@ -26,8 +28,8 @@ public class PetCoinCollect : PetAction {
 		petBody = GetComponent<Rigidbody2D> ();
 		coins = new HashSet<GameObject> ();
 		followScript = GetComponent<PetFollow> ();
-
-		StartCoroutine (SeekInFifteen());
+//
+//		StartCoroutine (SeekInFifteen());
 	}
 
 	// Update is called once per frame
@@ -37,7 +39,11 @@ public class PetCoinCollect : PetAction {
 				followScript.followingPlayer = false;
 				if (curTarget == null) {
 					curTarget = GetTarget ();
-					targetBody = curTarget.GetComponent<Rigidbody2D> ();
+					if (curTarget == null) {
+						coins.Clear ();
+					} else {
+						targetBody = curTarget.GetComponent<Rigidbody2D> ();
+					}
 				} else {
 					if (radius.contact) {
 						curTarget.GetComponent<CoinPickup> ().CollectCoin (player);
@@ -56,11 +62,17 @@ public class PetCoinCollect : PetAction {
 	GameObject GetTarget() {
 		IEnumerator setEnum = coins.GetEnumerator ();
 		setEnum.MoveNext ();
+		while (setEnum.Current == null) {
+			if (!setEnum.MoveNext ())
+				break;
+		}
 		return (GameObject)setEnum.Current;
 	}
 
 	public override void Activate() {
-		SeekCoins ();
+		if (!cooldown) {
+			SeekCoins ();
+		}
 	}
 
 	public override void Setup(GameObject player) {
@@ -71,7 +83,9 @@ public class PetCoinCollect : PetAction {
 		Debug.Log ("STARTING TO SEEK COINS");
 		followScript.followingPlayer = false;
 		seeking = true;
+		cooldown = true;
 		StartCoroutine (SeekTimer ());
+		StartCoroutine (CooldownTimer ());
 	}
 
 	void StopSeeking() {
@@ -85,6 +99,11 @@ public class PetCoinCollect : PetAction {
 	IEnumerator SeekTimer() {
 		yield return new WaitForSeconds (seekDuration);
 		StopSeeking ();
+	}
+
+	IEnumerator CooldownTimer() {
+		yield return new WaitForSeconds (cooldownDuration);
+		cooldown = false;
 	}
 
 	IEnumerator SeekInFifteen() {
