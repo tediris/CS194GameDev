@@ -163,13 +163,16 @@ public class PlayerHealth : NetworkBehaviour
 	}
 
 	public void Heal() {
-		health = maxHealth;
 		for (int i = 0; i < maxHealth; i++) {
 			hearts [i].color = Color.white;
 		}
 		if (!alive) {
 			screenAction.Flash (Color.white);
+		} else {
+			if (health != maxHealth)
+				screenAction.Flash (new Color(1.0f, 0.8f, 1.0f, 0.7f));
 		}
+		health = maxHealth;
 	}
 
 //	void FindPlayerManager() {

@@ -20,7 +20,7 @@ public class ScreenAction : MonoBehaviour {
 	void Update () {
 		if (flashing) {
 			screen.color = Color.Lerp (screen.color, targetColor, flashSpeed);
-			if (screen.color.a >= 0.95f) {
+			if (screen.color.a >= 0.95f * targetColor.a) {
 				targetColor = GetTransparentTarget ();
 			} else if (screen.color.a <= 0.05f) {
 				flashing = false;
