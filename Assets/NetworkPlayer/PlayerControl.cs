@@ -56,6 +56,9 @@ public class PlayerControl : NetworkBehaviour
 	private bool didGetHit = false;
 	public Vector2 hitForce = new Vector2 (0, 0);
 
+	public bool debugMovement = false;
+	public bool disableMovement = false;
+
 	// Gamepad code
 	[HideInInspector]
 	public bool controllerEnabled = false;
@@ -172,7 +175,8 @@ public class PlayerControl : NetworkBehaviour
 		Vector2 force = playerPos - enemyPos;
 		didGetHit = true;
 		hitForce = force;
-		controllerEnabled = false;
+		//controllerEnabled = false;
+		disableMovement = true;
 	}
 
 	bool canMoveHorizontally() {
@@ -208,6 +212,11 @@ public class PlayerControl : NetworkBehaviour
 
 	bool moveButtonDown() {
 		return Mathf.Abs(dirInput) > 0f;
+	}
+
+	public void ResetControl() {
+		grounded = true;
+
 	}
 
 	// Use this for initialization
@@ -392,12 +401,12 @@ public class PlayerControl : NetworkBehaviour
 			playerBody.velocity = hitForce * 5.0f;
 			didGetHit = false;
 			StartCoroutine (WaitToEnableControl());
-			}
+		}
 	}
 
 	IEnumerator WaitToEnableControl() {
 		yield return new WaitForSeconds(2.0f);
-		controllerEnabled = true;
+		disableMovement = false;
 	}
 
 	void ThrowPlayer() {

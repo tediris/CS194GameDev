@@ -12,6 +12,7 @@ public class GameStateManager : NetworkBehaviour {
 	ServerComm localPlayerComm;
 	CoinPlacement coinPlacer = null;
 	public GameObject eggPrefab;
+	GameObject networkEntityPool;
 
 	public GameObject GetLocalPlayer() {
 		return localPlayerComm.gameObject;
@@ -20,6 +21,7 @@ public class GameStateManager : NetworkBehaviour {
 	public override void OnStartServer()
 	{
 		Debug.Log ("Server started");
+		networkEntityPool = GameObject.Find ("NetEntityPool");
 		curSeed = System.DateTime.Now.ToString();
 		players = new List<GameObject> ();
 		mapGenerator.GenerateNewMap (curSeed);
@@ -62,7 +64,7 @@ public class GameStateManager : NetworkBehaviour {
 			return;
 		GameObject egg = (GameObject)Instantiate (eggPrefab, loc, Quaternion.identity);
 		egg.name = "Egg_Capture";
-		egg.transform.parent = mapGenerator.gameObject.transform;
+		egg.transform.parent = networkEntityPool.transform;
 		NetworkServer.Spawn (egg);
 	}
 
