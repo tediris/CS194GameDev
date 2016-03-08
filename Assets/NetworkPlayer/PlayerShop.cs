@@ -53,6 +53,7 @@ public class PlayerShop : NetworkBehaviour {
 			Debug.Log (control);
 			Debug.Log (newPet);
 			control.SetPet (newPet);
+			shopText.SetTimedNotice ("Press I to activate your pet's ability!", Color.white, 5f);
 		}
 	}
 
