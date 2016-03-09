@@ -3777,6 +3777,7 @@ MonoBehaviour:
   - {fileID: 5011600}
   - {fileID: 5098404}
   speed: 0.6
+  enable: 0
 --- !u!114 &11417136
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6600,6 +6601,10 @@ Prefab:
       propertyPath: m_Constraints
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: eggPrefab
+      value: 
+      objectReference: {fileID: 160362, guid: e26cf9cc31c6e4feeafde824dba091e1, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 164864}

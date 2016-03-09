@@ -13,6 +13,8 @@ public class CoinPickup : NetworkBehaviour {
 	
 	void OnTriggerEnter2D(Collider2D other) {
 		if (other.tag == "Player") {
+			if (!other.gameObject.GetComponent<PlayerHealth> ().alive)
+				return;
 			if (isServer) {
 				int playerNum = other.name [other.name.Length - 1];
 				other.gameObject.GetComponent<CoinCollector> ().CmdIncrementCoins (value);
