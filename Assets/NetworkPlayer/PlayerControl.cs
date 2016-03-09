@@ -104,6 +104,38 @@ public class PlayerControl : NetworkBehaviour
 			return platform == Platform.Windows;
 		}
 
+		public string Button(string key) {
+			if (controllerEnabled) {
+				if (key == "Jump") {
+					return "A";
+				}
+				if (key == "Carry") {
+					return "B";
+				}
+				if (key == "Buy") {
+					return "X";
+				}
+				if (key == "Activate") {
+					return "Y";
+				}
+			} else {
+				if (key == "Jump") {
+					return "U or Space";
+				}
+				if (key == "Carry") {
+					return "P";
+				}
+				if (key == "Buy") {
+					return "O";
+				}
+				if (key == "Activate") {
+					return "I";
+				}
+			}
+			Debug.LogWarning ("\"No button with that key!!");
+			return "No button with that key!!";
+		}
+
 		public bool JumpButton() {
 			if (controllerEnabled) {
 				if (isOSX ()) {
@@ -116,7 +148,6 @@ public class PlayerControl : NetworkBehaviour
 			} else {
 				return (Input.GetKeyDown (KeyCode.Space) || Input.GetKeyDown (KeyCode.U));
 			}
-
 		}
 
 		public bool CarryButton() {
