@@ -1,21 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 
 public class GUIManager : MonoBehaviour {
 
-	public NetworkManagerHUD netManager;
+	public GameObject netManager;
 
 	// Use this for initialization
 	void Start () {
-		netManager = GameObject.Find ("Network").GetComponent<NetworkManagerHUD>();
-		netManager.showGUI = false;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		if (Input.GetKeyDown (KeyCode.Escape)) {
-			netManager.showGUI = !netManager.showGUI;
-		}
+		netManager = GameObject.Find ("Menu");
+		netManager.SetActive(false);
 	}
 }
