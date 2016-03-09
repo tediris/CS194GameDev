@@ -205,6 +205,7 @@ public class MapGen : MonoBehaviour {
 				rooms [x, y].hasTreasure = true;
 			}
 		}
+		GameObject.Find ("GameState").GetComponent<GameStateManager> ().numTreasures = numTreasureRooms;
 	}
 
 	void SetupStealMode() {

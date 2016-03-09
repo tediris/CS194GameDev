@@ -9,16 +9,9 @@ public class TreasureChest : NetworkBehaviour {
 	// Use this for initialization
 	void Start () {
 		gsManager = GameObject.Find ("GameState").GetComponent<GameStateManager> ();
-		Debug.Log ("Am I server? " + isServer);
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {
-		if (isServer) {
-			Debug.Log ("Server detected collision");
-		} else {
-			Debug.Log ("Client detected collision");
-		}
-		Debug.Log (other.gameObject);
 		if (!isServer)
 			return;
 		if (other.gameObject.tag == "Player") {

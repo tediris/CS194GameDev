@@ -14,6 +14,7 @@ public class GameStateManager : NetworkBehaviour {
 	public GameObject eggPrefab;
 	GameObject networkEntityPool;
 	//[HideInInspector]
+	[SyncVar]
 	public int numTreasures = 0;
 	public Vector2 startPoint;
 
@@ -75,7 +76,7 @@ public class GameStateManager : NetworkBehaviour {
 		if (!isServer)
 			return;
 		GameObject instance = (GameObject)Instantiate (go, pos, Quaternion.identity);
-		//instance.transform.SetParent(networkEntityPool.transform, true);
+		instance.transform.SetParent(networkEntityPool.transform, true);
 		NetworkServer.Spawn (instance);
 	}
 
