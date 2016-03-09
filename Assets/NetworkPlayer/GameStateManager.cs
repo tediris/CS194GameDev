@@ -13,6 +13,9 @@ public class GameStateManager : NetworkBehaviour {
 	CoinPlacement coinPlacer = null;
 	public GameObject eggPrefab;
 	GameObject networkEntityPool;
+	//[HideInInspector]
+	public int numTreasures = 0;
+	public Vector2 startPoint;
 
 	public GameObject GetLocalPlayer() {
 		return localPlayerComm.gameObject;
@@ -68,12 +71,17 @@ public class GameStateManager : NetworkBehaviour {
 		NetworkServer.Spawn (egg);
 	}
 
+	public void CreateOverNetworkInstant(GameObject go, Vector3 pos) {
+		if (!isServer)
+			return;
+		GameObject instance = (GameObject)Instantiate (go, pos, Quaternion.identity);
+		//instance.transform.SetParent(networkEntityPool.transform, true);
+		NetworkServer.Spawn (instance);
+	}
+
 	public void CreateOverNetwork (GameObject go, Vector3 pos) {
 		if (!isServer)
 			return;
-//		GameObject instance = (GameObject)Instantiate (go, pos, Quaternion.identity);
-//		instance.transform.SetParent(networkEntityPool.transform, true);
-		//NetworkServer.Spawn (instance);
 		SpawnEnemyDelayed(go, pos);
 	}
 
@@ -96,10 +104,12 @@ public class GameStateManager : NetworkBehaviour {
 
 	IEnumerator SpawnAfterDelay(GameObject go, Vector3 pos) {
 //		yield return new WaitForSeconds (1.0f);
-		yield return new WaitForFixedUpdate();
-		GameObject instance = (GameObject)Instantiate (go, pos, Quaternion.identity);
-		instance.transform.SetParent(networkEntityPool.transform, true);
-		NetworkServer.Spawn (go);
+		if (isServer) {
+			yield return new WaitForFixedUpdate ();
+			GameObject instance = (GameObject)Instantiate (go, pos, Quaternion.identity);
+			instance.transform.SetParent (networkEntityPool.transform, true);
+			NetworkServer.Spawn (go);
+		}
 	}
 
 	public void GenerateNewMap() {
@@ -134,6 +144,11 @@ public class GameStateManager : NetworkBehaviour {
 //	void Update () {
 //	
 //	}
+
+	public void ResetGame() {
+		GenerateNewMap ();
+		ResetPlayerLocation (startPoint.x, startPoint.y);
+	}
 
 	[Command]
 	void CmdGenerateMaps(string seed) {

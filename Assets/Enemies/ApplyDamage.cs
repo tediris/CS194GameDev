@@ -11,7 +11,7 @@ public class ApplyDamage : NetworkBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {
-		if (stateManager.GetLocalPlayer () == null) {
+		if (stateManager == null || stateManager.GetLocalPlayer () == null) {
 			return;
 		}
 		if (other.gameObject.name == stateManager.GetLocalPlayer().name) {

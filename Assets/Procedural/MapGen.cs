@@ -198,11 +198,11 @@ public class MapGen : MonoBehaviour {
 			int x = rand.Next (numRoomsWidth);
 			int y = rand.Next (numRoomsHeight);
 			Pair<int, int> room = new Pair<int,int> (x, y);
+			if (rooms [x, y].dist == 0)
+				continue;
 			if (!treasureRooms.Contains(room)) {
 				treasureRooms.Add(room);
 				rooms [x, y].hasTreasure = true;
-				Debug.Log (x);
-				Debug.Log (y);
 			}
 		}
 	}
