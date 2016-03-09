@@ -53,7 +53,7 @@ public class PlayerShop : NetworkBehaviour {
 			Debug.Log (control);
 			Debug.Log (newPet);
 			control.SetPet (newPet);
-			shopText.SetTimedNotice ("Press I to activate your pet's ability!", Color.white, 5f);
+			shopText.SetTimedNotice ("Press " + control.input.Button("Activate") + " to activate your pet's ability!", Color.white, 5f);
 		}
 	}
 
@@ -61,7 +61,7 @@ public class PlayerShop : NetworkBehaviour {
 		canBuy = true;
 		petAvailable = petForSale;
 		buyPrice = price;
-		shopText.SetNotice (price + " coins! Press the O key to buy", Color.white);
+		shopText.SetNotice (price + " coins! Press the "+ control.input.Button("Buy") + " key to buy", Color.white);
 	}
 
 	public void DisableBuy() {

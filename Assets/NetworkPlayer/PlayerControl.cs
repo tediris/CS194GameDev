@@ -85,14 +85,14 @@ public class PlayerControl : NetworkBehaviour
 			if (controllerEnabled) {
 				return Input.GetAxis ("Vertical") > 0f;
 			} else {
-				return Input.GetKey (KeyCode.W);
+				return Input.GetKey (KeyCode.W) || Input.GetKey(KeyCode.UpArrow);
 			}
 		}
 		public bool DownInput() {
 			if (controllerEnabled) {
 				return Input.GetAxis ("Vertical") < 0f;
 			} else {
-				return Input.GetKey (KeyCode.S);
+				return Input.GetKey (KeyCode.S) || Input.GetKey(KeyCode.DownArrow);
 			}
 		}
 
@@ -102,6 +102,38 @@ public class PlayerControl : NetworkBehaviour
 
 		public bool isWindows() {
 			return platform == Platform.Windows;
+		}
+
+		public string Button(string key) {
+			if (controllerEnabled) {
+				if (key == "Jump") {
+					return "A";
+				}
+				if (key == "Carry") {
+					return "B";
+				}
+				if (key == "Buy") {
+					return "X";
+				}
+				if (key == "Activate") {
+					return "Y";
+				}
+			} else {
+				if (key == "Jump") {
+					return "U or Space";
+				}
+				if (key == "Carry") {
+					return "P";
+				}
+				if (key == "Buy") {
+					return "O";
+				}
+				if (key == "Activate") {
+					return "I";
+				}
+			}
+			Debug.LogWarning ("\"No button with that key!!");
+			return "No button with that key!!";
 		}
 
 		public bool JumpButton() {
@@ -116,7 +148,6 @@ public class PlayerControl : NetworkBehaviour
 			} else {
 				return (Input.GetKeyDown (KeyCode.Space) || Input.GetKeyDown (KeyCode.U));
 			}
-
 		}
 
 		public bool CarryButton() {
@@ -200,10 +231,10 @@ public class PlayerControl : NetworkBehaviour
 		if (controllerEnabled) {
 			buttonValue = Input.GetAxis("Horizontal");
 		} else {
-			if (Input.GetKey (KeyCode.A)) {
+			if (Input.GetKey (KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) {
 				buttonValue -= 1.0f;
 			}
-			if (Input.GetKey (KeyCode.D)) {
+			if (Input.GetKey (KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) {
 				buttonValue += 1.0f;
 			}
 		}
