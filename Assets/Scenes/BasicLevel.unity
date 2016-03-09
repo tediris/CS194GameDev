@@ -116,6 +116,8 @@ MonoBehaviour:
   mapGenerator: {fileID: 0}
   curSeed: null
   eggPrefab: {fileID: 160362, guid: e26cf9cc31c6e4feeafde824dba091e1, type: 2}
+  numTreasures: 0
+  startPoint: {x: 3.2, y: 96}
 --- !u!114 &32943559
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -994,12 +996,12 @@ MonoBehaviour:
   eggPrefab: {fileID: 160362, guid: e26cf9cc31c6e4feeafde824dba091e1, type: 2}
   gameMode: 1
   testGameMode: 1
-  debugGameMode: 0
+  debugGameMode: 1
   endPortal: {fileID: 169894, guid: a0dc72db3489842a784d2c257b2738a2, type: 2}
   startRoomPrefab: {fileID: 164182, guid: 9802a1d27ab29406e84c165ca032a81b, type: 2}
   eggRoomPrefab:
   - {fileID: 164864, guid: f11fcaa6fc31a4187b8e5e8f01e73cd4, type: 2}
-  treasureRoomPrefab: {fileID: 0}
+  treasureRoomPrefab: {fileID: 128150, guid: 8d04fc0038b1c49afa0b430cfe2e6eaf, type: 2}
   sealingWallNSEWPrefabs:
   - {fileID: 149766, guid: 389e27f910b084f378e3db8781822faf, type: 2}
   - {fileID: 100834, guid: e30648d45bb3542b584a06da5a97e6c1, type: 2}
@@ -9648,6 +9650,7 @@ MonoBehaviour:
   - {fileID: 159086, guid: eb55e646dc84145248b0f7aa8152b17d, type: 2}
   - {fileID: 111294, guid: a1dbb8e32f449448eb5cbc640e2a01a4, type: 2}
   - {fileID: 146224, guid: 624629922c4834b79b39141358cd576f, type: 2}
+  - {fileID: 144306, guid: 188853fcc0c90487f872c02e062ba55d, type: 2}
   m_CustomConfig: 0
   m_MaxConnections: 4
   m_ConnectionConfig:
