@@ -3,7 +3,7 @@ using System.Collections;
 
 public class CollectingRadius : MonoBehaviour {
 
-	public bool contact = false;
+	int numContacting = 0;
 
 	// Use this for initialization
 //	void Start () {
@@ -15,15 +15,19 @@ public class CollectingRadius : MonoBehaviour {
 //	
 //	}
 
+	public bool Contact() {
+		return numContacting > 0;
+	}
+
 	void OnTriggerEnter2D(Collider2D other) {
 		if (other.tag == "Coin") {
-			contact = true;
+			numContacting++;
 		}
 	}
 
 	void OnTriggerExit2D(Collider2D other) {
 		if (other.tag == "Coin") {
-			contact = false;
+			numContacting--;
 		}
 	}
 }

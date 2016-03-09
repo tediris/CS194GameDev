@@ -45,7 +45,7 @@ public class PetCoinCollect : PetAction {
 						targetBody = curTarget.GetComponent<Rigidbody2D> ();
 					}
 				} else {
-					if (radius.contact) {
+					if (radius.Contact()) {
 						curTarget.GetComponent<CoinPickup> ().CollectCoin (player);
 						curTarget = null;
 						targetBody = null;
