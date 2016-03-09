@@ -30,6 +30,7 @@ public class ShrineTele : MonoBehaviour {
 				serverComm.RequestMap ();
 				serverComm.MovePlayers (toX, toY);
 			}
+			Destroy (other.gameObject);
 		}
 	}
 }
