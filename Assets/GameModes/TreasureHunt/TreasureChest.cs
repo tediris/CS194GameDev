@@ -16,11 +16,14 @@ public class TreasureChest : NetworkBehaviour {
 			return;
 		if (other.gameObject.tag == "Player") {
 			// player collected treasure
-			Debug.Log(other.name + " found a treasure");
-			gsManager.numTreasures--;
-			if (gsManager.numTreasures < 1) {
-				Debug.Log ("Found the last treasure, ending the level");
-				gsManager.ResetGame ();
+			if (other.gameObject.GetComponent<PlayerHealth> ().alive) {
+				Debug.Log (other.name + " found a treasure");
+				gsManager.numTreasures--;
+				Destroy (this.gameObject);
+				if (gsManager.numTreasures < 1) {
+					Debug.Log ("Found the last treasure, ending the level");
+					gsManager.ResetGame ();
+				}
 			}
 		}
 	}
