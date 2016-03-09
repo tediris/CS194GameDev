@@ -85,14 +85,14 @@ public class PlayerControl : NetworkBehaviour
 			if (controllerEnabled) {
 				return Input.GetAxis ("Vertical") > 0f;
 			} else {
-				return Input.GetKey (KeyCode.W);
+				return Input.GetKey (KeyCode.W) || Input.GetKey(KeyCode.UpArrow);
 			}
 		}
 		public bool DownInput() {
 			if (controllerEnabled) {
 				return Input.GetAxis ("Vertical") < 0f;
 			} else {
-				return Input.GetKey (KeyCode.S);
+				return Input.GetKey (KeyCode.S) || Input.GetKey(KeyCode.DownArrow);
 			}
 		}
 
@@ -231,10 +231,10 @@ public class PlayerControl : NetworkBehaviour
 		if (controllerEnabled) {
 			buttonValue = Input.GetAxis("Horizontal");
 		} else {
-			if (Input.GetKey (KeyCode.A)) {
+			if (Input.GetKey (KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) {
 				buttonValue -= 1.0f;
 			}
-			if (Input.GetKey (KeyCode.D)) {
+			if (Input.GetKey (KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) {
 				buttonValue += 1.0f;
 			}
 		}
