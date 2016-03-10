@@ -331,6 +331,11 @@ public class PlayerControl : NetworkBehaviour
 		anim.SetBool ("onWall", false);
 	}
 
+	[Command]
+	void CmdActivatePet() {
+		petInteract.Activate ();
+	}
+
 	// Update is called once per frame
 	void Update () {
 		anim.SetBool ("grounded", grounded);
@@ -343,7 +348,7 @@ public class PlayerControl : NetworkBehaviour
 
 		if (input.ActivateButton()) {
 			if (pet != null) {
-				petInteract.Activate ();
+				CmdActivatePet ();
 			}
 		}
 

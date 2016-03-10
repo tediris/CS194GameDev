@@ -1043,8 +1043,8 @@ MonoBehaviour:
   tileSize: 32
   roomWidth: 6.4
   roomHeight: 3.2
-  numRoomsWidth: 3
-  numRoomsHeight: 3
+  numRoomsWidth: 2
+  numRoomsHeight: 2
   numTreasureRooms: 1
   numRandomConnections: 5
   seed: taami

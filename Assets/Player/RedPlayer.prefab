@@ -226,6 +226,9 @@ MonoBehaviour:
   climbSpeed: 1
   wallJumpPush: 2
   superJumpModeText: {fileID: 0}
+  hitForce: {x: 0, y: 0}
+  debugMovement: 0
+  disableMovement: 0
   controllerEnabled: 0
   grabbingWall: 0
 --- !u!114 &11407572
@@ -425,6 +428,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8638c178e46bc4a38b255c51950146aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pets:
+  - {fileID: 111294, guid: a1dbb8e32f449448eb5cbc640e2a01a4, type: 2}
 --- !u!212 &21207416
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -492,6 +497,10 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: pets.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: tools.Array.size
       value: 1
@@ -582,7 +591,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: maxSpeed
@@ -721,6 +730,10 @@ Prefab:
       propertyPath: deathAnimationTime
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: pets.Array.data[0]
+      value: 
+      objectReference: {fileID: 111294, guid: a1dbb8e32f449448eb5cbc640e2a01a4, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 187436}

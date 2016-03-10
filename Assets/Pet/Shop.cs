@@ -18,13 +18,17 @@ public class Shop : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D other) {
 		if (other.tag == "Player") {
-			other.gameObject.GetComponent<PlayerShop> ().EnableBuy (petForSale, price);
+			PlayerShop shop = other.gameObject.GetComponent<PlayerShop> ();
+			if (shop != null)
+				shop.EnableBuy (petForSale, price);
 		}
 	}
 
 	void OnTriggerExit2D(Collider2D other) {
 		if (other.tag == "Player") {
-			other.gameObject.GetComponent<PlayerShop> ().DisableBuy ();
+			PlayerShop shop = other.gameObject.GetComponent<PlayerShop> ();
+			if (shop != null)
+				shop.DisableBuy ();
 		}
 	}
 }

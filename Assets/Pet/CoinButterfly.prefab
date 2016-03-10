@@ -143,6 +143,7 @@ MonoBehaviour:
   radius: {fileID: 11406368}
   coinDist: 0.2
   seekDuration: 60
+  cooldownDuration: 180
   moveSpeed: 2
   player: {fileID: 0}
 --- !u!114 &11406368
@@ -156,7 +157,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94ff72c1e0da74fd4bb30c3efe713593, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  contact: 0
 --- !u!114 &11417240
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -196,7 +196,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_TransformSyncMode: 1
-  m_SendInterval: 0.1
+  m_SendInterval: 0.04761905
   m_SyncRotationAxis: 3
   m_RotationSyncCompression: 0
   m_SyncSpin: 0
@@ -305,6 +305,10 @@ Prefab:
       propertyPath: activeScripts.Array.data[1]
       value: 
       objectReference: {fileID: 11404232}
+    - target: {fileID: 0}
+      propertyPath: m_SendInterval
+      value: 0.04761905
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 111294}

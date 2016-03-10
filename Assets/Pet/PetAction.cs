@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Networking;
 
-public class PetAction : MonoBehaviour {
+public class PetAction : NetworkBehaviour {
 
 	public virtual void Setup(GameObject player) {
 

@@ -116,17 +116,21 @@ public class PetCoinCollect : PetAction {
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {
-		if (other.tag == "Coin") {
-			coins.Add (other.gameObject);
+		if (isServer) {
+			if (other.tag == "Coin") {
+				coins.Add (other.gameObject);
+			}
 		}
 	}
 
 	void OnTriggerExit2D(Collider2D other) {
-		if (other.tag == "Coin") {
-			if (other.gameObject == curTarget) {
-				curTarget = null;
+		if (isServer) {
+			if (other.tag == "Coin") {
+				if (other.gameObject == curTarget) {
+					curTarget = null;
+				}
+				coins.Remove (other.gameObject);
 			}
-			coins.Remove (other.gameObject);
 		}
 	}
 }
