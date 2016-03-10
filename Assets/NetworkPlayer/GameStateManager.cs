@@ -19,6 +19,9 @@ public class GameStateManager : NetworkBehaviour {
 	public Vector2 startPoint;
 
 	public GameObject GetLocalPlayer() {
+		if (localPlayerComm == null) {
+			return null;
+		}
 		return localPlayerComm.gameObject;
 	}
 

@@ -14,6 +14,7 @@ public class EggCarry : DeathListener {
 	public Vector2 startRoom = new Vector2 (3.2f, 98.4f);
 
 	public override void PlayerDied(GameObject player) {
+		Debug.Log(player.name + " died, dropping the egg");
 		CmdDrop ();
 	}
 
@@ -74,11 +75,13 @@ public class EggCarry : DeathListener {
 		playerObj = null;
 		playerBody = null;
 		carried = false;
+		RpcDrop ();
 	}
 
 	[ClientRpc]
 	void RpcDrop() {
-		this.gameObject.transform.position = playerObj.transform.position;
+		if (this.playerObj != null)
+			this.gameObject.transform.position = playerObj.transform.position;
 		playerObj = null;
 		playerBody = null;
 		carried = false;

@@ -995,7 +995,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eggPrefab: {fileID: 160362, guid: e26cf9cc31c6e4feeafde824dba091e1, type: 2}
   gameMode: 1
-  testGameMode: 0
+  testGameMode: 1
   debugGameMode: 2
   endPortal: {fileID: 169894, guid: a0dc72db3489842a784d2c257b2738a2, type: 2}
   startRoomPrefab: {fileID: 164182, guid: 9802a1d27ab29406e84c165ca032a81b, type: 2}

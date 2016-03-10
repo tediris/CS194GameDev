@@ -126,8 +126,9 @@ public class PlayerHealth : NetworkBehaviour
 
 	IEnumerator WaitForGhost() {
 		yield return new WaitForSeconds (deathAnimationTime);
-
-		playerControl.enabled = true;
+		if (isLocalPlayer) {
+			playerControl.enabled = true;
+		}
 	}
 
 	[Command]
