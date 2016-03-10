@@ -119,11 +119,11 @@ public class GameStateManager : NetworkBehaviour {
 	public void GenerateNewMap() {
 		//DESTROY EVERYTHING
 		if (isServer) {
+			networkEntityPool.GetComponent<DestroyAllChildren>().ResetLevel();
 			curSeed = System.DateTime.Now.ToString ();
 			CmdGenerateMaps (curSeed);
 			coinPlacer.PlaceCoins ();
 			// destroy all the network entities
-			networkEntityPool.GetComponent<DestroyAllChildren>().ResetLevel();
 			//coinPlacer.PlaceEnemies ();
 		} else {
 			Debug.LogError ("STOP TRYING TO MAKE A NEW LEVEL AS A CLIENT T_T");

@@ -31,8 +31,16 @@ public class EggCarry : DeathListener {
 		if (!isServer)
 			return;
 		// check to see if the egg was retrieved
-		if (carried)
-			return;
+
+		if (carried) {
+			if (other.tag == "Shrine") {
+				// end the game
+				GameObject.Find("GameState").GetComponent<GameStateManager>().ResetGame();
+				Destroy(this.gameObject);
+			} else {
+				return;
+			}
+		} 
 			
 		if (other.tag == "Player") {
 			if (other.gameObject.GetComponent<PlayerHealth> ().alive) {
