@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-up" width="20" height="10" tilewidth="32" tileheight="32" nextobjectid="19">
+ <tileset firstgid="1" name="twilight_tiles" tilewidth="32" tileheight="32" tilecount="64">
+  <image source="twilight_tiles.png" width="256" height="256"/>
+ </tileset>
+ <layer name="base" width="20" height="10">
+  <data encoding="base64" compression="zlib">
+   eJytkTkLwkAQRlcjCR4kRNNobDxyNB6N0UaT//+rfBYDQ3B3gzjwitl5s3wwN2NMA3d4wgta6Iy9+p7sPyBSs19L9kNIPO4O9nCAo8eNv7yNIRiQaag3g/kfvSWsVD9SWSYOz1YbyFU/VVkWDk8q8vyfqiyZx5X7llBZnLXKsrU4sv+57wnOcIFCzWpHjr4n+1d4A4tQCck=
+  </data>
+ </layer>
+ <objectgroup name="Colliders">
+  <object id="1" x="0" y="0" width="32" height="96"/>
+  <object id="2" x="32" y="0" width="64" height="64"/>
+  <object id="3" x="96" y="0" width="128" height="32"/>
+  <object id="5" x="0" y="224" width="32" height="96"/>
+  <object id="6" x="32" y="256" width="64" height="64"/>
+  <object id="7" x="96" y="288" width="128" height="32"/>
+  <object id="8" x="128" y="96" width="64" height="128"/>
+  <object id="9" x="448" y="96" width="64" height="128"/>
+  <object id="10" x="256" y="64" width="128" height="32"/>
+  <object id="11" x="256" y="160" width="128" height="128"/>
+  <object id="12" x="416" y="0" width="128" height="32"/>
+  <object id="13" x="544" y="0" width="64" height="64"/>
+  <object id="14" x="608" y="0" width="32" height="96"/>
+  <object id="16" x="608" y="224" width="32" height="96"/>
+  <object id="17" x="544" y="256" width="64" height="64"/>
+  <object id="18" x="416" y="288" width="128" height="32"/>
+ </objectgroup>
+</map>
