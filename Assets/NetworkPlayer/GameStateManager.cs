@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 
 public class GameStateManager : NetworkBehaviour {
 
@@ -17,6 +18,9 @@ public class GameStateManager : NetworkBehaviour {
 	[SyncVar]
 	public int numTreasures = 0;
 	public Vector2 startPoint;
+
+	int level = 1;
+	public Text levelText;
 
 	public GameObject GetLocalPlayer() {
 		if (localPlayerComm == null) {
@@ -34,6 +38,8 @@ public class GameStateManager : NetworkBehaviour {
 		mapGenerator.GenerateNewMap (curSeed);
 		coinPlacer = GameObject.Find ("Coins").GetComponent<CoinPlacement>();
 		coinPlacer.PlaceCoins ();
+		levelText = GameObject.Find ("LevelInfo").GetComponent<Text> ();
+		levelText.text = "Level " + level;
 		//coinPlacer.PlaceEnemies ();
 		// disable client stuff
 	}
@@ -123,6 +129,8 @@ public class GameStateManager : NetworkBehaviour {
 			curSeed = System.DateTime.Now.ToString ();
 			CmdGenerateMaps (curSeed);
 			coinPlacer.PlaceCoins ();
+			level += 1;
+			levelText.text = "Level " + level;
 			// destroy all the network entities
 			//coinPlacer.PlaceEnemies ();
 		} else {
