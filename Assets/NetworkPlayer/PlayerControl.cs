@@ -118,6 +118,9 @@ public class PlayerControl : NetworkBehaviour
 				if (key == "Activate") {
 					return "Y";
 				}
+				if (key == "Menu") {
+					return "Start";
+				}
 			} else {
 				if (key == "Jump") {
 					return "U or Space";
@@ -130,6 +133,9 @@ public class PlayerControl : NetworkBehaviour
 				}
 				if (key == "Activate") {
 					return "I";
+				}
+				if (key == "Menu") {
+					return "Escape";
 				}
 			}
 			Debug.LogWarning ("\"No button with that key!!");
@@ -189,6 +195,20 @@ public class PlayerControl : NetworkBehaviour
 				}
 			} else {
 				return Input.GetKeyDown (KeyCode.O);
+			}
+		}
+
+		public bool MenuButton() {
+			if (controllerEnabled) {
+				if (isOSX ()) {
+					return Input.GetKeyDown ("joystick button 9");
+				} else if (isWindows ()) {
+					return Input.GetKeyDown ("joystick button 7");
+				} else {
+					return false;
+				}
+			} else {
+				return Input.GetKeyDown (KeyCode.Escape);
 			}
 		}
 
@@ -272,11 +292,11 @@ public class PlayerControl : NetworkBehaviour
 //		superJumpModeText = GameObject.Find ("PowerJumpMode").GetComponent<Text> ();
 	}
 
-	void FindPlayerManager() {
-		while (carryManager == null) {
-			carryManager = GameObject.Find ("PlayerManager").GetComponent<CarryManager> ();
-		}
-	}
+//	void FindPlayerManager() {
+//		while (carryManager == null) {
+//			carryManager = GameObject.Find ("PlayerManager").GetComponent<CarryManager> ();
+//		}
+//	}
 
 	public bool grabbingWall = false;
 
