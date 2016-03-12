@@ -23,6 +23,8 @@ public class PlayerHealth : NetworkBehaviour
 
 	public bool alive = true;
 
+	private NotificationText notificationText;
+
 	Image[] hearts;
 
 	ScreenAction screenAction;
@@ -61,6 +63,7 @@ public class PlayerHealth : NetworkBehaviour
 		}
 //		healthBarBackground = panel.FindChild ("Health Background").GetComponent<RectTransform> ();
 //		healthBar = healthBarBackground.FindChild ("Health Foreground").GetComponent<RectTransform> ();
+		notificationText = GameObject.Find("Notice").GetComponent<NotificationText> ();
 	}
 
 	public void addDeathListener(DeathListener dl) {
@@ -102,6 +105,8 @@ public class PlayerHealth : NetworkBehaviour
 			playerControl.enabled = false;
 			StartCoroutine (WaitForGhost ());
 			ToggleAlive ();
+
+			notificationText.SetTimedNotice ("Oh no, return to the shrine to revive.", Color.white, 3);
 		}
 	}
 
