@@ -13,6 +13,8 @@ public class EggCarry : DeathListener {
 	float offset = 0.3f;
 	public Vector2 startRoom = new Vector2 (3.2f, 98.4f);
 
+	private NotificationText notificationText;
+
 	public override void PlayerDied(GameObject player) {
 		Debug.Log(player.name + " died, dropping the egg");
 		CmdDrop ();
@@ -25,6 +27,7 @@ public class EggCarry : DeathListener {
 //		if (isServer) {
 //			NetworkServer.Spawn (this.gameObject);
 //		}
+		notificationText = GameObject.Find ("Notice").GetComponent<NotificationText> ();
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {
@@ -46,6 +49,7 @@ public class EggCarry : DeathListener {
 			if (other.gameObject.GetComponent<PlayerHealth> ().alive) {
 				Debug.Log (other.gameObject.name + " is picking up the object");
 				CmdSetCarried (other.gameObject.name);
+				notificationText.SetTimedNotice ("Return the egg!", Color.white, 3);
 			}
 		}
 	}
