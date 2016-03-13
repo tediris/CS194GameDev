@@ -10,6 +10,7 @@ TagManager:
   - Coin
   - Shrine
   - Bait
+  - Egg
   layers:
   - Default
   - TransparentFX
@@ -55,6 +56,9 @@ TagManager:
     locked: 0
   - name: Pickup
     uniqueID: 483883415
+    locked: 0
+  - name: Pet
+    uniqueID: 1956285679
     locked: 0
   - name: Player
     uniqueID: 1640707647

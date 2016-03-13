@@ -23,6 +23,11 @@ public class PlayerControl : NetworkBehaviour
 
 	Carryable carryingObject;
 
+	GameObject pet = null;
+	PetGenericInteract petInteract = null;
+
+	PlayerShop shop;
+
 	Rigidbody2D playerBody;
 
 	NetSetup networkInfo;
@@ -48,6 +53,12 @@ public class PlayerControl : NetworkBehaviour
 	private WallCheck wallCheck;
 
 	public Text superJumpModeText;
+
+	private bool didGetHit = false;
+	public Vector2 hitForce = new Vector2 (0, 0);
+
+	public bool debugMovement = false;
+	public bool disableMovement = false;
 
 	// Gamepad code
 	[HideInInspector]
@@ -75,14 +86,14 @@ public class PlayerControl : NetworkBehaviour
 			if (controllerEnabled) {
 				return Input.GetAxis ("Vertical") > 0f;
 			} else {
-				return Input.GetKey (KeyCode.W);
+				return Input.GetKey (KeyCode.W) || Input.GetKey(KeyCode.UpArrow);
 			}
 		}
 		public bool DownInput() {
 			if (controllerEnabled) {
 				return Input.GetAxis ("Vertical") < 0f;
 			} else {
-				return Input.GetKey (KeyCode.S);
+				return Input.GetKey (KeyCode.S) || Input.GetKey(KeyCode.DownArrow);
 			}
 		}
 
@@ -92,6 +103,38 @@ public class PlayerControl : NetworkBehaviour
 
 		public bool isWindows() {
 			return platform == Platform.Windows;
+		}
+
+		public string Button(string key) {
+			if (controllerEnabled) {
+				if (key == "Jump") {
+					return "A";
+				}
+				if (key == "Carry") {
+					return "B";
+				}
+				if (key == "Buy") {
+					return "X";
+				}
+				if (key == "Activate") {
+					return "Y";
+				}
+			} else {
+				if (key == "Jump") {
+					return "U or Space";
+				}
+				if (key == "Carry") {
+					return "P";
+				}
+				if (key == "Buy") {
+					return "O";
+				}
+				if (key == "Activate") {
+					return "I";
+				}
+			}
+			Debug.LogWarning ("\"No button with that key!!");
+			return "No button with that key!!";
 		}
 
 		public bool JumpButton() {
@@ -106,7 +149,6 @@ public class PlayerControl : NetworkBehaviour
 			} else {
 				return (Input.GetKeyDown (KeyCode.Space) || Input.GetKeyDown (KeyCode.U));
 			}
-
 		}
 
 		public bool CarryButton() {
@@ -123,6 +165,34 @@ public class PlayerControl : NetworkBehaviour
 			}
 		}
 
+		public bool ActivateButton() {
+			if (controllerEnabled) {
+				if (isOSX ()) {
+					return Input.GetKeyDown ("joystick button 19");
+				} else if (isWindows ()) {
+					return Input.GetKeyDown ("joystick button 3");
+				} else {
+					return false;
+				}
+			} else {
+				return Input.GetKeyDown (KeyCode.I);
+			}
+		}
+
+		public bool BuyButton() {
+			if (controllerEnabled) {
+				if (isOSX ()) {
+					return Input.GetKeyDown ("joystick button 18");
+				} else if (isWindows ()) {
+					return Input.GetKeyDown ("joystick button 2");
+				} else {
+					return false;
+				}
+			} else {
+				return Input.GetKeyDown (KeyCode.O);
+			}
+		}
+
 		public bool ItemButton() {
 			return Input.GetKeyDown (KeyCode.F1);
 		}
@@ -130,6 +200,15 @@ public class PlayerControl : NetworkBehaviour
 
 	public void SetAirSpeed(float value) {
 		airSpeed = value;
+	}
+
+	public void DidGetHit(Vector2 enemyPos) {
+	    Vector2 playerPos = playerBody.position;
+		Vector2 force = playerPos - enemyPos;
+		didGetHit = true;
+		hitForce = force;
+		//controllerEnabled = false;
+		disableMovement = true;
 	}
 
 	bool canMoveHorizontally() {
@@ -153,10 +232,10 @@ public class PlayerControl : NetworkBehaviour
 		if (controllerEnabled) {
 			buttonValue = Input.GetAxis("Horizontal");
 		} else {
-			if (Input.GetKey (KeyCode.A)) {
+			if (Input.GetKey (KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) {
 				buttonValue -= 1.0f;
 			}
-			if (Input.GetKey (KeyCode.D)) {
+			if (Input.GetKey (KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) {
 				buttonValue += 1.0f;
 			}
 		}
@@ -167,8 +246,14 @@ public class PlayerControl : NetworkBehaviour
 		return Mathf.Abs(dirInput) > 0f;
 	}
 
+	public void ResetControl() {
+		grounded = true;
+
+	}
+
 	// Use this for initialization
 	void Start () {
+		shop = GetComponent<PlayerShop> ();
 		playerBody = GetComponent<Rigidbody2D> ();
 		networkInfo = GetComponent<NetSetup> ();
 		carryControl = GetComponent<CarryControl> ();
@@ -185,8 +270,8 @@ public class PlayerControl : NetworkBehaviour
 		}
 		input = new GeneralInput ();
 		input.controllerEnabled = controllerEnabled;
-
-		superJumpModeText = GameObject.Find ("PowerJumpMode").GetComponent<Text> ();
+//
+//		superJumpModeText = GameObject.Find ("PowerJumpMode").GetComponent<Text> ();
 	}
 
 	void FindPlayerManager() {
@@ -247,6 +332,11 @@ public class PlayerControl : NetworkBehaviour
 		anim.SetBool ("onWall", false);
 	}
 
+	[Command]
+	void CmdActivatePet() {
+		petInteract.Activate ();
+	}
+
 	// Update is called once per frame
 	void Update () {
 		anim.SetBool ("grounded", grounded);
@@ -257,12 +347,23 @@ public class PlayerControl : NetworkBehaviour
 			currentPlatformCollider = null;
 		}
 
+		if (input.ActivateButton()) {
+			if (pet != null) {
+				CmdActivatePet ();
+			}
+		}
+
 		if (input.CarryButton()) {
 			if (!carrying) {
 				CarryPlayer ();
 			} else {
 				ThrowPlayer ();
 			}
+		}
+
+		if (input.BuyButton () && pet == null) {
+			Debug.Log ("Buying...");
+			shop.Buy ();
 		}
 
 		if (grabbingWall && Input.GetKeyDown(KeyCode.X)) {
@@ -338,6 +439,17 @@ public class PlayerControl : NetworkBehaviour
 		} else if (h < 0 && facingRight) {
 			Flip ();
 		}
+
+		if (didGetHit) {
+			playerBody.velocity = hitForce * 5.0f;
+			didGetHit = false;
+			StartCoroutine (WaitToEnableControl());
+		}
+	}
+
+	IEnumerator WaitToEnableControl() {
+		yield return new WaitForSeconds(2.0f);
+		disableMovement = false;
 	}
 
 	void ThrowPlayer() {
@@ -444,5 +556,10 @@ public class PlayerControl : NetworkBehaviour
 		theScale.x *= -1;
 		transform.localScale = theScale;
 		CmdFlipClients ();
+	}
+
+	public void SetPet(GameObject pet) {
+		this.pet = pet;
+		petInteract = pet.GetComponent<PetGenericInteract> ();
 	}
 }

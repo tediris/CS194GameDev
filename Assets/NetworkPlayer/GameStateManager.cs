@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 
 public class GameStateManager : NetworkBehaviour {
 
@@ -13,19 +14,33 @@ public class GameStateManager : NetworkBehaviour {
 	CoinPlacement coinPlacer = null;
 	public GameObject eggPrefab;
 	public GameObject baitPrefab;
+	GameObject networkEntityPool;
+	//[HideInInspector]
+	[SyncVar]
+	public int numTreasures = 0;
+	public Vector2 startPoint;
+
+	int level = 1;
+	public Text levelText;
 
 	public GameObject GetLocalPlayer() {
+		if (localPlayerComm == null) {
+			return null;
+		}
 		return localPlayerComm.gameObject;
 	}
 
 	public override void OnStartServer()
 	{
 		Debug.Log ("Server started");
+		networkEntityPool = GameObject.Find ("NetEntityPool");
 		curSeed = System.DateTime.Now.ToString();
 		players = new List<GameObject> ();
 		mapGenerator.GenerateNewMap (curSeed);
 		coinPlacer = GameObject.Find ("Coins").GetComponent<CoinPlacement>();
 		coinPlacer.PlaceCoins ();
+		levelText = GameObject.Find ("LevelInfo").GetComponent<Text> ();
+		levelText.text = "Level " + level;
 		//coinPlacer.PlaceEnemies ();
 		// disable client stuff
 	}
@@ -62,7 +77,8 @@ public class GameStateManager : NetworkBehaviour {
 		if (!isServer)
 			return;
 		GameObject egg = (GameObject)Instantiate (eggPrefab, loc, Quaternion.identity);
-		egg.transform.parent = mapGenerator.gameObject.transform;
+		egg.name = "Egg_Capture";
+		egg.transform.SetParent(networkEntityPool.transform, true);
 		NetworkServer.Spawn (egg);
 	}
 
@@ -74,13 +90,19 @@ public class GameStateManager : NetworkBehaviour {
 		NetworkServer.Spawn (bait);
 		return bait;
 	}
+		
+	public void CreateOverNetworkInstant(GameObject go, Vector3 pos) {
+		if (!isServer)
+			return;
+		GameObject instance = (GameObject)Instantiate (go, pos, Quaternion.identity);
+		instance.transform.SetParent(networkEntityPool.transform, true);
+		NetworkServer.Spawn (instance);
+	}
 
 	public void CreateOverNetwork (GameObject go, Vector3 pos) {
 		if (!isServer)
 			return;
-		GameObject instance = (GameObject)Instantiate (go, pos, Quaternion.identity);
-		instance.transform.parent = mapGenerator.gameObject.transform;
-		NetworkServer.Spawn (instance);
+		SpawnEnemyDelayed(go, pos);
 	}
 
 	public void SpawnEggMonster(GameObject go, Vector3 pos, List<Rigidbody2D> waypoints) {
@@ -92,16 +114,34 @@ public class GameStateManager : NetworkBehaviour {
 			wayFollow.wayPoints = waypoints;
 			wayFollow.enable = true;
 		}
-		monster.transform.parent = mapGenerator.gameObject.transform;
+		monster.transform.SetParent(networkEntityPool.transform, true);
 		NetworkServer.Spawn (monster);
+	}
+
+	void SpawnEnemyDelayed(GameObject go, Vector3 pos) {
+		StartCoroutine (SpawnAfterDelay(go, pos));
+	}
+
+	IEnumerator SpawnAfterDelay(GameObject go, Vector3 pos) {
+//		yield return new WaitForSeconds (1.0f);
+		if (isServer) {
+			yield return new WaitForFixedUpdate ();
+			GameObject instance = (GameObject)Instantiate (go, pos, Quaternion.identity);
+			instance.transform.SetParent (networkEntityPool.transform, true);
+			NetworkServer.Spawn (go);
+		}
 	}
 
 	public void GenerateNewMap() {
 		//DESTROY EVERYTHING
 		if (isServer) {
+			networkEntityPool.GetComponent<DestroyAllChildren>().ResetLevel();
 			curSeed = System.DateTime.Now.ToString ();
 			CmdGenerateMaps (curSeed);
 			coinPlacer.PlaceCoins ();
+			level += 1;
+			levelText.text = "Level " + level;
+			// destroy all the network entities
 			//coinPlacer.PlaceEnemies ();
 		} else {
 			Debug.LogError ("STOP TRYING TO MAKE A NEW LEVEL AS A CLIENT T_T");
@@ -127,16 +167,30 @@ public class GameStateManager : NetworkBehaviour {
 //	
 //	}
 
+	public void ResetGame() {
+		GenerateNewMap ();
+		ResetPlayerLocation (startPoint.x, startPoint.y);
+	}
+
 	[Command]
 	void CmdGenerateMaps(string seed) {
 		RpcGenerateMaps (seed);
+	}
+
+	void SendToGraveyard(GameObject obj) {
+		StartCoroutine (DestroyOnNextFrame (obj));
+	}
+
+	IEnumerator DestroyOnNextFrame(GameObject o) {
+		yield return new WaitForFixedUpdate ();
+		Destroy (o);
 	}
 
 	[ClientRpc]
 	void RpcGenerateMaps(string seed) {
 		var children = new List<GameObject>();
 		foreach (Transform child in mapGenerator.gameObject.transform) children.Add(child.gameObject);
-		children.ForEach(child => Destroy(child));
+		children.ForEach(child => SendToGraveyard(child));
 		mapGenerator.GenerateNewMap (seed);
 	}
 

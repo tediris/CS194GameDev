@@ -68,7 +68,9 @@ public class ServerComm : NetworkBehaviour {
 	[ClientRpc]
     void RpcSetPosition(float x, float y)
     {
-		wallCheck.ResetOnTeleport();
+		if (isLocalPlayer) {
+			wallCheck.ResetOnTeleport ();
+		}
         gameObject.transform.position = new Vector3(x, y, gameObject.transform.position.z);
 
     }

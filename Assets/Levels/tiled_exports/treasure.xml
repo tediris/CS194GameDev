@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-up" width="20" height="10" tilewidth="32" tileheight="32" nextobjectid="17">
+ <tileset firstgid="1" name="twilight" tilewidth="32" tileheight="32" tilecount="64" columns="8">
+  <image source="../../Tilemaps/twilight_tiles.png" width="256" height="256"/>
+ </tileset>
+ <layer name="Tile Layer 1" width="20" height="10">
+  <data encoding="csv">
+45,46,47,48,47,45,46,0,0,0,0,0,0,47,48,48,45,46,47,48,
+53,54,55,56,55,53,54,0,0,0,0,0,0,55,56,56,53,54,55,56,
+61,62,63,64,63,61,62,0,0,0,0,0,0,63,64,64,61,62,63,64,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,1,2,3,4,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,9,10,11,12,0,0,0,0,0,0,0,0,
+37,38,39,40,37,37,38,0,17,18,19,20,0,39,40,38,37,38,39,40,
+45,46,47,48,45,45,46,0,25,26,27,28,0,47,48,46,45,46,47,48,
+53,54,55,56,53,53,54,0,0,0,0,0,0,55,56,54,53,54,55,56
+</data>
+ </layer>
+ <objectgroup name="Colliders">
+  <object id="10" x="160" y="0" width="32"/>
+  <object id="13" x="0" y="0" width="224" height="96"/>
+  <object id="14" x="416" y="0" width="224" height="96"/>
+  <object id="15" x="0" y="224" width="224" height="96"/>
+  <object id="16" x="416" y="224" width="224" height="96"/>
+ </objectgroup>
+</map>

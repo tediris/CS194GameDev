@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-up" width="20" height="10" tilewidth="32" tileheight="32" nextobjectid="33">
+ <tileset firstgid="1" name="twilight" tilewidth="32" tileheight="32" tilecount="64">
+  <image source="../twilight_tiles.png" width="256" height="256"/>
+  <terraintypes>
+   <terrain name="Ground" tile="-1"/>
+  </terraintypes>
+  <tile id="32" terrain=",,,0"/>
+  <tile id="33" terrain=",,,0"/>
+  <tile id="34" terrain=",,0,"/>
+  <tile id="35" terrain=",,,0"/>
+ </tileset>
+ <layer name="base" width="20" height="10">
+  <data encoding="base64" compression="zlib">
+   eJydz1sLgjAYgOGVgZjdlNFl0sHOpTdaN5X//1f1Ct9grJm2wcP2nTaWKqVKVLjjIXvlyJdG3u7TcYg3ajzx6hG39Szl/GsdccIZl47euqPuu1ZYY+s5u/ljdoAhAow83tN36NkIY8SYOOr2ytT3fyNjdooZEswddfO/O6Sy73Ewzploq9n5JreQ+664IUfRI84ltvONDwzgEvM=
+  </data>
+ </layer>
+ <objectgroup name="Colliders">
+  <object id="15" x="0" y="0" width="576" height="64"/>
+  <object id="16" x="576" y="0" width="64" height="64"/>
+  <object id="17" x="608" y="64" width="32" height="32"/>
+  <object id="18" x="608" y="224" width="32" height="96"/>
+  <object id="19" x="96" y="256" width="512" height="64"/>
+  <object id="20" x="0" y="256" width="96" height="64"/>
+  <object id="21" x="0" y="64" width="32" height="32"/>
+  <object id="22" x="0" y="224" width="32" height="32"/>
+  <object id="23" x="32" y="128" width="96" height="32"/>
+  <object id="24" x="32" y="224" width="96" height="32"/>
+  <object id="25" x="160" y="192" width="64" height="64"/>
+  <object id="26" x="256" y="160" width="128" height="96"/>
+  <object id="27" x="256" y="64" width="128" height="32"/>
+  <object id="28" x="416" y="192" width="64" height="64"/>
+  <object id="29" x="512" y="224" width="96" height="32"/>
+  <object id="30" x="512" y="128" width="96" height="32"/>
+ </objectgroup>
+ <objectgroup name="Enemies">
+  <object id="31" name="Slime" x="64" y="96" width="32" height="32"/>
+  <object id="32" name="Slime" x="544" y="192" width="32" height="32"/>
+ </objectgroup>
+</map>

@@ -4,7 +4,7 @@ using System.Collections;
 public class EnemyGroundCheck : MonoBehaviour {
 
 	public bool touchingGround = true;
-	public int numTouching = 1;
+	public int numTouching = 0;
 
 	void OnTriggerEnter2D(Collider2D col) {
 		if (col.tag != "Ground")
@@ -19,7 +19,7 @@ public class EnemyGroundCheck : MonoBehaviour {
 		numTouching--;
 		if (numTouching < 1) {
 			touchingGround = false;
-			numTouching = 0;
+			//numTouching = 0;
 		}
 	}
 }

@@ -4438,6 +4438,18 @@ Prefab:
       propertyPath: m_TagString
       value: Shrine
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: toX
+      value: 3.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: toY
+      value: 96
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 164182}

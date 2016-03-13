@@ -139,8 +139,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3f0377663db548bea73fcc4430b7158, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  eggPrefab: {fileID: 0}
+  gameMode: 0
+  testGameMode: 1
+  debugGameMode: 1
   endPortal: {fileID: 169894, guid: a0dc72db3489842a784d2c257b2738a2, type: 2}
   startRoomPrefab: {fileID: 164182, guid: 9802a1d27ab29406e84c165ca032a81b, type: 2}
+  eggRoomPrefab: []
+  treasureRoomPrefab: {fileID: 0}
   sealingWallNSEWPrefabs:
   - {fileID: 149766, guid: 389e27f910b084f378e3db8781822faf, type: 2}
   - {fileID: 100834, guid: e30648d45bb3542b584a06da5a97e6c1, type: 2}
@@ -181,6 +187,7 @@ MonoBehaviour:
   roomHeight: 3.2
   numRoomsWidth: 3
   numRoomsHeight: 3
+  numTreasureRooms: 1
   numRandomConnections: 3
   seed: morgan
 --- !u!1001 &625972661

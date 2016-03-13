@@ -59,7 +59,7 @@ GameObject:
   - 114: {fileID: 11427102}
   - 114: {fileID: 11464598}
   - 114: {fileID: 11472580}
-  - 114: {fileID: 11484050}
+  - 114: {fileID: 11491082}
   m_Layer: 8
   m_Name: RedPlayer
   m_TagString: Player
@@ -226,6 +226,9 @@ MonoBehaviour:
   climbSpeed: 1
   wallJumpPush: 2
   superJumpModeText: {fileID: 0}
+  hitForce: {x: 0, y: 0}
+  debugMovement: 0
+  disableMovement: 0
   controllerEnabled: 0
   grabbingWall: 0
 --- !u!114 &11407572
@@ -254,7 +257,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 3
   health: 3
-  deathAnimationTime: 0.6
+  deathAnimationTime: 2
   alive: 1
 --- !u!114 &11419108
 MonoBehaviour:
@@ -427,6 +430,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a926416ac6c14e10a1a982a0c8f2fa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11491082
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 187436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8638c178e46bc4a38b255c51950146aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pets:
+  - {fileID: 111294, guid: a1dbb8e32f449448eb5cbc640e2a01a4, type: 2}
 --- !u!212 &21207416
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -494,6 +510,10 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: pets.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: tools.Array.size
       value: 1
@@ -723,6 +743,13 @@ Prefab:
       propertyPath: baitCount
       value: 5
       objectReference: {fileID: 0}
+      propertyPath: deathAnimationTime
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: pets.Array.data[0]
+      value: 
+      objectReference: {fileID: 111294, guid: a1dbb8e32f449448eb5cbc640e2a01a4, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 187436}
