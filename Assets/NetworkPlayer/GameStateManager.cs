@@ -12,6 +12,7 @@ public class GameStateManager : NetworkBehaviour {
 	ServerComm localPlayerComm;
 	CoinPlacement coinPlacer = null;
 	public GameObject eggPrefab;
+	public GameObject baitPrefab;
 
 	public GameObject GetLocalPlayer() {
 		return localPlayerComm.gameObject;
@@ -63,6 +64,15 @@ public class GameStateManager : NetworkBehaviour {
 		GameObject egg = (GameObject)Instantiate (eggPrefab, loc, Quaternion.identity);
 		egg.transform.parent = mapGenerator.gameObject.transform;
 		NetworkServer.Spawn (egg);
+	}
+
+	public GameObject SpawnBait(Vector3 loc) {
+		if (!isServer)
+			return null;
+		GameObject bait = (GameObject)Instantiate (baitPrefab, loc, Quaternion.identity);
+		bait.transform.parent = mapGenerator.gameObject.transform;
+		NetworkServer.Spawn (bait);
+		return bait;
 	}
 
 	public void CreateOverNetwork (GameObject go, Vector3 pos) {

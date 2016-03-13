@@ -59,6 +59,7 @@ GameObject:
   - 114: {fileID: 11427102}
   - 114: {fileID: 11464598}
   - 114: {fileID: 11472580}
+  - 114: {fileID: 11484050}
   m_Layer: 8
   m_Name: RedPlayer
   m_TagString: Player
@@ -210,6 +211,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSpeed: 1.5
   jumpSpeed: 3
+  hasJetpack: 0
+  powerJumps: 0
   groundTags:
   - Ground
   - Player
@@ -222,6 +225,7 @@ MonoBehaviour:
   airControl: 0.05
   climbSpeed: 1
   wallJumpPush: 2
+  superJumpModeText: {fileID: 0}
   controllerEnabled: 0
   grabbingWall: 0
 --- !u!114 &11407572
@@ -250,6 +254,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 3
   health: 3
+  deathAnimationTime: 0.6
   alive: 1
 --- !u!114 &11419108
 MonoBehaviour:
@@ -398,6 +403,19 @@ MonoBehaviour:
   param3: 
   param4: 
   param5: 
+--- !u!114 &11484050
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 187436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5a6b096417344211b7bf2ea77f17ca7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baitCount: 5
+  baits: []
 --- !u!114 &11488224
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -566,7 +584,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: maxSpeed
@@ -700,6 +718,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: baitCount
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
