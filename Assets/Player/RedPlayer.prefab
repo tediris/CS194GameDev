@@ -60,6 +60,7 @@ GameObject:
   - 114: {fileID: 11464598}
   - 114: {fileID: 11472580}
   - 114: {fileID: 11491082}
+  - 114: {fileID: 11484050}
   m_Layer: 8
   m_Name: RedPlayer
   m_TagString: Player
@@ -408,7 +409,7 @@ MonoBehaviour:
   param5: 
 --- !u!114 &11484050
 MonoBehaviour:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 187436}
@@ -742,9 +743,6 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: baitCount
       value: 5
-      objectReference: {fileID: 0}
-      propertyPath: deathAnimationTime
-      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: pets.Array.data[0]
