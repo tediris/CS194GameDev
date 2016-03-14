@@ -140,27 +140,15 @@ public class MapGen : MonoBehaviour {
 	}
 
 	void SpawnMap() {
-//		int maxDist = -1;
-//		int maxDistX = -1;
-//		int maxDistY = -1;
-//		for (int x = 0; x < numRoomsWidth; x++) {
-//			for (int y = 0; y < numRoomsHeight; y++) {
-//				if (rooms [y, x].dist > maxDist) {
-//					maxDist = rooms [y, x].dist;
-//					maxDistX = x;
-//					maxDistY = y;
-//				}
-//			}
-//		}
-//
-//		CreateEnd (maxDistX, maxDistY);
 		SetupGameMode();
-
 		for (int x = 0; x < numRoomsWidth; x++) {
 			for (int y = 0; y < numRoomsHeight; y++) {
 				rooms [y, x].Create ();
 			}
 		}
+
+		SafariManager safariManager = GameObject.Find ("GameState").GetComponent<SafariManager> ();
+		safariManager.StartManager ();
 	}
 
 	void SetupGameMode() {
@@ -170,8 +158,6 @@ public class MapGen : MonoBehaviour {
 			SetupTreasureMode ();
 		} else if (gameMode == GameMode.Steal) {
 			SetupStealMode ();
-		} else if (gameMode == GameMode.Safari) {
-			SetupSafariMode ();
 		}
 	}
 
@@ -223,18 +209,30 @@ public class MapGen : MonoBehaviour {
 		rooms [maxDistX, maxDistY].isEggRoom = true;
 	}
 
-	void SetupSafariMode() {
-		bool flag = false;
-		while (!flag) {
-			int x = rand.Next (numRoomsWidth);
-			int y = rand.Next (numRoomsHeight);
-			Room room = rooms [x, y];
-			if (!room.connectedRooms [(int)Direction.NORTH]) {
-				room.isTrapRoom = true;
-				flag = true;
-			}
+	Room RandomRoom () {
+		if (rooms.Length == 0) {
+			return null;
 		}
+		int x = rand.Next (numRoomsWidth);
+		int y = rand.Next (numRoomsHeight);
+		Room room = rooms [x, y];
+		return room;
 	}
+
+	public Room GetRandomRoom() {
+		return RandomRoom ();
+	}
+
+//	void SetupSafariMode() {
+//		bool flag = false;
+//		while (!flag) {
+//			Room room = RandomRoom ();
+//			if (!room.connectedRooms [(int)Direction.NORTH]) {
+//				room.isTrapRoom = true;
+//				flag = true;
+//			}
+//		}
+//	}
 
 	void CreateEnd(int x, int y) {
 		Vector3 pos = Vector3.up * (-y - 0.5f) * roomHeight + Vector3.right * (-x + 0.5f) * roomWidth;
@@ -434,41 +432,6 @@ public class MapGen : MonoBehaviour {
 
 			GameObject tile = Instantiate (prefab, pos, Quaternion.identity) as GameObject;
 			tile.transform.parent = generator.gameObject.transform;
-
-			if (isTrapRoom) {
-				GameStateManager gsManager = GameObject.Find ("GameState").GetComponent<GameStateManager> ();
-				Vector3 roomPos = prefab.transform.position;
-				Vector2 trapPos;
-				Rigidbody2D connectedBody;
-				Vector2 connectedAnchorPoint;
-
-				while (true) {
-					float deltaX = Random.value * generator.roomWidth; 
-					float deltaY = Random.value * generator.roomHeight;
-					int layerMask = 1 << 8;
-
-					Vector2 _pos = new Vector2 (pos.x + deltaX, pos.y - deltaY);
-					RaycastHit2D hit = Physics2D.Raycast (_pos, Vector2.up, layerMask);
-					if (hit.collider != null) {
-						Rigidbody2D colliderRigidbody = hit.collider.gameObject.AddComponent<Rigidbody2D> ();
-						colliderRigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
-						connectedBody = colliderRigidbody;
-						connectedAnchorPoint = connectedBody.transform.InverseTransformPoint (hit.point);
-						trapPos = new Vector2(hit.point.x, hit.point.y - 0.1f);
-
-						GameObject trap = gsManager.SpawnTrap (trapPos);
-						SpringJoint2D joint = trap.GetComponent<SpringJoint2D> ();
-						Rigidbody2D trapBody = trap.GetComponent<Rigidbody2D> ();
-
-						joint.anchor.Set (trapBody.transform.position.x, trapBody.transform.position.y - 0.1f);
-						joint.connectedBody = connectedBody;
-						joint.connectedAnchor = connectedAnchorPoint;
-
-						trapBody.MovePosition (trapPos);
-						break;
-					}
-				}
-			}
 		}
 	}
 }

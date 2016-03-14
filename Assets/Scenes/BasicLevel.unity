@@ -95,6 +95,7 @@ GameObject:
   - 4: {fileID: 32943560}
   - 114: {fileID: 32943559}
   - 114: {fileID: 32943558}
+  - 114: {fileID: 32943561}
   m_Layer: 0
   m_Name: GameState
   m_TagString: Untagged
@@ -116,8 +117,6 @@ MonoBehaviour:
   mapGenerator: {fileID: 0}
   curSeed: null
   eggPrefab: {fileID: 160362, guid: e26cf9cc31c6e4feeafde824dba091e1, type: 2}
-  baitPrefab: {fileID: 160362, guid: 09bcc98ea0864407791f611f41ed37b8, type: 2}
-  trapPrefab: {fileID: 195656, guid: bac76bb98c85b4d80ac90e50a0c75f19, type: 2}
   numTreasures: 0
   startPoint: {x: 3.2, y: 96}
   levelText: {fileID: 0}
@@ -165,6 +164,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 8
+--- !u!114 &32943561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 32943557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 305fc9a28f032420d9bfa7ac38ae296f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyPrefab: {fileID: 159086, guid: 005d6ef1efae0412887b3233317d322b, type: 2}
+  trapPrefab: {fileID: 195656, guid: bac76bb98c85b4d80ac90e50a0c75f19, type: 2}
 --- !u!1 &37079870
 GameObject:
   m_ObjectHideFlags: 0

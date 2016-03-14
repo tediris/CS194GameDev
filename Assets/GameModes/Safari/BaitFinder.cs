@@ -18,6 +18,7 @@ public class BaitFinder : MonoBehaviour {
 
 	IEnumerator UpdatePursuedBait() {
 		for (;;) {
+			HashSet<GameObject> baitsToRemove = new HashSet<GameObject> ();
 			float totalDistance = 0f;
 			foreach (GameObject bait in activeBaits) {
 				float distance = Vector2.Distance (bait.transform.position, body.position);
@@ -27,6 +28,9 @@ public class BaitFinder : MonoBehaviour {
 			float totalProbabilities = 20f; // Initiailizing to 4 is a fudge factor to give the bait finder a high prior of not moving towards a bait
 			foreach (GameObject bait in activeBaits) {
 				float distance = Vector2.Distance (bait.transform.position, body.position);
+				if (distance < 1e-1f) {
+					baitsToRemove.Add (bait);
+				}
 				totalProbabilities += Mathf.Exp (Mathf.Pow(distance, -2));
 			}
 			Debug.Log ("Total probability " + totalProbabilities);
@@ -36,13 +40,18 @@ public class BaitFinder : MonoBehaviour {
 			float currentProbability = 0f;
 			foreach (GameObject bait in activeBaits) {
 				float distance = Vector2.Distance (bait.transform.position, body.position);
-				float probability = Mathf.Exp (Mathf.Pow(distance, -2)) / totalProbabilities;
+				float probability = Mathf.Exp (Mathf.Pow(distance, -0.5f)) / totalProbabilities;
 				currentProbability += probability;
 				if (currentProbability > desiredProbability) {
 					pursuedBait = bait;
 					Debug.Log ("Moving to bait");
 					break;
 				}
+			}
+
+			foreach (GameObject bait in baitsToRemove) {
+				activeBaits.Remove (bait);
+				Destroy (bait);
 			}
 
 			yield return new WaitForSeconds (0.5f);

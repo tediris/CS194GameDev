@@ -13,8 +13,6 @@ public class GameStateManager : NetworkBehaviour {
 	ServerComm localPlayerComm;
 	CoinPlacement coinPlacer = null;
 	public GameObject eggPrefab;
-	public GameObject baitPrefab;
-	public GameObject trapPrefab;
 
 	GameObject networkEntityPool;
 	//[HideInInspector]
@@ -73,7 +71,7 @@ public class GameStateManager : NetworkBehaviour {
 
 	public void StoreLocalPlayer(ServerComm comm) {
 		localPlayerComm = comm;
-	}
+	} 
 
 	public void SpawnEgg(Vector3 loc) {
 		if (!isServer)
@@ -83,32 +81,15 @@ public class GameStateManager : NetworkBehaviour {
 		egg.transform.SetParent(networkEntityPool.transform, true);
 		NetworkServer.Spawn (egg);
 	}
-
-	public GameObject SpawnTrap(Vector3 loc) {
-		if (!isServer)
-			return null;
-		GameObject trap = (GameObject)Instantiate (trapPrefab, loc, Quaternion.identity);
-//		egg.name = "Egg_Capture";
-		trap.transform.SetParent(networkEntityPool.transform, true);
-		NetworkServer.Spawn (trap);
-		return trap;
-	}
-
-	public GameObject SpawnBait(Vector3 loc) {
-		if (!isServer)
-			return null;
-		GameObject bait = (GameObject)Instantiate (baitPrefab, loc, Quaternion.identity);
-		bait.transform.parent = mapGenerator.gameObject.transform;
-		NetworkServer.Spawn (bait);
-		return bait;
-	}
 		
-	public void CreateOverNetworkInstant(GameObject go, Vector3 pos) {
-		if (!isServer)
-			return;
+	public GameObject CreateOverNetworkInstant(GameObject go, Vector3 pos) {
+		if (!isServer) {
+			return null;
+		}
 		GameObject instance = (GameObject)Instantiate (go, pos, Quaternion.identity);
 		instance.transform.SetParent(networkEntityPool.transform, true);
 		NetworkServer.Spawn (instance);
+		return instance;
 	}
 
 	public void CreateOverNetwork (GameObject go, Vector3 pos) {

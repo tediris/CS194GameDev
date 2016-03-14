@@ -420,6 +420,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baitCount: 5
   baits: []
+  baitPrefab: {fileID: 160362, guid: 09bcc98ea0864407791f611f41ed37b8, type: 2}
 --- !u!114 &11488224
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -748,6 +749,10 @@ Prefab:
       propertyPath: pets.Array.data[0]
       value: 
       objectReference: {fileID: 111294, guid: a1dbb8e32f449448eb5cbc640e2a01a4, type: 2}
+    - target: {fileID: 0}
+      propertyPath: baitPrefab
+      value: 
+      objectReference: {fileID: 160362, guid: 09bcc98ea0864407791f611f41ed37b8, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 187436}

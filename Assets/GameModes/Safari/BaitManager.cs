@@ -6,26 +6,27 @@ public class BaitManager : MonoBehaviour {
 
 	public int baitCount;
 	public List<GameObject> baits;
+	public GameObject baitPrefab;
 
 	// Use this for initialization
 	void Start () {
 		for (int i = 0; i < baitCount; i++) {
 			GameStateManager gsManager = GameObject.Find ("GameState").GetComponent<GameStateManager> ();
 			Vector3 location = new Vector3 (100f, 100f, 0f);
-			GameObject bait = gsManager.SpawnBait (location);
+			GameObject bait = gsManager.CreateOverNetworkInstant (baitPrefab, location);
 			baits.Add (bait);
 		}
 	}
 	
 	// Update is called once per frame
-	void Update () {
-	
-	}
+//	void Update () {
+//	
+//	}
 
 	public GameObject MoveEggToPlayer(PlayerControl player) {
 		if (baits.Count == 0) {
 			Debug.Log ("No bait left");
-			return null;
+			return new GameObject();
 		}
 
 		GameObject bait = baits [0];
