@@ -3,18 +3,20 @@ using System.Collections;
 using UnityEngine.Networking;
 
 public class TrapManager : NetworkBehaviour {
-	enum TrapState { Ready, Down, Falling, Rising };
-	TrapState trapState = TrapState.Ready;
+	public enum TrapState { Ready, Down, Falling, Rising };
+	public TrapState trapState = TrapState.Ready;
+//	public Vector2 homePosition;
 	Rigidbody2D trapBody;
 	SpringJoint2D spring;
-	Vector2 homePosition;
+
 
 	// Use this for initialization
 	void Start () {
 		trapBody = this.transform.GetComponent<Rigidbody2D> ();
 		trapState = TrapState.Ready;
 		spring = this.transform.GetComponent<SpringJoint2D> ();
-		homePosition = trapBody.position;
+		spring.distance = 0.1f;
+		spring.enabled = true;
 	}
 
 	// Update is called once per frame
@@ -29,7 +31,7 @@ public class TrapManager : NetworkBehaviour {
 		}
 
 		if (trapState == TrapState.Rising) {
-			if (Vector2.Distance (homePosition, this.trapBody.position) < 1) {
+			if (trapBody.velocity.magnitude < 1f && Vector2.Distance (spring.connectedBody.transform.TransformPoint(spring.connectedAnchor), trapBody.position) < 1f) {
 				trapState = TrapState.Ready;
 			}
 			spring.distance = 0.1f;

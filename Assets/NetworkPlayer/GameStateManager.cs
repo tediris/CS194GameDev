@@ -14,6 +14,8 @@ public class GameStateManager : NetworkBehaviour {
 	CoinPlacement coinPlacer = null;
 	public GameObject eggPrefab;
 	public GameObject baitPrefab;
+	public GameObject trapPrefab;
+
 	GameObject networkEntityPool;
 	//[HideInInspector]
 	[SyncVar]
@@ -80,6 +82,16 @@ public class GameStateManager : NetworkBehaviour {
 		egg.name = "Egg_Capture";
 		egg.transform.SetParent(networkEntityPool.transform, true);
 		NetworkServer.Spawn (egg);
+	}
+
+	public GameObject SpawnTrap(Vector3 loc) {
+		if (!isServer)
+			return null;
+		GameObject trap = (GameObject)Instantiate (trapPrefab, loc, Quaternion.identity);
+//		egg.name = "Egg_Capture";
+		trap.transform.SetParent(networkEntityPool.transform, true);
+		NetworkServer.Spawn (trap);
+		return trap;
 	}
 
 	public GameObject SpawnBait(Vector3 loc) {

@@ -32,11 +32,10 @@ public class MapGen : MonoBehaviour {
 	public enum GameMode {
 		Race = 0,
 		Treasure = 1,
-		Steal = 2
+		Steal = 2,
+		Safari = 3
 	}
-
-	public GameObject eggPrefab;
-
+			
 	public GameMode gameMode;
 	public bool testGameMode = false;
 	public GameMode debugGameMode;
@@ -166,13 +165,13 @@ public class MapGen : MonoBehaviour {
 
 	void SetupGameMode() {
 		if (gameMode == GameMode.Race) {
-			// place the end portal
 			SetupRaceMode ();
 		} else if (gameMode == GameMode.Treasure) {
 			SetupTreasureMode ();
 		} else if (gameMode == GameMode.Steal) {
-			Debug.Log ("It's an egg game mode");
 			SetupStealMode ();
+		} else if (gameMode == GameMode.Safari) {
+			SetupSafariMode ();
 		}
 	}
 
@@ -222,6 +221,19 @@ public class MapGen : MonoBehaviour {
 			}
 		}
 		rooms [maxDistX, maxDistY].isEggRoom = true;
+	}
+
+	void SetupSafariMode() {
+		bool flag = false;
+		while (!flag) {
+			int x = rand.Next (numRoomsWidth);
+			int y = rand.Next (numRoomsHeight);
+			Room room = rooms [x, y];
+			if (!room.connectedRooms [(int)Direction.NORTH]) {
+				room.isTrapRoom = true;
+				flag = true;
+			}
+		}
 	}
 
 	void CreateEnd(int x, int y) {
@@ -305,6 +317,7 @@ public class MapGen : MonoBehaviour {
 		public MapGen generator;
 		public bool hasTreasure = false;
 		public bool isEggRoom = false;
+		public bool isTrapRoom = false;
 
 		public Room(int x, int y, MapGen gen, int dist) {
 			this.x = x;
@@ -421,6 +434,41 @@ public class MapGen : MonoBehaviour {
 
 			GameObject tile = Instantiate (prefab, pos, Quaternion.identity) as GameObject;
 			tile.transform.parent = generator.gameObject.transform;
+
+			if (isTrapRoom) {
+				GameStateManager gsManager = GameObject.Find ("GameState").GetComponent<GameStateManager> ();
+				Vector3 roomPos = prefab.transform.position;
+				Vector2 trapPos;
+				Rigidbody2D connectedBody;
+				Vector2 connectedAnchorPoint;
+
+				while (true) {
+					float deltaX = Random.value * generator.roomWidth; 
+					float deltaY = Random.value * generator.roomHeight;
+					int layerMask = 1 << 8;
+
+					Vector2 _pos = new Vector2 (pos.x + deltaX, pos.y - deltaY);
+					RaycastHit2D hit = Physics2D.Raycast (_pos, Vector2.up, layerMask);
+					if (hit.collider != null) {
+						Rigidbody2D colliderRigidbody = hit.collider.gameObject.AddComponent<Rigidbody2D> ();
+						colliderRigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
+						connectedBody = colliderRigidbody;
+						connectedAnchorPoint = connectedBody.transform.InverseTransformPoint (hit.point);
+						trapPos = new Vector2(hit.point.x, hit.point.y - 0.1f);
+
+						GameObject trap = gsManager.SpawnTrap (trapPos);
+						SpringJoint2D joint = trap.GetComponent<SpringJoint2D> ();
+						Rigidbody2D trapBody = trap.GetComponent<Rigidbody2D> ();
+
+						joint.anchor.Set (trapBody.transform.position.x, trapBody.transform.position.y - 0.1f);
+						joint.connectedBody = connectedBody;
+						joint.connectedAnchor = connectedAnchorPoint;
+
+						trapBody.MovePosition (trapPos);
+						break;
+					}
+				}
+			}
 		}
 	}
 }
