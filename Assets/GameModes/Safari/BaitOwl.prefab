@@ -34,6 +34,7 @@ GameObject:
   - 114: {fileID: 11437606}
   - 114: {fileID: 11486752}
   - 114: {fileID: 11434484}
+  - 60: {fileID: 6052144}
   m_Layer: 0
   m_Name: BaitOwl
   m_TagString: Untagged
@@ -78,7 +79,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 0
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -114,6 +115,49 @@ CircleCollider2D:
   m_Offset: {x: 0, y: -0.03}
   serializedVersion: 2
   m_Radius: 10
+--- !u!60 &6052144
+PolygonCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 159086}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  m_Points:
+    m_Paths:
+    - - {x: 0.01, y: -0.19999999}
+      - {x: 0.049999997, y: -0.19999999}
+      - {x: 0.08, y: -0.19}
+      - {x: 0.08, y: -0.16}
+      - {x: 0.17999999, y: -0.11}
+      - {x: 0.24, y: -0.04}
+      - {x: 0.31, y: 0.06}
+      - {x: 0.31, y: 0.21}
+      - {x: 0.29999998, y: 0.26999998}
+      - {x: 0.19999999, y: 0.26999998}
+      - {x: 0.14, y: 0.24}
+      - {x: 0.099999994, y: 0.26999998}
+      - {x: 0.06, y: 0.26999998}
+      - {x: 0.02, y: 0.22}
+      - {x: -0.089999996, y: 0.26999998}
+      - {x: -0.14999999, y: 0.22999999}
+      - {x: -0.21, y: 0.26999998}
+      - {x: -0.32, y: 0.26999998}
+      - {x: -0.32, y: 0.04}
+      - {x: -0.29, y: -0.01}
+      - {x: -0.11, y: -0.19}
+      - {x: -0.089999996, y: -0.19999999}
+      - {x: -0.02, y: -0.19999999}
+      - {x: -0.01, y: -0.19}
+      - {x: -0.01, y: -0.14999999}
+      - {x: -0.01, y: -0.17999999}
+    - - {x: -0.14999999, y: 0.11}
+      - {x: -0.16, y: 0.12}
+      - {x: -0.17999999, y: 0.08}
 --- !u!95 &9556072
 Animator:
   serializedVersion: 3
@@ -282,7 +326,7 @@ Prefab:
       objectReference: {fileID: 11434484}
     - target: {fileID: 0}
       propertyPath: m_IsKinematic
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Enabled

@@ -177,6 +177,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 159086, guid: 005d6ef1efae0412887b3233317d322b, type: 2}
   trapPrefab: {fileID: 195656, guid: bac76bb98c85b4d80ac90e50a0c75f19, type: 2}
+  leverPrefab: {fileID: 195656, guid: a3728eab763b0402b97b082d9542ca8c, type: 2}
 --- !u!1 &37079870
 GameObject:
   m_ObjectHideFlags: 0

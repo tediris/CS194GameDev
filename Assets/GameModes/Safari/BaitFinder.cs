@@ -31,7 +31,7 @@ public class BaitFinder : MonoBehaviour {
 				if (distance < 1e-1f) {
 					baitsToRemove.Add (bait);
 				}
-				totalProbabilities += Mathf.Exp (Mathf.Pow(distance, -2));
+				totalProbabilities += Mathf.Exp (Mathf.Pow(distance, -0.5f));
 			}
 			Debug.Log ("Total probability " + totalProbabilities);
 
