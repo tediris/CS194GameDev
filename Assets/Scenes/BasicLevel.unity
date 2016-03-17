@@ -1015,6 +1015,7 @@ MonoBehaviour:
   endPortal: {fileID: 169894, guid: a0dc72db3489842a784d2c257b2738a2, type: 2}
   startRoomPrefab: {fileID: 164182, guid: 9802a1d27ab29406e84c165ca032a81b, type: 2}
   eggRoomPrefab:
+  - {fileID: 164864, guid: f11fcaa6fc31a4187b8e5e8f01e73cd4, type: 2}
   - {fileID: 161630, guid: a831af324d8e347cc8ce4bff9bdcb41e, type: 2}
   treasureRoomPrefab: {fileID: 128150, guid: 8d04fc0038b1c49afa0b430cfe2e6eaf, type: 2}
   sealingWallNSEWPrefabs:
