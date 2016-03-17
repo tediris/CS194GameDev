@@ -26,6 +26,7 @@ public class SafariManager : NetworkBehaviour {
 			GameObject trap = CreateTrap ();
 			if (!trap) {
 				Debug.Log ("Error: could not create trap");
+				GameObject.Find("GameState").GetComponent<GameStateManager>().ResetGame();
 				return;
 			}
 			GameObject enemy = CreateEnemy ();
