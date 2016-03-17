@@ -50,7 +50,7 @@ public class SafariManager : NetworkBehaviour {
 
 	GameObject CreateTrap () {
 		int count = 0;
-		while (count < 20) {
+		while (count < 200) {
 			count += 1;
 			MapGen.Room room = mg.GetRandomRoom ();
 			float deltaX = Random.value * mg.roomWidth;
@@ -65,10 +65,10 @@ public class SafariManager : NetworkBehaviour {
 
 			int layerMask = 1 << 8;
 			RaycastHit2D trapHit = Physics2D.Raycast (trapCastPos, Vector2.up, layerMask);
-			RaycastHit2D trapLeftClearHit = Physics2D.Raycast (trapCastPos, Vector2.down, 5f, layerMask);
-			RaycastHit2D trapRightClearHit = Physics2D.Raycast (trapCastPos, Vector2.down, 5f, layerMask);
+			RaycastHit2D trapLeftClearHit = Physics2D.Raycast (trapLeftCastPos, Vector2.down, layerMask);
+			RaycastHit2D trapRightClearHit = Physics2D.Raycast (trapRightCastPos, Vector2.down, layerMask);
 			RaycastHit2D leverHit = Physics2D.Raycast (leverCastPos, Vector2.down, layerMask);
-			if (trapLeftClearHit.collider == null && trapRightClearHit.collider == null
+			if (trapLeftClearHit.distance > 1.5f && trapRightClearHit.distance > 1.5f
 				&& trapHit.collider != null 
 				&& leverHit.collider != null
 				&& Vector2.Dot(Vector2.down, trapHit.normal) > 0f 
@@ -76,14 +76,14 @@ public class SafariManager : NetworkBehaviour {
 				Vector2 trapPos = new Vector2(trapHit.point.x, trapHit.point.y - 1f);
 				GameObject trap = gs.CreateOverNetworkInstant (trapPrefab, trapPos);
 				SpringJoint2D joint = trap.GetComponent<SpringJoint2D> ();
-				Rigidbody2D trapBody = trap.GetComponent<Rigidbody2D> ();
+//				Rigidbody2D trapBody = trap.GetComponent<Rigidbody2D> ();
 
 				Rigidbody2D colliderRigidbody = trapHit.collider.gameObject.AddComponent<Rigidbody2D> ();
 				colliderRigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
 				joint.connectedBody = colliderRigidbody;
 				joint.connectedAnchor = joint.connectedBody.transform.InverseTransformPoint (trapHit.point);
 
-				trapBody.MovePosition (trapPos);
+//				trapBody.MovePosition (trapPos);
 
 				Vector2 leverPos = new Vector2 (leverHit.point.x, leverHit.point.y + 0.1f);
 				GameObject lever = gs.CreateOverNetworkInstant (leverPrefab, leverPos);

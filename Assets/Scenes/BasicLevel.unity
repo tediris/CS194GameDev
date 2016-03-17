@@ -1062,7 +1062,7 @@ MonoBehaviour:
   numRoomsHeight: 2
   numTreasureRooms: 1
   numRandomConnections: 5
-  seed: taami
+  seed: sdfasdf
 --- !u!1 &117369914
 GameObject:
   m_ObjectHideFlags: 0
