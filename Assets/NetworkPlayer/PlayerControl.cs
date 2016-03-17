@@ -33,6 +33,7 @@ public class PlayerControl : NetworkBehaviour
 	NetSetup networkInfo;
 	GameObject playerManager;
 	CarryManager carryManager;
+	BaitManager baitManager;
 
 	CarryControl carryControl;
 	[HideInInspector]public Animator anim;
@@ -259,6 +260,7 @@ public class PlayerControl : NetworkBehaviour
 		anim = GetComponent<Animator> ();
 		gravityInitial = playerBody.gravityScale;
 		wallCheck = GetComponentInChildren<WallCheck> ();
+		baitManager = GetComponent<BaitManager> ();
 		string[] controllers = Input.GetJoystickNames ();
 		foreach (string s in controllers) {
 			Debug.Log (s);
@@ -294,7 +296,6 @@ public class PlayerControl : NetworkBehaviour
 					} else {
 						anim.SetBool ("climbing", false);
 					}
-
 				}
 			} else {
 				if (Mathf.Abs (buttonValue) < float.Epsilon) {
@@ -379,6 +380,12 @@ public class PlayerControl : NetworkBehaviour
 				powerJumps = 3;
 				superJumpModeText.enabled = true;
 			}
+		}
+
+		if (Input.GetKeyDown (KeyCode.B)) {
+			GameObject bait = baitManager.MoveEggToPlayer (this);
+			CmdCarryItem (bait);
+			carrying = true;
 		}
 
 		if (canJump() && input.JumpButton()) {

@@ -95,6 +95,7 @@ GameObject:
   - 4: {fileID: 32943560}
   - 114: {fileID: 32943559}
   - 114: {fileID: 32943558}
+  - 114: {fileID: 32943561}
   m_Layer: 0
   m_Name: GameState
   m_TagString: Untagged
@@ -163,6 +164,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 8
+--- !u!114 &32943561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 32943557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 305fc9a28f032420d9bfa7ac38ae296f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyPrefab: {fileID: 159086, guid: 005d6ef1efae0412887b3233317d322b, type: 2}
+  trapPrefab: {fileID: 195656, guid: bac76bb98c85b4d80ac90e50a0c75f19, type: 2}
+  leverPrefab: {fileID: 195656, guid: a3728eab763b0402b97b082d9542ca8c, type: 2}
 --- !u!1 &37079870
 GameObject:
   m_ObjectHideFlags: 0
@@ -994,10 +1009,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3f0377663db548bea73fcc4430b7158, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eggPrefab: {fileID: 160362, guid: e26cf9cc31c6e4feeafde824dba091e1, type: 2}
-  gameMode: 1
+  gameMode: 3
   testGameMode: 1
-  debugGameMode: 2
+  debugGameMode: 3
   endPortal: {fileID: 169894, guid: a0dc72db3489842a784d2c257b2738a2, type: 2}
   startRoomPrefab: {fileID: 164182, guid: 9802a1d27ab29406e84c165ca032a81b, type: 2}
   eggRoomPrefab:
@@ -1049,7 +1063,7 @@ MonoBehaviour:
   numRoomsHeight: 2
   numTreasureRooms: 1
   numRandomConnections: 5
-  seed: taami
+  seed: sdfasdf
 --- !u!1 &117369914
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,8 +4,8 @@ using UnityEngine.Networking;
 
 public class TrapDeployer : NetworkBehaviour {
 
-	public Transform droppingTrap;
-	public Transform raisingTrap;
+	public GameObject droppingTrap;
+	public GameObject raisingTrap;
 
 	// Use this for initialization
 	void Start () {

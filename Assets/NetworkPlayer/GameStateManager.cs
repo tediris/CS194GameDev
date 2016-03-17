@@ -13,6 +13,7 @@ public class GameStateManager : NetworkBehaviour {
 	ServerComm localPlayerComm;
 	CoinPlacement coinPlacer = null;
 	public GameObject eggPrefab;
+
 	GameObject networkEntityPool;
 	//[HideInInspector]
 	[SyncVar]
@@ -70,7 +71,7 @@ public class GameStateManager : NetworkBehaviour {
 
 	public void StoreLocalPlayer(ServerComm comm) {
 		localPlayerComm = comm;
-	}
+	} 
 
 	public void SpawnEgg(Vector3 loc) {
 		if (!isServer)
@@ -80,13 +81,15 @@ public class GameStateManager : NetworkBehaviour {
 		egg.transform.SetParent(networkEntityPool.transform, true);
 		NetworkServer.Spawn (egg);
 	}
-
-	public void CreateOverNetworkInstant(GameObject go, Vector3 pos) {
-		if (!isServer)
-			return;
+		
+	public GameObject CreateOverNetworkInstant(GameObject go, Vector3 pos) {
+		if (!isServer) {
+			return null;
+		}
 		GameObject instance = (GameObject)Instantiate (go, pos, Quaternion.identity);
 		instance.transform.SetParent(networkEntityPool.transform, true);
 		NetworkServer.Spawn (instance);
+		return instance;
 	}
 
 	public void CreateOverNetwork (GameObject go, Vector3 pos) {
