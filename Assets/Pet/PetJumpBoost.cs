@@ -18,6 +18,8 @@ public class PetJumpBoost : PetAction {
 	float originalMaxDist;
 	PetFollow follow;
 
+	PlayerNotification activationStatus;
+
 	// Use this for initialization
 	void Start () {
 		follow = GetComponent<PetFollow> ();
@@ -51,6 +53,8 @@ public class PetJumpBoost : PetAction {
 	public override void Activate() {
 		if (!cooldown) {
 			BoostJump ();
+		} else {
+			activationStatus.SetPlayerTimedNotification ("Pet ability is on cooldown.", Color.white, 3.0f);
 		}
 	}
 
@@ -59,6 +63,7 @@ public class PetJumpBoost : PetAction {
 		playerControl = player.GetComponent<PlayerControl> ();
 		originalJump = playerControl.jumpSpeed;
 		originalMoveSpeed = playerControl.airControl;
+		activationStatus = player.GetComponent<PlayerNotification> ();
 	}
 
 	IEnumerator BoostTimer() {
@@ -69,5 +74,6 @@ public class PetJumpBoost : PetAction {
 	IEnumerator CooldownTimer() {
 		yield return new WaitForSeconds (cooldownDuration);
 		cooldown = false;
+		activationStatus.SetPlayerTimedNotification ("Pet ability ready!", Color.white, 3.0f);
 	}
 }
