@@ -33,6 +33,7 @@ public class SafariManager : NetworkBehaviour {
 			tm = trap.GetComponent<TrapManager> ();
 			tm.AddTarget(enemy, ((manager) => {
 				Debug.Log("Captured enemy");
+				GameObject.Find("GameState").GetComponent<GameStateManager>().ResetGame();
 				return true;
 			}));
 		}
@@ -50,49 +51,58 @@ public class SafariManager : NetworkBehaviour {
 
 	GameObject CreateTrap () {
 		int count = 0;
-		while (count < 200) {
+		while (count < 10000) {
 			count += 1;
 			MapGen.Room room = mg.GetRandomRoom ();
 			float deltaX = Random.value * mg.roomWidth;
 			float deltaY = Random.value * mg.roomHeight;
 			Vector2 trapCastPos = new Vector2 (room.x + deltaX, room.y - deltaY);
-			Vector2 trapLeftCastPos = new Vector2 (trapCastPos.x - 0.3f, trapCastPos.y);
-			Vector2 trapRightCastPos = new Vector2 (trapCastPos.x + 0.3f, trapCastPos.y);
 
-			deltaX = Random.value * mg.roomWidth;
-			deltaY = Random.value * mg.roomHeight;
-			Vector2 leverCastPos = new Vector2 (room.x + deltaX, room.y - deltaY);
+			deltaX = Random.value * mg.roomWidth/2;
+			deltaY = Random.value * mg.roomHeight/2;
+			Vector2 leverCastPos = new Vector2 (room.x + mg.roomWidth/4 + deltaX, room.y - mg.roomHeight/4 - deltaY);
 
 			int layerMask = 1 << 8;
-			RaycastHit2D trapHit = Physics2D.Raycast (trapCastPos, Vector2.up, layerMask);
-			RaycastHit2D trapLeftClearHit = Physics2D.Raycast (trapLeftCastPos, Vector2.down, layerMask);
-			RaycastHit2D trapRightClearHit = Physics2D.Raycast (trapRightCastPos, Vector2.down, layerMask);
-			RaycastHit2D leverHit = Physics2D.Raycast (leverCastPos, Vector2.down, layerMask);
-			if (trapLeftClearHit.distance > 1.5f && trapRightClearHit.distance > 1.5f
-				&& trapHit.collider != null 
-				&& leverHit.collider != null
-				&& Vector2.Dot(Vector2.down, trapHit.normal) > 0f 
-				&& Vector2.Dot(Vector2.up, leverHit.normal) > 0f) {
-				Vector2 trapPos = new Vector2(trapHit.point.x, trapHit.point.y - 1f);
-				GameObject trap = gs.CreateOverNetworkInstant (trapPrefab, trapPos);
-				SpringJoint2D joint = trap.GetComponent<SpringJoint2D> ();
+			RaycastHit2D trapHit = Physics2D.CircleCast (trapCastPos, 0.3f, Vector2.up, layerMask);
+			if (!(trapHit.collider != null && Vector2.Dot(Vector2.down, trapHit.normal) > 0f)) {
+				continue;
+			}
+
+			Vector2 trapClearCastPos = new Vector2 (trapCastPos.x, trapCastPos.y - 0.35f);
+			RaycastHit2D trapClearHit = Physics2D.CircleCast (trapClearCastPos, 0.35f, Vector2.down, layerMask);
+			if (!(trapClearHit.collider != null && trapClearHit.distance > 1f)) {
+				continue;
+			}
+
+			RaycastHit2D leverHit = Physics2D.CircleCast (leverCastPos, 0.3f, Vector2.down, layerMask);
+			if (!(leverHit.collider != null && Vector2.Dot (Vector2.up, leverHit.normal) > 0f)) {
+				continue;
+			}
+
+			RaycastHit2D leverClearHit = Physics2D.CircleCast (leverCastPos, 0.2f, Vector2.down, layerMask);
+			if (!(leverClearHit.collider == null || leverClearHit.distance > 0.1f)) {
+				continue;
+			}
+
+			Vector2 trapPos = new Vector2(trapHit.point.x, trapHit.point.y);
+			GameObject trap = gs.CreateOverNetworkInstant (trapPrefab, trapPos);
+			SpringJoint2D joint = trap.GetComponent<SpringJoint2D> ();
 //				Rigidbody2D trapBody = trap.GetComponent<Rigidbody2D> ();
 
-				Rigidbody2D colliderRigidbody = trapHit.collider.gameObject.AddComponent<Rigidbody2D> ();
-				colliderRigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
-				joint.connectedBody = colliderRigidbody;
-				joint.connectedAnchor = joint.connectedBody.transform.InverseTransformPoint (trapHit.point);
+			Rigidbody2D colliderRigidbody = trapHit.collider.gameObject.AddComponent<Rigidbody2D> ();
+			colliderRigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
+			joint.connectedBody = colliderRigidbody;
+			joint.connectedAnchor = joint.connectedBody.transform.InverseTransformPoint (trapHit.point);
 
 //				trapBody.MovePosition (trapPos);
 
-				Vector2 leverPos = new Vector2 (leverHit.point.x, leverHit.point.y + 0.1f);
-				GameObject lever = gs.CreateOverNetworkInstant (leverPrefab, leverPos);
-				TrapDeployer deployer = lever.GetComponent<TrapDeployer> ();
-				deployer.droppingTrap = trap;
-				deployer.raisingTrap = trap;
+			Vector2 leverPos = new Vector2 (leverHit.point.x, leverHit.point.y);
+			GameObject lever = gs.CreateOverNetworkInstant (leverPrefab, leverPos);
+			TrapDeployer deployer = lever.GetComponent<TrapDeployer> ();
+			deployer.droppingTrap = trap;
+			deployer.raisingTrap = trap;
 
-				return trap;
-			}
+			return trap;
 		}
 		return null;
 	}

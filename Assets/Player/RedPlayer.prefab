@@ -418,7 +418,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5a6b096417344211b7bf2ea77f17ca7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baitCount: 5
+  baitCount: 100
   baits: []
   baitPrefab: {fileID: 160362, guid: 09bcc98ea0864407791f611f41ed37b8, type: 2}
 --- !u!114 &11488224
@@ -743,7 +743,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: baitCount
-      value: 5
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: pets.Array.data[0]
