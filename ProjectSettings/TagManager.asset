@@ -9,6 +9,7 @@ TagManager:
   - MinimapCamera
   - Coin
   - Shrine
+  - Bait
   - Egg
   layers:
   - Default

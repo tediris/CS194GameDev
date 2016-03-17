@@ -50,10 +50,12 @@ public class CoinPlacement : NetworkBehaviour {
 		for (int i = 0; i < numEnemies; i++) {
 			while (true) {
 				float xPos = ((float) rand.NextDouble ()) * xScale;
-				float yPos = ((float)rand.NextDouble ()) * yScale;
+				float yPos = ((float) rand.NextDouble ()) * yScale;
 				Vector2 pos = basePos + new Vector2 (xPos, yPos);
 				RaycastHit2D rcast = Physics2D.Raycast (pos, Vector2.down, 0.1f);
-				if (rcast.collider == null) {
+				if (rcast.collider) {
+					Debug.Log ("Raycast hit collider");
+				} else {
 					// place the coin
 					GameObject enemy = Instantiate (enemyPrefab, new Vector3 (pos.x, pos.y, 0), Quaternion.identity) as GameObject;
 					enemy.transform.parent = this.gameObject.transform;

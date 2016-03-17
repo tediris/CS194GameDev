@@ -9,13 +9,12 @@ GameObject:
   m_Component:
   - 4: {fileID: 415872}
   - 212: {fileID: 21284542}
-  - 68: {fileID: 6880682}
   - 114: {fileID: 11495554}
-  - 114: {fileID: 11482656}
   - 50: {fileID: 5070494}
-  - 231: {fileID: 23191308}
+  - 114: {fileID: 11460220}
+  - 68: {fileID: 6820622}
   m_Layer: 0
-  m_Name: Trap
+  m_Name: TrapLever
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 195656}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.59, y: -0.66, z: 0}
-  m_LocalScale: {x: 0.2700415, y: 0.27616104, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -41,7 +40,7 @@ Rigidbody2D:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 195656}
   m_UseAutoMass: 0
-  m_Mass: 300
+  m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -50,7 +49,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 5
---- !u!68 &6880682
+--- !u!68 &6820622
 EdgeCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -63,11 +62,11 @@ EdgeCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   m_Points:
-  - {x: 0.63716125, y: -0.6195984}
-  - {x: 0.657547, y: 0.64489746}
-  - {x: -0.6449051, y: 0.6196289}
-  - {x: -0.64979553, y: -0.6448364}
---- !u!114 &11482656
+  - {x: -0.122832775, y: -0.13146782}
+  - {x: 0.12705517, y: -0.13686097}
+  - {x: 0.032278538, y: -0.08996761}
+  - {x: -0.12638092, y: 0.11347157}
+--- !u!114 &11460220
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -75,9 +74,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 195656}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ad3de481b6844591bb5279d9df965f4, type: 3}
+  m_Script: {fileID: 11500000, guid: 87c7fa7b5ac414014ab8713215c6b9d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  droppingTrap: {fileID: 0}
+  raisingTrap: {fileID: 0}
 --- !u!114 &11495554
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -92,22 +93,22 @@ MonoBehaviour:
   m_SceneId:
     m_Value: 0
   m_AssetId:
-    i0: 186
-    i1: 199
-    i2: 107
-    i3: 185
-    i4: 140
-    i5: 133
-    i6: 180
-    i7: 216
-    i8: 10
-    i9: 201
-    i10: 14
-    i11: 80
-    i12: 160
-    i13: 199
-    i14: 95
-    i15: 25
+    i0: 163
+    i1: 114
+    i2: 142
+    i3: 171
+    i4: 118
+    i5: 59
+    i6: 4
+    i7: 2
+    i8: 185
+    i9: 123
+    i10: 8
+    i11: 45
+    i12: 149
+    i13: 66
+    i14: 202
+    i15: 140
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
 --- !u!212 &21284542
@@ -136,29 +137,10 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 6c8f34bc095e34d92b3fce4bcc55cf13, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 29fd6ede62d59418e8b1d614c872b59d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
---- !u!231 &23191308
-SpringJoint2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 195656}
-  m_Enabled: 1
-  serializedVersion: 4
-  m_EnableCollision: 0
-  m_ConnectedRigidBody: {fileID: 0}
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_AutoConfigureConnectedAnchor: 0
-  m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 4.591604, y: -0.3200209}
-  m_AutoConfigureDistance: 0
-  m_Distance: 0.1
-  m_DampingRatio: 0
-  m_Frequency: 1
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -170,6 +152,23 @@ Prefab:
       propertyPath: m_Distance
       value: 0.1
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Frequency
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 29fd6ede62d59418e8b1d614c872b59d,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 195656}

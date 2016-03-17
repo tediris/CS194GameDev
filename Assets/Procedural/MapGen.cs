@@ -32,11 +32,10 @@ public class MapGen : MonoBehaviour {
 	public enum GameMode {
 		Race = 0,
 		Treasure = 1,
-		Steal = 2
+		Steal = 2,
+		Safari = 3
 	}
-
-	public GameObject eggPrefab;
-
+			
 	public GameMode gameMode;
 	public bool testGameMode = false;
 	public GameMode debugGameMode;
@@ -141,37 +140,23 @@ public class MapGen : MonoBehaviour {
 	}
 
 	void SpawnMap() {
-//		int maxDist = -1;
-//		int maxDistX = -1;
-//		int maxDistY = -1;
-//		for (int x = 0; x < numRoomsWidth; x++) {
-//			for (int y = 0; y < numRoomsHeight; y++) {
-//				if (rooms [y, x].dist > maxDist) {
-//					maxDist = rooms [y, x].dist;
-//					maxDistX = x;
-//					maxDistY = y;
-//				}
-//			}
-//		}
-//
-//		CreateEnd (maxDistX, maxDistY);
 		SetupGameMode();
-
 		for (int x = 0; x < numRoomsWidth; x++) {
 			for (int y = 0; y < numRoomsHeight; y++) {
 				rooms [y, x].Create ();
 			}
 		}
+
+		SafariManager safariManager = GameObject.Find ("GameState").GetComponent<SafariManager> ();
+		safariManager.StartManager ();
 	}
 
 	void SetupGameMode() {
 		if (gameMode == GameMode.Race) {
-			// place the end portal
 			SetupRaceMode ();
 		} else if (gameMode == GameMode.Treasure) {
 			SetupTreasureMode ();
 		} else if (gameMode == GameMode.Steal) {
-			Debug.Log ("It's an egg game mode");
 			SetupStealMode ();
 		}
 	}
@@ -223,6 +208,31 @@ public class MapGen : MonoBehaviour {
 		}
 		rooms [maxDistX, maxDistY].isEggRoom = true;
 	}
+
+	Room RandomRoom () {
+		if (rooms.Length == 0) {
+			return null;
+		}
+		int x = rand.Next (numRoomsWidth);
+		int y = rand.Next (numRoomsHeight);
+		Room room = rooms [x, y];
+		return room;
+	}
+
+	public Room GetRandomRoom() {
+		return RandomRoom ();
+	}
+
+//	void SetupSafariMode() {
+//		bool flag = false;
+//		while (!flag) {
+//			Room room = RandomRoom ();
+//			if (!room.connectedRooms [(int)Direction.NORTH]) {
+//				room.isTrapRoom = true;
+//				flag = true;
+//			}
+//		}
+//	}
 
 	void CreateEnd(int x, int y) {
 		Vector3 pos = Vector3.up * (-y - 0.5f) * roomHeight + Vector3.right * (-x + 0.5f) * roomWidth;
@@ -305,6 +315,7 @@ public class MapGen : MonoBehaviour {
 		public MapGen generator;
 		public bool hasTreasure = false;
 		public bool isEggRoom = false;
+		public bool isTrapRoom = false;
 
 		public Room(int x, int y, MapGen gen, int dist) {
 			this.x = x;

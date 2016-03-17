@@ -11,7 +11,6 @@ public class FlyingEnemy : NetworkBehaviour {
 	public Vector2 currPosition;
 	public Vector2 destination;
 
-
 	Rigidbody2D body;
 
 	System.Random rand;
