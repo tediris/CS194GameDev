@@ -13,8 +13,8 @@ public class PetCoinCollect : PetAction {
 	public CollectingRadius radius;
 
 	public float coinDist = 0.2f;
-	public float seekDuration = 60f;
-	public float cooldownDuration = 180f;
+	public float seekDuration = 20f;
+	public float cooldownDuration = 60f;
 	public float moveSpeed = 2.0f;
 	public GameObject player;
 	bool seeking = false;
@@ -22,12 +22,15 @@ public class PetCoinCollect : PetAction {
 
 	Vector2 curVelocity;
 
+	PlayerNotification activationStatus;
+
 	// Use this for initialization
 	void Start () {
 		curVelocity = Vector2.zero;
 		petBody = GetComponent<Rigidbody2D> ();
 		coins = new HashSet<GameObject> ();
 		followScript = GetComponent<PetFollow> ();
+
 //
 //		StartCoroutine (SeekInFifteen());
 	}
@@ -71,12 +74,16 @@ public class PetCoinCollect : PetAction {
 
 	public override void Activate() {
 		if (!cooldown) {
+			activationStatus.SetPlayerTimedNotification ("Pet ability activated!", Color.white, 3.0f);
 			SeekCoins ();
+		} else {
+			activationStatus.SetPlayerTimedNotification ("Pet ability is on cooldown.", Color.white, 3.0f);
 		}
 	}
 
 	public override void Setup(GameObject player) {
 		this.player = player;
+		activationStatus = player.GetComponent<PlayerNotification> ();
 	}
 
 	public void SeekCoins() {
@@ -104,6 +111,7 @@ public class PetCoinCollect : PetAction {
 	IEnumerator CooldownTimer() {
 		yield return new WaitForSeconds (cooldownDuration);
 		cooldown = false;
+		activationStatus.SetPlayerTimedNotification ("Pet ability ready!", Color.white, 3.0f);
 	}
 
 	IEnumerator SeekInFifteen() {

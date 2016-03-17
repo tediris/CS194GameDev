@@ -80,6 +80,8 @@ public class MapGen : MonoBehaviour {
 	public string seed = "mario";
 
 	private Teleport portalScript;
+
+	public string levelDescription;
 	
 	// Use this for initialization
 	void Start () {
@@ -162,6 +164,7 @@ public class MapGen : MonoBehaviour {
 	}
 
 	void SetupRaceMode() {
+		levelDescription = LevelDescriptions.RaceLevel;
 		int maxDist = -1;
 		int maxDistX = -1;
 		int maxDistY = -1;
@@ -178,6 +181,7 @@ public class MapGen : MonoBehaviour {
 	}
 
 	void SetupTreasureMode() {
+		levelDescription = LevelDescriptions.TreasureLevel;
 		List<Pair<int, int>> treasureRooms = new List<Pair<int, int>>();
 		while (treasureRooms.Count < numTreasureRooms) {
 			int x = rand.Next (numRoomsWidth);
@@ -194,6 +198,7 @@ public class MapGen : MonoBehaviour {
 	}
 
 	void SetupStealMode() {
+		levelDescription = LevelDescriptions.StealLevel;
 		int maxDist = -1;
 		int maxDistX = -1;
 		int maxDistY = -1;
@@ -382,6 +387,7 @@ public class MapGen : MonoBehaviour {
 					}
 				}
 				prefab.transform.parent = generator.gameObject.transform;
+				prefab.GetComponentInChildren<LevelTypeDescription> ().description = generator.levelDescription;
 				return;
 			}
 

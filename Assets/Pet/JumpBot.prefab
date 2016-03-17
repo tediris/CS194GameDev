@@ -13,47 +13,18 @@ GameObject:
   - 50: {fileID: 5008372}
   - 114: {fileID: 11466018}
   - 61: {fileID: 6131786}
-  - 114: {fileID: 11404232}
   - 114: {fileID: 11481086}
   - 114: {fileID: 11456392}
   - 114: {fileID: 11442520}
   - 114: {fileID: 11417240}
+  - 114: {fileID: 11441602}
   m_Layer: 0
-  m_Name: CoinButterfly
+  m_Name: JumpBot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &159654
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 407948}
-  - 61: {fileID: 6181016}
-  - 114: {fileID: 11406368}
-  m_Layer: 0
-  m_Name: CollectRadius
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &407948
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 159654}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 486624}
-  m_RootOrder: 0
 --- !u!4 &486624
 Transform:
   m_ObjectHideFlags: 1
@@ -63,8 +34,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3.2, y: 98.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 407948}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!50 &5008372
@@ -98,20 +68,6 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 3, y: 3}
---- !u!61 &6181016
-BoxCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 159654}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Size: {x: 0.32, y: 0.32}
 --- !u!95 &9565728
 Animator:
   serializedVersion: 3
@@ -121,7 +77,7 @@ Animator:
   m_GameObject: {fileID: 111294}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 0dfe8cce874a04155a1f5d71e8e36310, type: 2}
+  m_Controller: {fileID: 9100000, guid: 33b99eb6fb79b4a1dae5bd9cc5c736cd, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -129,34 +85,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &11404232
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 111294}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 489293168419343aebaa3e9a500e9a3b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  radius: {fileID: 11406368}
-  coinDist: 0.2
-  seekDuration: 60
-  cooldownDuration: 180
-  moveSpeed: 2
-  player: {fileID: 0}
---- !u!114 &11406368
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 159654}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94ff72c1e0da74fd4bb30c3efe713593, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &11417240
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -170,7 +98,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activeScripts:
   - {fileID: 11466018}
-  - {fileID: 11404232}
+  - {fileID: 11441602}
+--- !u!114 &11441602
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 111294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79b77e6da4b3142e4bfa5e7db6a398e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boostDuration: 20
+  cooldownDuration: 60
+  player: {fileID: 0}
+  boostMultiplier: 1.5
 --- !u!114 &11442520
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -182,8 +125,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f889da7ec9ff54fefbf6403286d32958, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  actionMessage: Money, money, money!
-  petScript: {fileID: 11404232}
+  actionMessage: Jump speed increased
+  petScript: {fileID: 11441602}
 --- !u!114 &11456392
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -235,22 +178,22 @@ MonoBehaviour:
   m_SceneId:
     m_Value: 0
   m_AssetId:
-    i0: 161
-    i1: 219
-    i2: 184
-    i3: 227
-    i4: 47
-    i5: 68
-    i6: 148
-    i7: 72
-    i8: 235
-    i9: 92
-    i10: 188
-    i11: 100
-    i12: 14
-    i13: 42
-    i14: 1
-    i15: 164
+    i0: 137
+    i1: 81
+    i2: 238
+    i3: 140
+    i4: 155
+    i5: 27
+    i6: 164
+    i7: 227
+    i8: 88
+    i9: 174
+    i10: 52
+    i11: 233
+    i12: 192
+    i13: 109
+    i14: 2
+    i15: 169
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
 --- !u!212 &21260220
@@ -279,7 +222,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1956285679
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 0314754cf08c94958b2ea5b5fa9206ac, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 419e0133f999c4ea8bda4aa3cafe9dd9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -305,10 +248,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: activeScripts.Array.data[1]
       value: 
-      objectReference: {fileID: 11404232}
+      objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_SendInterval
       value: 0.033333335
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: actionMessage
+      value: Jump speed increased
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_TransformSyncMode
