@@ -1011,7 +1011,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameMode: 3
   testGameMode: 1
-  debugGameMode: 3
+  debugGameMode: 1
   endPortal: {fileID: 169894, guid: a0dc72db3489842a784d2c257b2738a2, type: 2}
   startRoomPrefab: {fileID: 164182, guid: 9802a1d27ab29406e84c165ca032a81b, type: 2}
   eggRoomPrefab:
@@ -1063,6 +1063,7 @@ MonoBehaviour:
   numTreasureRooms: 1
   numRandomConnections: 5
   seed: sdfasdf
+  levelDescription: 
 --- !u!1 &117369914
 GameObject:
   m_ObjectHideFlags: 0
@@ -1094,7 +1095,7 @@ RectTransform:
   - {fileID: 1319769657}
   - {fileID: 343088438}
   m_Father: {fileID: 321182422}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -2337,7 +2338,7 @@ RectTransform:
   - {fileID: 2080916616}
   - {fileID: 358865381}
   m_Father: {fileID: 321182422}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -8825,8 +8826,8 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -129.5, y: -31.5}
-  m_SizeDelta: {x: 259, y: 63}
+  m_AnchoredPosition: {x: -326.5, y: -38.899994}
+  m_SizeDelta: {x: 654, y: 78.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1307264869
 MonoBehaviour:
@@ -8850,10 +8851,10 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: 756744923a1df40de8abdb52b66f5a03, type: 3}
-    m_FontSize: 14
+    m_FontSize: 30
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 3
     m_MaxSize: 40
     m_Alignment: 2
     m_AlignByGeometry: 0

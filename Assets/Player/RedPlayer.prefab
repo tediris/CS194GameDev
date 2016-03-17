@@ -61,6 +61,7 @@ GameObject:
   - 114: {fileID: 11472580}
   - 114: {fileID: 11491082}
   - 114: {fileID: 11484050}
+  - 114: {fileID: 11491638}
   m_Layer: 8
   m_Name: RedPlayer
   m_TagString: Player
@@ -445,6 +446,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pets:
   - {fileID: 111294, guid: a1dbb8e32f449448eb5cbc640e2a01a4, type: 2}
+--- !u!114 &11491638
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 187436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c2020bb019434c4696fb6d7f0181324, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &21207416
 SpriteRenderer:
   m_ObjectHideFlags: 1
