@@ -74,6 +74,7 @@ public class PetCoinCollect : PetAction {
 
 	public override void Activate() {
 		if (!cooldown) {
+			activationStatus.SetPlayerTimedNotification ("Pet ability activated!", Color.white, 3.0f);
 			SeekCoins ();
 		} else {
 			activationStatus.SetPlayerTimedNotification ("Pet ability is on cooldown.", Color.white, 3.0f);
