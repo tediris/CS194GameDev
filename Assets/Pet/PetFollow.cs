@@ -7,6 +7,8 @@ public class PetFollow : MonoBehaviour {
 	public float followDistance;
 	public float maxDistance;
 	public float moveSpeed = 2.0f;
+	public float jumpThreshold = 50f;
+	public float lerpSpeed = 0.05f;
 
 	public bool followingPlayer = true;
 
@@ -26,17 +28,22 @@ public class PetFollow : MonoBehaviour {
 
 		if (playerTarget == null)
 			return;
-		
-		targetPosition = playerTarget.position + new Vector2 (followDistance, followDistance);
-		if (Vector2.Distance (petBody.position, targetPosition) > maxDistance) {
-			petBody.velocity = (targetPosition - petBody.position).normalized * moveSpeed;;
-		} else {
-			petBody.velocity = Vector2.zero;
+
+		if ((playerTarget.position - petBody.position).magnitude > jumpThreshold) {
+			transform.position = playerTarget.position;
+			return;
 		}
 
-		if (petBody.velocity.x < 0f) {
-			transform.localScale = new Vector2 (-1f, 1f);
+		targetPosition = playerTarget.position + new Vector2 (followDistance, followDistance);
+		if (Vector2.Distance (petBody.position, targetPosition) > maxDistance) {
+			petBody.velocity = Vector2.Lerp(petBody.velocity, (targetPosition - petBody.position).normalized * moveSpeed, lerpSpeed);
 		} else {
+			petBody.velocity = Vector2.Lerp(petBody.velocity, Vector2.zero, lerpSpeed);
+		}
+
+		if (petBody.velocity.x < -0.01f) {
+			transform.localScale = new Vector2 (-1f, 1f);
+		} else if (petBody.velocity.x > 0.01f) {
 			transform.localScale = new Vector2 (1f, 1f);
 		}
 
