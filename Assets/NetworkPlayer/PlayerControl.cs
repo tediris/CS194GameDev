@@ -422,7 +422,7 @@ public class PlayerControl : NetworkBehaviour
 			}
 		}
 
-		if (Input.GetKeyDown (KeyCode.B)) {
+		if (input.BaitButton()) {
 			GameObject bait = baitManager.MoveEggToPlayer (this);
 			CmdCarryItem (bait);
 			carrying = true;
