@@ -9,6 +9,7 @@ public class NetSetup : NetworkBehaviour {
 	public int playerNum = -1;
 
 	public List<RuntimeAnimatorController> animators;
+	public List<RuntimeAnimatorController> deathAnimatorz;
 
 	private PlayerIDs idStore;
 
@@ -45,6 +46,8 @@ public class NetSetup : NetworkBehaviour {
 		}
 
 		GetComponent<Animator> ().runtimeAnimatorController = animators [playerNum];
+		GameObject ghostlyObj = transform.FindChild ("Ghost").gameObject;
+		ghostlyObj.GetComponent<Animator> ().runtimeAnimatorController = deathAnimatorz [playerNum];
 	}
 	
 	// Update is called once per frame
