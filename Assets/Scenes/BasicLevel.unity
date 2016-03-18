@@ -1011,7 +1011,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameMode: 3
   testGameMode: 1
-  debugGameMode: 3
+  debugGameMode: 0
   endPortal: {fileID: 169894, guid: a0dc72db3489842a784d2c257b2738a2, type: 2}
   startRoomPrefab: {fileID: 164182, guid: 9802a1d27ab29406e84c165ca032a81b, type: 2}
   eggRoomPrefab:
@@ -9741,6 +9741,8 @@ MonoBehaviour:
   - {fileID: 111294, guid: a1dbb8e32f449448eb5cbc640e2a01a4, type: 2}
   - {fileID: 146224, guid: 624629922c4834b79b39141358cd576f, type: 2}
   - {fileID: 144306, guid: 188853fcc0c90487f872c02e062ba55d, type: 2}
+  - {fileID: 108182, guid: a255309d7459046e987a6d8d251071a0, type: 2}
+  - {fileID: 185300, guid: 6f004258e53654c87a877664b82b3a45, type: 2}
   m_CustomConfig: 0
   m_MaxConnections: 4
   m_ConnectionConfig:
@@ -15340,8 +15342,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numCoins: 30
   numEnemies: 5
+  numRobots: 5
+  numSawRobots: 5
   coinPrefab: {fileID: 110378, guid: 59ad0e74ec7554b05b4893b530982dd5, type: 2}
   enemyPrefab: {fileID: 151486, guid: f198a78cf27304012a5fee0143839cc2, type: 2}
+  robotPrefab: {fileID: 108182, guid: a255309d7459046e987a6d8d251071a0, type: 2}
+  sawRobotPrefab: {fileID: 185300, guid: 6f004258e53654c87a877664b82b3a45, type: 2}
 --- !u!114 &2097155987
 MonoBehaviour:
   m_ObjectHideFlags: 0
