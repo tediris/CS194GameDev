@@ -149,9 +149,6 @@ public class MapGen : MonoBehaviour {
 				rooms [y, x].Create ();
 			}
 		}
-
-		SafariManager safariManager = GameObject.Find ("GameState").GetComponent<SafariManager> ();
-		safariManager.StartManager ();
 	}
 
 	void SetupGameMode() {
@@ -180,7 +177,7 @@ public class MapGen : MonoBehaviour {
 				}
 			}
 		}
-		rooms [maxDistY, maxDistX].isEggRoom = true;
+		rooms [maxDistY, maxDistX].isTrapRoom = true;
 	}
 
 	void SetupRaceMode() {
@@ -417,6 +414,8 @@ public class MapGen : MonoBehaviour {
 				}
 				prefab.transform.parent = generator.gameObject.transform;
 
+				SafariManager safariManager = GameObject.Find ("GameState").GetComponent<SafariManager> ();
+				safariManager.Spawn (trapPos, leverPos);
 
 				return;
 			}
