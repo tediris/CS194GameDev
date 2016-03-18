@@ -28,7 +28,7 @@ public class GUIManager : MonoBehaviour {
 	}
 
 	IEnumerator FindLocalPlayerControl() {
-		yield return new WaitForSeconds (0.1f);
+		yield return new WaitForSeconds (3.0f);
 		playerInput = GameObject.Find ("GameState").GetComponent<GameStateManager> ().GetLocalPlayer ().GetComponent<PlayerControl> ().input;
 		if (playerInput == null)
 			StartCoroutine(FindLocalPlayerControl ());
