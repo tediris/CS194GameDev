@@ -55,16 +55,16 @@ public class SafariManager : NetworkBehaviour {
 		while (count < 10000) {
 			count += 1;
 			MapGen.Room room = mg.GetRandomRoom ();
-			float deltaX = Random.value * mg.roomWidth;
-			float deltaY = Random.value * mg.roomHeight;
-			Vector2 trapCastPos = new Vector2 (room.x + deltaX, room.y - deltaY);
+			float deltaX = Random.value * mg.roomWidth/2;
+			float deltaY = Random.value * mg.roomHeight/2;
+			Vector2 trapCastPos = new Vector2 (room.x + mg.roomWidth/4 + deltaX, room.y - mg.roomHeight/4 - deltaY);
 
 			deltaX = Random.value * mg.roomWidth/2;
 			deltaY = Random.value * mg.roomHeight/2;
 			Vector2 leverCastPos = new Vector2 (room.x + mg.roomWidth/4 + deltaX, room.y - mg.roomHeight/4 - deltaY);
 
-			int layerMask = 1 << 8;
-			RaycastHit2D trapHit = Physics2D.CircleCast (trapCastPos, 0.35f, Vector2.up, layerMask);
+			int layerMask = LayerMask.NameToLayer("Default") | LayerMask.NameToLayer("Pickups");
+			RaycastHit2D trapHit = Physics2D.CircleCast (trapCastPos, 0.3f, Vector2.up, layerMask);
 			if (!(trapHit.collider != null && Vector2.Dot(Vector2.down, trapHit.normal) > 0f)) {
 				continue;
 			}
@@ -84,6 +84,8 @@ public class SafariManager : NetworkBehaviour {
 			if (!(leverClearHit.collider == null || leverClearHit.distance > 0.1f)) {
 				continue;
 			}
+
+			Debug.Log (trapHit.point);
 
 			Vector2 trapPos = new Vector2(trapHit.point.x, trapHit.point.y);
 			GameObject trap = gs.CreateOverNetworkInstant (trapPrefab, trapCastPos);
