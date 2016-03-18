@@ -122,6 +122,9 @@ public class PlayerControl : NetworkBehaviour
 				if (key == "Menu") {
 					return "Start";
 				}
+				if (key == "Bait") {
+					return "Right Bumper";
+				}
 			} else {
 				if (key == "Jump") {
 					return "U or Space";
@@ -137,6 +140,9 @@ public class PlayerControl : NetworkBehaviour
 				}
 				if (key == "Menu") {
 					return "Escape";
+				}
+				if (key == "Bait") {
+					return "B";
 				}
 			}
 			Debug.LogWarning ("\"No button with that key!!");
@@ -168,6 +174,20 @@ public class PlayerControl : NetworkBehaviour
 				}
 			} else {
 				return Input.GetKeyDown (KeyCode.P);
+			}
+		}
+
+		public bool BaitButton() {
+			if (controllerEnabled) {
+				if (isOSX ()) {
+					return Input.GetKeyDown ("joystick button 14");
+				} else if (isWindows ()) {
+					return Input.GetKeyDown ("joystick button 5");
+				} else {
+					return false;
+				}
+			} else {
+				return Input.GetKeyDown (KeyCode.B);
 			}
 		}
 
