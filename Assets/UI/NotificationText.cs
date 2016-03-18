@@ -6,7 +6,7 @@ public class NotificationText : MonoBehaviour {
 
 	Text notice;
 	string timedNotice;
-	bool onTimedNotice = false;
+	int onTimedNotice = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -19,7 +19,7 @@ public class NotificationText : MonoBehaviour {
 	}
 
 	public void ClearNotice() {
-		if (onTimedNotice) {
+		if (onTimedNotice != 0) {
 			notice.text = timedNotice;
 		} else {
 			notice.text = "";
@@ -27,19 +27,15 @@ public class NotificationText : MonoBehaviour {
 	}
 
 	public void SetTimedNotice(string text, Color color, float time) {
-		if (!onTimedNotice) {
-			timedNotice = text;
-			onTimedNotice = true;
-			SetNotice (text, color);
-			StartCoroutine (ClearTimer (time));
-		} else {
-			Debug.LogWarning ("Setting multiple timed notices");
-		}
+		timedNotice = text;
+		onTimedNotice++;
+		SetNotice (text, color);
+		StartCoroutine (ClearTimer (time));
 	}
 
 	IEnumerator ClearTimer(float time) {
 		yield return new WaitForSeconds (time);
-		onTimedNotice = false;
+		onTimedNotice--;
 		ClearNotice ();
 	}
 }

@@ -25,10 +25,12 @@ public class TrapManager : NetworkBehaviour {
 		if (trapState == TrapState.Ready) {
 			spring.distance = 0.25f;
 			spring.enabled = true;
+			trapBody.constraints = RigidbodyConstraints2D.FreezeAll;
 		}
 
 		if (trapState == TrapState.Falling || trapState == TrapState.Down) {
 			spring.enabled = false;
+			trapBody.constraints = RigidbodyConstraints2D.FreezeAll ^ RigidbodyConstraints2D.FreezePositionY;
 		}
 
 //		if (trapState == TrapState.Falling && trapBody.velocity.magnitude < 1e-2f) {
@@ -36,11 +38,12 @@ public class TrapManager : NetworkBehaviour {
 //		}
 
 		if (trapState == TrapState.Rising) {
+			trapBody.constraints = RigidbodyConstraints2D.FreezeAll ^ RigidbodyConstraints2D.FreezePositionY;
+			spring.distance = 0.25f;
+			spring.enabled = true;
 			if (trapBody.velocity.magnitude < 1e-2f && Vector2.Distance (spring.connectedBody.transform.TransformPoint(spring.connectedAnchor), trapBody.position) < 1f) {
 				trapState = TrapState.Ready;
 			}
-			spring.distance = 0.25f;
-			spring.enabled = true;
 		}
 	}
 

@@ -28,9 +28,6 @@ public class BaitFinder : MonoBehaviour {
 			float totalProbabilities = 20f; // Initiailizing to 4 is a fudge factor to give the bait finder a high prior of not moving towards a bait
 			foreach (GameObject bait in activeBaits) {
 				float distance = Vector2.Distance (bait.transform.position, body.position);
-				if (distance < 1e-1f) {
-					baitsToRemove.Add (bait);
-				}
 				totalProbabilities += Mathf.Exp (Mathf.Pow(distance, -0.5f));
 			}
 			Debug.Log ("Total probability " + totalProbabilities);
@@ -49,11 +46,6 @@ public class BaitFinder : MonoBehaviour {
 				}
 			}
 
-			foreach (GameObject bait in baitsToRemove) {
-				activeBaits.Remove (bait);
-				Destroy (bait);
-			}
-
 			yield return new WaitForSeconds (0.5f);
 		}
 	}
@@ -70,6 +62,13 @@ public class BaitFinder : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D other) {
 		if (other.tag == BAIT_TAG) {
 			activeBaits.Add (other.gameObject);
+		}
+	}
+
+	void OnCollisionEnter2D(Collision2D coll) {
+		if (coll.gameObject.tag == BAIT_TAG) {
+			activeBaits.Remove (coll.gameObject);
+			Destroy (coll.gameObject);
 		}
 	}
 }
