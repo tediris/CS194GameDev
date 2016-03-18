@@ -298,6 +298,11 @@ MonoBehaviour:
   - {fileID: 9100000, guid: b2d0ae95db38f474c9f8f505b6160916, type: 2}
   - {fileID: 9100000, guid: 9ef60b52602224a83b9207afc0ef4e1b, type: 2}
   - {fileID: 9100000, guid: 3de159e4ed2894b31a8423f0bfe34d2e, type: 2}
+  deathAnimatorz:
+  - {fileID: 9100000, guid: a5ab8a4ee963840899d22cc42fa9cd1a, type: 2}
+  - {fileID: 9100000, guid: 666be7da84e24454288f21f904ab02f1, type: 2}
+  - {fileID: 9100000, guid: 666be7da84e24454288f21f904ab02f1, type: 2}
+  - {fileID: 9100000, guid: 61f657534206041f58edd26449a5d93d, type: 2}
 --- !u!114 &11423774
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -425,7 +430,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baitCount: 100
-  baits: []
   baitPrefab: {fileID: 160362, guid: 09bcc98ea0864407791f611f41ed37b8, type: 2}
 --- !u!114 &11488224
 MonoBehaviour:
@@ -545,6 +549,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: groundTags.Array.size
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: deathAnimatorz.Array.size
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_AssetId.i0
@@ -791,6 +799,18 @@ Prefab:
       propertyPath: animators.Array.data[2]
       value: 
       objectReference: {fileID: 9100000, guid: 9ef60b52602224a83b9207afc0ef4e1b, type: 2}
+    - target: {fileID: 0}
+      propertyPath: deathAnimatorz.Array.data[0]
+      value: 
+      objectReference: {fileID: 9100000, guid: a5ab8a4ee963840899d22cc42fa9cd1a, type: 2}
+    - target: {fileID: 0}
+      propertyPath: deathAnimatorz.Array.data[1]
+      value: 
+      objectReference: {fileID: 9100000, guid: 666be7da84e24454288f21f904ab02f1, type: 2}
+    - target: {fileID: 0}
+      propertyPath: deathAnimatorz.Array.data[3]
+      value: 
+      objectReference: {fileID: 9100000, guid: 61f657534206041f58edd26449a5d93d, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 187436}
