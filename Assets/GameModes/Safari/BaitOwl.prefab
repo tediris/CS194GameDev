@@ -8,9 +8,9 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 407882}
-  - 58: {fileID: 5868580}
   - 114: {fileID: 11483238}
   - 50: {fileID: 5053432}
+  - 61: {fileID: 6152652}
   m_Layer: 0
   m_Name: BaitFinder
   m_TagString: Untagged
@@ -35,6 +35,7 @@ GameObject:
   - 114: {fileID: 11486752}
   - 114: {fileID: 11434484}
   - 60: {fileID: 6052144}
+  - 114: {fileID: 11425392}
   m_Layer: 0
   m_Name: BaitOwl
   m_TagString: Untagged
@@ -49,8 +50,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 145810}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.8165222, y: 0.8214059, z: 0}
-  m_LocalScale: {x: 0.25, y: 0.25, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 441592}
   m_RootOrder: 0
@@ -101,20 +102,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!58 &5868580
-CircleCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 145810}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_Offset: {x: 0, y: -0.03}
-  serializedVersion: 2
-  m_Radius: 10
 --- !u!60 &6052144
 PolygonCollider2D:
   m_ObjectHideFlags: 1
@@ -158,6 +145,20 @@ PolygonCollider2D:
     - - {x: -0.14999999, y: 0.11}
       - {x: -0.16, y: 0.12}
       - {x: -0.17999999, y: 0.08}
+--- !u!61 &6152652
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 145810}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Size: {x: 1.5, y: 1.5}
 --- !u!95 &9556072
 Animator:
   serializedVersion: 3
@@ -207,6 +208,17 @@ MonoBehaviour:
     i15: 43
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
+--- !u!114 &11425392
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 159086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5b7f008d4ece4685a8efb0d9e461b36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11434484
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -218,7 +230,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 290ff3402a2ce43feba239cb6416a367, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  travelRadius: 5
+  travelRadius: 2
   speed: 0.3
   currPosition: {x: 0, y: 0}
   destination: {x: 0, y: 0}
@@ -334,7 +346,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: travelRadius
-      value: 5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: speed
@@ -343,6 +355,18 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_GravityScale
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Size.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Size.y
+      value: 1.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

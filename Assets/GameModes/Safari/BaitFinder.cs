@@ -5,21 +5,24 @@ using System.Collections.Generic;
 public class BaitFinder : MonoBehaviour {
 
 	const string BAIT_TAG = "Bait";
-	HashSet<GameObject> activeBaits;
 	Rigidbody2D body;
 	GameObject pursuedBait;
 
 	// Use this for initialization
 	void Start () {
-		activeBaits = new HashSet<GameObject> ();
 		body = transform.parent.GetComponent<Rigidbody2D> ();
 		StartCoroutine ("UpdatePursuedBait");
 	}
 
 	IEnumerator UpdatePursuedBait() {
 		for (;;) {
-			HashSet<GameObject> baitsToRemove = new HashSet<GameObject> ();
+
+			HashSet<GameObject> activeBaits = new HashSet<GameObject> ();
 			float totalDistance = 0f;
+			foreach (GameObject bait in GameObject.FindGameObjectsWithTag ("Bait")) {
+				activeBaits.Add (bait);
+			}
+
 			foreach (GameObject bait in activeBaits) {
 				float distance = Vector2.Distance (bait.transform.position, body.position);
 				totalDistance += distance;
@@ -30,7 +33,6 @@ public class BaitFinder : MonoBehaviour {
 				float distance = Vector2.Distance (bait.transform.position, body.position);
 				totalProbabilities += Mathf.Exp (Mathf.Pow(distance, -0.5f));
 			}
-			Debug.Log ("Total probability " + totalProbabilities);
 
 			pursuedBait = null;
 			float desiredProbability = Random.value;
@@ -41,7 +43,6 @@ public class BaitFinder : MonoBehaviour {
 				currentProbability += probability;
 				if (currentProbability > desiredProbability) {
 					pursuedBait = bait;
-					Debug.Log ("Moving to bait");
 					break;
 				}
 			}
@@ -51,7 +52,7 @@ public class BaitFinder : MonoBehaviour {
 	}
 
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		if (pursuedBait) {
 			Rigidbody2D baitBody = pursuedBait.GetComponent<Rigidbody2D> ();
 			Vector2 direction = baitBody.position - body.position;
@@ -59,15 +60,15 @@ public class BaitFinder : MonoBehaviour {
 		}
 	}
 
-	void OnTriggerEnter2D(Collider2D other) {
-		if (other.tag == BAIT_TAG) {
-			activeBaits.Add (other.gameObject);
-		}
-	}
+//	void OnTriggerEnter2D(Collider2D other) {
+//		if (other.tag == BAIT_TAG) {
+//			activeBaits.Add (other.gameObject);
+//		}
+//	}
 
-	void OnCollisionEnter2D(Collision2D coll) {
+	void OnTriggerEnter2D(Collider2D coll) {
 		if (coll.gameObject.tag == BAIT_TAG) {
-			activeBaits.Remove (coll.gameObject);
+//			activeBaits.Remove (coll.gameObject);
 			Destroy (coll.gameObject);
 		}
 	}
