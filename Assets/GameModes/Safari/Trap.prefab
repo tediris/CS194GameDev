@@ -158,8 +158,8 @@ SpringJoint2D:
   m_ConnectedAnchor: {x: 100, y: -0.08399993}
   m_AutoConfigureDistance: 1
   m_Distance: 0.005
-  m_DampingRatio: 0
-  m_Frequency: 100
+  m_DampingRatio: 0.3
+  m_Frequency: 10
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -173,7 +173,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Frequency
-      value: 100
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_AutoConfigureConnectedAnchor
@@ -188,6 +188,10 @@ Prefab:
       value: 
       objectReference: {fileID: 21300000, guid: 4ad9b9b7151d3475ab885f447c11edfb,
         type: 3}
+    - target: {fileID: 0}
+      propertyPath: m_DampingRatio
+      value: 0.3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 195656}
