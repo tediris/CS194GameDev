@@ -5,7 +5,7 @@ AnimatorController:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: ghost_0
+  m_Name: ghost_3
   serializedVersion: 5
   m_AnimatorParameters: []
   m_AnimatorLayers:
@@ -61,7 +61,7 @@ AnimatorState:
   m_SpeedParameterActive: 0
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: d78779a7fca454bbca045007b83197e5, type: 2}
+  m_Motion: {fileID: 7400000, guid: 43bf25200ac9a499d80184bcf1ecabe0, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
