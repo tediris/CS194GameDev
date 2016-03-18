@@ -403,9 +403,7 @@ public class PlayerControl : NetworkBehaviour
 		}
 
 		if (Input.GetKeyDown (KeyCode.B)) {
-			GameObject bait = baitManager.MoveEggToPlayer (this);
-			CmdCarryItem (bait);
-			carrying = true;
+			CmdGetBait ();
 		}
 
 		if (canJump() && input.JumpButton()) {
@@ -559,6 +557,13 @@ public class PlayerControl : NetworkBehaviour
 	[Command]
 	void CmdFlipClients() {
 		RpcFlipClients ();
+	}
+
+	[Command]
+	void CmdGetBait() {
+		GameObject bait = baitManager.MoveEggToPlayer (this);
+		CmdCarryItem (bait);
+		carrying = true;
 	}
 
 	[ClientRpc]
