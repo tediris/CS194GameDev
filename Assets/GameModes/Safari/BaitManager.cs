@@ -20,13 +20,13 @@ public class BaitManager : MonoBehaviour {
 	
 	// Update is called once per frame
 //	void Update () {
-//	
+//			
 //	}
 
 	public GameObject MoveEggToPlayer(PlayerControl player) {
 		if (baits.Count == 0) {
 			Debug.Log ("No bait left");
-			return new GameObject();
+			return new GameObject ();
 		}
 
 		GameObject bait = baits [0];

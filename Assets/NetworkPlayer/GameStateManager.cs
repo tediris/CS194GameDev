@@ -92,6 +92,15 @@ public class GameStateManager : NetworkBehaviour {
 		return instance;
 	}
 
+	public GameObject CreateOverNetworkInstantUnpooled(GameObject go, Vector3 pos) {
+		if (!isServer) {
+			return null;
+		}
+		GameObject instance = (GameObject)Instantiate (go, pos, Quaternion.identity);
+		NetworkServer.Spawn (instance);
+		return instance;
+	}
+
 	public void CreateOverNetwork (GameObject go, Vector3 pos) {
 		if (!isServer)
 			return;
