@@ -44,7 +44,7 @@ public class NetSetup : NetworkBehaviour {
 		if (isLocalPlayer) {
 			idStore.localID = gameObject.name;
 		}
-
+			
 		GetComponent<Animator> ().runtimeAnimatorController = animators [playerNum];
 		GameObject ghostlyObj = transform.FindChild ("Ghost").gameObject;
 		ghostlyObj.GetComponent<Animator> ().runtimeAnimatorController = deathAnimatorz [playerNum];
