@@ -61,6 +61,7 @@ GameObject:
   - 114: {fileID: 11472580}
   - 114: {fileID: 11491082}
   - 114: {fileID: 11484050}
+  - 114: {fileID: 11491638}
   m_Layer: 8
   m_Name: RedPlayer
   m_TagString: Player
@@ -418,8 +419,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5a6b096417344211b7bf2ea77f17ca7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baitCount: 5
+  baitCount: 100
   baits: []
+  baitPrefab: {fileID: 160362, guid: 09bcc98ea0864407791f611f41ed37b8, type: 2}
 --- !u!114 &11488224
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -444,6 +446,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pets:
   - {fileID: 111294, guid: a1dbb8e32f449448eb5cbc640e2a01a4, type: 2}
+  - {fileID: 111294, guid: 8951ee8c9b1ba4e358ae34e9c06d02a9, type: 2}
+--- !u!114 &11491638
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 187436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c2020bb019434c4696fb6d7f0181324, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &21207416
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -513,7 +527,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: pets.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: tools.Array.size
@@ -742,12 +756,20 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: baitCount
-      value: 5
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: pets.Array.data[0]
       value: 
       objectReference: {fileID: 111294, guid: a1dbb8e32f449448eb5cbc640e2a01a4, type: 2}
+    - target: {fileID: 0}
+      propertyPath: baitPrefab
+      value: 
+      objectReference: {fileID: 160362, guid: 09bcc98ea0864407791f611f41ed37b8, type: 2}
+    - target: {fileID: 0}
+      propertyPath: pets.Array.data[1]
+      value: 
+      objectReference: {fileID: 111294, guid: 8951ee8c9b1ba4e358ae34e9c06d02a9, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 187436}

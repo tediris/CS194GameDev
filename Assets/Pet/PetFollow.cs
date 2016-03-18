@@ -6,40 +6,44 @@ public class PetFollow : MonoBehaviour {
 	public Rigidbody2D playerTarget;
 	public float followDistance;
 	public float maxDistance;
-	public float lerpSpeed = 0.1f;
+	public float moveSpeed = 2.0f;
+	public float jumpThreshold = 50f;
+	public float lerpSpeed = 0.05f;
 
 	public bool followingPlayer = true;
 
 	private Vector2 targetPosition;
-	private Vector2 curVelocity;
 
 	private Rigidbody2D petBody;
 
 	// Use this for initialization
 	void Start () {
 		petBody = GetComponent<Rigidbody2D> ();
-		curVelocity = Vector2.zero;
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		if (!followingPlayer)
 			return;
 
 		if (playerTarget == null)
 			return;
-		
+
+		if ((playerTarget.position - petBody.position).magnitude > jumpThreshold) {
+			transform.position = playerTarget.position;
+			return;
+		}
+
 		targetPosition = playerTarget.position + new Vector2 (followDistance, followDistance);
 		if (Vector2.Distance (petBody.position, targetPosition) > maxDistance) {
-			curVelocity = Vector2.Lerp (curVelocity, targetPosition - petBody.position, lerpSpeed);
+			petBody.velocity = Vector2.Lerp(petBody.velocity, (targetPosition - petBody.position).normalized * moveSpeed, lerpSpeed);
 		} else {
-			curVelocity = Vector2.Lerp (curVelocity, Vector2.zero, lerpSpeed);
+			petBody.velocity = Vector2.Lerp(petBody.velocity, Vector2.zero, lerpSpeed);
 		}
-		petBody.velocity = curVelocity;
 
-		if (curVelocity.x < 0f) {
+		if (petBody.velocity.x < -0.01f) {
 			transform.localScale = new Vector2 (-1f, 1f);
-		} else {
+		} else if (petBody.velocity.x > 0.01f) {
 			transform.localScale = new Vector2 (1f, 1f);
 		}
 
