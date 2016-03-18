@@ -293,6 +293,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNum: -1
+  animators:
+  - {fileID: 9100000, guid: 5536a27ea677349eeb8827cdc44c02f5, type: 2}
+  - {fileID: 9100000, guid: b2d0ae95db38f474c9f8f505b6160916, type: 2}
 --- !u!114 &11423774
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -534,6 +537,10 @@ Prefab:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 0}
+      propertyPath: animators.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
       propertyPath: groundTags.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -770,6 +777,14 @@ Prefab:
       propertyPath: pets.Array.data[1]
       value: 
       objectReference: {fileID: 111294, guid: 8951ee8c9b1ba4e358ae34e9c06d02a9, type: 2}
+    - target: {fileID: 0}
+      propertyPath: animators.Array.data[0]
+      value: 
+      objectReference: {fileID: 9100000, guid: 5536a27ea677349eeb8827cdc44c02f5, type: 2}
+    - target: {fileID: 0}
+      propertyPath: animators.Array.data[1]
+      value: 
+      objectReference: {fileID: 9100000, guid: b2d0ae95db38f474c9f8f505b6160916, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 187436}
