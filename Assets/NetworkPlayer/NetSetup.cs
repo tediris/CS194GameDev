@@ -44,7 +44,7 @@ public class NetSetup : NetworkBehaviour {
 			idStore.localID = gameObject.name;
 		}
 
-		GetComponent<Animator> ().runtimeAnimatorController = animators [1];
+		GetComponent<Animator> ().runtimeAnimatorController = animators [playerNum];
 	}
 	
 	// Update is called once per frame
