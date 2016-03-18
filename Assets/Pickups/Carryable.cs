@@ -47,6 +47,10 @@ public class Carryable : NetworkBehaviour {
 	void CmdSetCarrying(int playerNum) {
 		GameObject player = GameObject.Find ("Player" + playerNum);
 		carried = true;
+
+		if (body == null) {
+			body = GetComponent<Rigidbody2D> ();
+		}
 		body.isKinematic = true;
 		toFollow = player.transform;
 	}

@@ -1,11 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.Networking;
 
 public class NetSetup : NetworkBehaviour {
 
 	[SyncVar]
 	public int playerNum = -1;
+
+	public List<RuntimeAnimatorController> animators;
 
 	private PlayerIDs idStore;
 
@@ -40,6 +43,8 @@ public class NetSetup : NetworkBehaviour {
 		if (isLocalPlayer) {
 			idStore.localID = gameObject.name;
 		}
+
+		GetComponent<Animator> ().runtimeAnimatorController = animators [playerNum];
 	}
 	
 	// Update is called once per frame
