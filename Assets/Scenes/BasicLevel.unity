@@ -1017,7 +1017,7 @@ MonoBehaviour:
   eggRoomPrefab:
   - {fileID: 164864, guid: f11fcaa6fc31a4187b8e5e8f01e73cd4, type: 2}
   - {fileID: 161630, guid: a831af324d8e347cc8ce4bff9bdcb41e, type: 2}
-  trapRoomPrefab: {fileID: 106114, guid: 052b6028e14d54c4fadc39e0e01b5f72, type: 2}
+  trapRoomPrefab: {fileID: 106144, guid: e6098eeb21f0f461e89518207ca6297f, type: 2}
   treasureRoomPrefab: {fileID: 128150, guid: 8d04fc0038b1c49afa0b430cfe2e6eaf, type: 2}
   sealingWallNSEWPrefabs:
   - {fileID: 149766, guid: 389e27f910b084f378e3db8781822faf, type: 2}
@@ -4865,48 +4865,6 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
---- !u!1001 &595338433
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 453182, guid: 052b6028e14d54c4fadc39e0e01b5f72, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 453182, guid: 052b6028e14d54c4fadc39e0e01b5f72, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 453182, guid: 052b6028e14d54c4fadc39e0e01b5f72, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 453182, guid: 052b6028e14d54c4fadc39e0e01b5f72, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 453182, guid: 052b6028e14d54c4fadc39e0e01b5f72, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 453182, guid: 052b6028e14d54c4fadc39e0e01b5f72, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 453182, guid: 052b6028e14d54c4fadc39e0e01b5f72, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 453182, guid: 052b6028e14d54c4fadc39e0e01b5f72, type: 2}
-      propertyPath: m_RootOrder
-      value: 15
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 052b6028e14d54c4fadc39e0e01b5f72, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1 &596256313
 GameObject:
   m_ObjectHideFlags: 0
