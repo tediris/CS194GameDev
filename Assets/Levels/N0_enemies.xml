@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-up" width="20" height="10" tilewidth="32" tileheight="32" nextobjectid="17">
+ <tileset firstgid="1" name="twilight" tilewidth="32" tileheight="32" tilecount="64">
+  <image source="../twilight_tiles.png" width="256" height="256"/>
+  <terraintypes>
+   <terrain name="Ground" tile="-1"/>
+  </terraintypes>
+  <tile id="32" terrain=",,,0"/>
+  <tile id="33" terrain=",,,0"/>
+  <tile id="34" terrain=",,0,"/>
+  <tile id="35" terrain=",,,0"/>
+ </tileset>
+ <layer name="base" width="20" height="10">
+  <data encoding="base64" compression="zlib">
+   eJylkLkOwkAMRLcJ0HA0HE0OCAQaCE2AhuP/v4pn4ZWs1eaQGOkpO86s4zh3zjVwgzs89Cm+TU2Qs34ME/jAE17wVl9Geu2CjL+TQKb9Fh2zDNUURjCHTU92C/uezBJmsIYicl/+qwz6tNVFqc6Xu9/+/lVi5vP76/q+VSwn+1vpfH37GyLZX6b9CjjCCSo9HxTrq0jOn1Mz3xkuUMNVva2F72v1YV34Anb0EGI=
+  </data>
+ </layer>
+ <objectgroup name="Colliders">
+  <object id="1" x="2" y="2" width="60" height="317"/>
+  <object id="2" x="10" y="2" width="213" height="58"/>
+  <object id="3" x="223" y="32" width="32" height="29"/>
+  <object id="4" x="385" y="30" width="31" height="31"/>
+  <object id="5" x="60" y="259" width="540" height="60"/>
+  <object id="6" x="416" y="0" width="202" height="61"/>
+  <object id="7" x="577" y="59" width="37" height="260"/>
+  <object id="9" x="605" y="0" width="35" height="319"/>
+  <object id="10" x="287" y="95" width="63" height="30"/>
+  <object id="11" x="160" y="127" width="127" height="30"/>
+  <object id="12" x="351" y="128" width="128" height="30"/>
+  <object id="13" x="97" y="192" width="125" height="30"/>
+  <object id="14" x="415" y="192" width="128" height="29"/>
+ </objectgroup>
+ <objectgroup name="Enemies">
+  <object id="15" name="FireDino" x="416" y="96" width="32" height="32"/>
+  <object id="16" name="Slime" x="128" y="160" width="32" height="32"/>
+ </objectgroup>
+</map>
