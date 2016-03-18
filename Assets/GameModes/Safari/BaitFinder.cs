@@ -7,10 +7,12 @@ public class BaitFinder : MonoBehaviour {
 	const string BAIT_TAG = "Bait";
 	Rigidbody2D body;
 	GameObject pursuedBait;
+	MonsterWander wander;
 
 	// Use this for initialization
 	void Start () {
 		body = transform.parent.GetComponent<Rigidbody2D> ();
+		wander = transform.parent.GetComponent<MonsterWander> ();
 		StartCoroutine ("UpdatePursuedBait");
 	}
 
@@ -47,18 +49,24 @@ public class BaitFinder : MonoBehaviour {
 				}
 			}
 
+			if (pursuedBait) {
+				wander.Disable ();
+				Rigidbody2D baitBody = pursuedBait.GetComponent<Rigidbody2D> ();
+				Vector2 direction = baitBody.position - body.position;
+				body.velocity = Vector2.ClampMagnitude (direction, 0.5f);
+			} else {
+				body.velocity = Vector2.zero;
+				wander.Enable ();
+			}
+
 			yield return new WaitForSeconds (0.5f);
 		}
 	}
 
 	// Update is called once per frame
-	void FixedUpdate () {
-		if (pursuedBait) {
-			Rigidbody2D baitBody = pursuedBait.GetComponent<Rigidbody2D> ();
-			Vector2 direction = baitBody.position - body.position;
-			body.velocity = Vector2.ClampMagnitude (direction, 0.5f);
-		}
-	}
+//	void FixedUpdate () {
+//		
+//	}
 
 //	void OnTriggerEnter2D(Collider2D other) {
 //		if (other.tag == BAIT_TAG) {

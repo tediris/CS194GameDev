@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Networking;
 
-public class MonsterWander : MonoBehaviour {
+public class MonsterWander : NetworkBehaviour {
 
 	Rigidbody2D body;
 	Vector2 startPosition;
@@ -13,17 +14,24 @@ public class MonsterWander : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		if (!isServer) {
+			this.enabled = false;
+		}
 		rand = new System.Random ();
 		body = GetComponent<Rigidbody2D> ();
 		startPosition = body.position;
+		destination = startPosition;
 	}
 
-	void Enable() {
+	public void Enable() {
+		if (wandering) {
+			return;
+		}
 		wandering = true;
 		startPosition = body.position;
 	}
 
-	void Disable() {
+	public void Disable() {
 		wandering = false;
 	}
 

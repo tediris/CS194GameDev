@@ -31,11 +31,10 @@ GameObject:
   - 50: {fileID: 5038434}
   - 114: {fileID: 11476090}
   - 114: {fileID: 11400916}
-  - 114: {fileID: 11437606}
   - 114: {fileID: 11486752}
-  - 114: {fileID: 11434484}
   - 60: {fileID: 6052144}
   - 114: {fileID: 11425392}
+  - 114: {fileID: 11465864}
   m_Layer: 0
   m_Name: BaitOwl
   m_TagString: Untagged
@@ -219,7 +218,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5b7f008d4ece4685a8efb0d9e461b36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &11434484
+--- !u!114 &11465864
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -227,25 +226,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 159086}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 290ff3402a2ce43feba239cb6416a367, type: 3}
+  m_Script: {fileID: 11500000, guid: 6f68ced6511054717ba5a4d4dc60dabf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  travelRadius: 2
+  wanderRadius: 2
   speed: 0.3
-  currPosition: {x: 0, y: 0}
-  destination: {x: 0, y: 0}
---- !u!114 &11437606
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 159086}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc0aab96710874182b82bc3ff927f7fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  controlScript: {fileID: 11434484}
 --- !u!114 &11476090
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -335,7 +320,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: controlScript
       value: 
-      objectReference: {fileID: 11434484}
+      objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_IsKinematic
       value: 1
