@@ -44,6 +44,7 @@ public class MapGen : MonoBehaviour {
 
 	public GameObject startRoomPrefab;
 	public List<GameObject> eggRoomPrefab;
+	public GameObject trapRoomPrefab;
 	public GameObject treasureRoomPrefab;
 	public List<GameObject> sealingWallNSEWPrefabs;
 	public List<GameObject> omniPrefabs;
@@ -148,9 +149,6 @@ public class MapGen : MonoBehaviour {
 				rooms [y, x].Create ();
 			}
 		}
-
-		SafariManager safariManager = GameObject.Find ("GameState").GetComponent<SafariManager> ();
-		safariManager.StartManager ();
 	}
 
 	void SetupGameMode() {
@@ -160,7 +158,26 @@ public class MapGen : MonoBehaviour {
 			SetupTreasureMode ();
 		} else if (gameMode == GameMode.Steal) {
 			SetupStealMode ();
+		} else if (gameMode == GameMode.Safari) {
+			SetupSafariMode ();
 		}
+	}
+
+	void SetupSafariMode() {
+		levelDescription = LevelDescriptions.StealLevel;
+		int maxDist = -1;
+		int maxDistX = -1;
+		int maxDistY = -1;
+		for (int x = 0; x < numRoomsWidth; x++) {
+			for (int y = 0; y < numRoomsHeight; y++) {
+				if (rooms [y, x].dist > maxDist) {
+					maxDist = rooms [y, x].dist;
+					maxDistX = x;
+					maxDistY = y;
+				}
+			}
+		}
+		rooms [maxDistY, maxDistX].isTrapRoom = true;
 	}
 
 	void SetupRaceMode() {
@@ -211,7 +228,7 @@ public class MapGen : MonoBehaviour {
 				}
 			}
 		}
-		rooms [maxDistX, maxDistY].isEggRoom = true;
+		rooms [maxDistY, maxDistX].isEggRoom = true;
 	}
 
 	Room RandomRoom () {
@@ -374,6 +391,32 @@ public class MapGen : MonoBehaviour {
 					}
 				}
 				prefab.transform.parent = generator.gameObject.transform;
+				return;
+			}
+
+			if (isTrapRoom) {
+				GameStateManager gsManager = GameObject.Find ("GameState").GetComponent<GameStateManager> ();
+				GameObject trapRoom = generator.trapRoomPrefab;
+				prefab = Instantiate (trapRoom, pos, Quaternion.identity) as GameObject;
+				// get the position of the egg
+				TrapLocation trapLoc = prefab.GetComponentInChildren<TrapLocation>();
+				Vector3 trapPos = trapLoc.transform.position;
+				LeverLocation leverLoc = prefab.GetComponentInChildren<LeverLocation>();
+				Vector3 leverPos = leverLoc.transform.position;
+				Destroy (trapLoc.gameObject);
+				Destroy (leverLoc.gameObject);
+
+				for (int i = 0; i < 4; i++) {
+					if (!connectedRooms [i]) {
+						GameObject wall = Instantiate (generator.sealingWallNSEWPrefabs [i], pos, Quaternion.identity) as GameObject;
+						wall.transform.parent = prefab.transform;
+					}
+				}
+				prefab.transform.parent = generator.gameObject.transform;
+
+				SafariManager safariManager = GameObject.Find ("GameState").GetComponent<SafariManager> ();
+				safariManager.Spawn (trapPos, leverPos);
+
 				return;
 			}
 				

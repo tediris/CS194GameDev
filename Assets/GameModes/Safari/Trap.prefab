@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 195656}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 100, y: -0.724, z: 0}
-  m_LocalScale: {x: 0.6, y: 0.6, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -63,10 +63,10 @@ EdgeCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   m_Points:
-  - {x: 0.63716125, y: -0.6195984}
-  - {x: 0.657547, y: 0.64489746}
-  - {x: -0.6449051, y: 0.6196289}
-  - {x: -0.64979553, y: -0.6448364}
+  - {x: 0.32762146, y: -0.29237008}
+  - {x: 0.30378723, y: 0.3176693}
+  - {x: -0.32652283, y: 0.31893235}
+  - {x: -0.34025574, y: -0.33529615}
 --- !u!114 &11482656
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -137,7 +137,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 6c8f34bc095e34d92b3fce4bcc55cf13, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4ad9b9b7151d3475ab885f447c11edfb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -155,11 +155,11 @@ SpringJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0.64000005}
-  m_ConnectedAnchor: {x: 100, y: 0}
+  m_ConnectedAnchor: {x: 100, y: -0.08399993}
   m_AutoConfigureDistance: 1
-  m_Distance: 0.24400523
-  m_DampingRatio: 0
-  m_Frequency: 100
+  m_Distance: 0.005
+  m_DampingRatio: 0.3
+  m_Frequency: 10
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -173,7 +173,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Frequency
-      value: 100
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_AutoConfigureConnectedAnchor
@@ -182,6 +182,15 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_AutoConfigureDistance
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 4ad9b9b7151d3475ab885f447c11edfb,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: m_DampingRatio
+      value: 0.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
